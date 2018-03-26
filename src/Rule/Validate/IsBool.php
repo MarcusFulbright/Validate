@@ -16,7 +16,7 @@ class IsBool implements RuleInterface
      *
      * @return bool
      */
-    public function __invoke(object $subject, string $field): bool
+    public function __invoke($subject, string $field): bool
     {
         return is_bool($subject->$field);
     }

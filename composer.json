@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Nashphp\\Validation\\": "src/"
+            "Nashphp\\Validation\\": "./src/"
         }
     },
     "authors": [

@@ -16,8 +16,10 @@ class ToBool implements RuleInterface
      *
      * @return bool
      */
-    public function __invoke(object $subject, string $field): bool
+    public function __invoke($subject, string $field): bool
     {
         $subject->$field = (bool) $subject->$field;
+
+        return true;
     }
 }

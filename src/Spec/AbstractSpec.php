@@ -43,12 +43,12 @@ abstract class AbstractSpec
      *
      * @return bool
      */
-    public function __invoke(object $subject): bool
+    public function __invoke($subject): bool
     {
-        array_unshift($args, $this->field);
-        array_unshift($args, $subject);
+        array_unshift($this->args, $this->field);
+        array_unshift($this->args, $subject);
         
-        return call_user_func_array($this->rule, $args);
+        return call_user_func_array($this->rule, $this->args);
     }
 
     /**

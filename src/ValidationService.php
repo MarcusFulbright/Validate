@@ -87,7 +87,7 @@ class ValidationService
     {
         $rule = $this->sanitizeLocator->get($ruleName);
         $spec = new SanitizeSpec($field, $rule, $ruleName, $args);
-        $this->sanitizeSpecs[$field][] = $spec;
+        $this->sanitizeSpecs[] = $spec;
 
         return $spec;
     }
@@ -160,7 +160,7 @@ class ValidationService
      *
      * @return bool
      */
-    protected function applySpec(object $subject, AbstractSpec $spec): bool
+    protected function applySpec($subject, AbstractSpec $spec): bool
     {
         if ($spec($subject)) {
 
