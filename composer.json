@@ -1,0 +1,18 @@
+{
+    "name": "nashphp/validation",
+    "description": "A standalone validation library for php",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nashphp\\Validation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marcus Fulbright",
+            "email": "fulbright.marcus@gmail.com"
+        }
+    ],
+    "require": {}
+}
