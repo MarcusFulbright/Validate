@@ -53,6 +53,16 @@ class ValidationService
     }
 
     /**
+     * Returns the collection of validation failures.
+     *
+     * @return FailureCollection
+     */
+    public function getFailures(): FailureCollection
+    {
+        return $this->failures;
+    }
+
+    /**
      * Configure the service to validate the given $field, with the given $rule.
      *
      * @param string $field
@@ -147,7 +157,7 @@ class ValidationService
             $this->applySpec($subject, $validateSpec);
         }
 
-        return empty($this->failures);
+        return $this->failures->isEmpty();
     }
 
     /**
@@ -162,10 +172,7 @@ class ValidationService
      */
     protected function applySpec($subject, AbstractSpec $spec): bool
     {
-        if ($spec($subject)) {
-
-            return true;
-        }
+        if ($spec($subject)) return true;
 
         $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
 

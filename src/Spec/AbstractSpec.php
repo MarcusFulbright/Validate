@@ -113,7 +113,7 @@ abstract class AbstractSpec
      */
     protected function getDefaultMessage(): string
     {
-        return $this->rule . $this->argsToString();
+        return $this->ruleName . $this->argsToString();
     }
 
     /**

@@ -1,4 +1,4 @@
-<phpunit bootstrap="./phpunit.php">
+<phpunit bootstrap="./phpunit.php" colors="true">
     <testsuites>
         <testsuite>
             <directory>./tests</directory>

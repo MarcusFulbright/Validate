@@ -39,4 +39,16 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($subject->testField);
     }
+
+    public function testValidateBool()
+    {
+        $subject = new \stdClass();
+        $subject->testField = true;
+
+        $validationService = $this->getValidationService();
+        $validationService->validate('testField', 'isBool');
+        $result = $validationService->applyToSubject($subject);
+
+        $this->assertTrue($result);
+    }
 }
