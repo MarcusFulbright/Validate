@@ -19,7 +19,7 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
     }
 
     protected function getValidationService(
-        ValidationLocator $validationLocator= null,
+        ValidationLocator $validationLocator = null,
         SanitizeLocator $sanitizeLocator = null
     ): ValidationService {
         $validationLocator =  $validationLocator ?? $this->getValidationLocator();
@@ -40,7 +40,7 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($subject->testField);
     }
 
-    public function testValidateBool()
+    public function testValidateBoolSuccess()
     {
         $subject = new \stdClass();
         $subject->testField = true;
@@ -50,5 +50,24 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         $result = $validationService->applyToSubject($subject);
 
         $this->assertTrue($result);
+    }
+
+    public function testValidateBoolFailure()
+    {
+        $expectedMessages = [
+            'testField' => [
+                'testField did not pass isBool(*stdClass*, testField)'
+            ]
+        ];
+        $subject = new \stdClass();
+        $subject->testField = 1;
+
+        $validationService = $this->getValidationService();
+        $validationService->validate('testField', 'isBool');
+        $result = $validationService->applyToSubject($subject);
+
+        $this->assertFalse($result);
+        $this->assertCount(1, $validationService->getFailures());
+        $this->assertEquals($expectedMessages, $validationService->getFailures()->getMessages());
     }
 }
