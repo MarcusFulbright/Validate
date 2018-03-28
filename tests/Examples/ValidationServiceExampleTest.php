@@ -2,6 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Examples;
 
+use Nashphp\Validation\Failure\FailureCollection;
 use Nashphp\Validation\Locator\SanitizeLocator;
 use Nashphp\Validation\Locator\ValidationLocator;
 use Nashphp\Validation\ValidationService;
@@ -18,14 +19,21 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         return new SanitizeLocator();
     }
 
+    protected function getFailureCollection(): FailureCollection
+    {
+        return new FailureCollection();
+    }
+
     protected function getValidationService(
         ValidationLocator $validationLocator = null,
-        SanitizeLocator $sanitizeLocator = null
+        SanitizeLocator $sanitizeLocator = null,
+        FailureCollection $failureCollection = null
     ): ValidationService {
         $validationLocator =  $validationLocator ?? $this->getValidationLocator();
         $sanitizeLocator = $sanitizeLocator ?? $this->getSanitizeLocator();
+        $failureCollection = $failureCollection ?? $this->getFailureCollection();
 
-        return new ValidationService($validationLocator, $sanitizeLocator);
+        return new ValidationService($validationLocator, $sanitizeLocator, $failureCollection);
     }
 
     public function testSanitizeToBool()
