@@ -45,11 +45,14 @@ class ValidationService
      * @param ValidationLocator $validationLocator
      * @param SanitizeLocator $sanitizeLocator
      */
-    public function __construct(ValidationLocator $validationLocator, SanitizeLocator $sanitizeLocator)
-    {
+    public function __construct(
+        ValidationLocator $validationLocator,
+        SanitizeLocator $sanitizeLocator,
+        FailureCollection $failureCollection
+    ) {
         $this->validationLocator = $validationLocator;
         $this->sanitizeLocator = $sanitizeLocator;
-        $this->failures = new FailureCollection();
+        $this->failures = $failureCollection;
     }
 
     /**
@@ -109,7 +112,7 @@ class ValidationService
      *
      * @return bool
      */
-    public function applyToSubject(&$subject): bool
+    public function apply(&$subject): bool
     {
         if (is_array($subject)) {
             return $this->applyToArray($subject);

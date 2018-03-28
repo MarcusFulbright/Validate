@@ -35,7 +35,7 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         $validationService = $this->getValidationService();
 
         $validationService->sanitize('testField', 'toBool');
-        $validationService->applyToSubject($subject);
+        $validationService->apply($subject);
 
         $this->assertTrue($subject->testField);
     }
@@ -47,7 +47,7 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
 
         $validationService = $this->getValidationService();
         $validationService->validate('testField', 'isBool');
-        $result = $validationService->applyToSubject($subject);
+        $result = $validationService->apply($subject);
 
         $this->assertTrue($result);
     }
@@ -64,7 +64,7 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
 
         $validationService = $this->getValidationService();
         $validationService->validate('testField', 'isBool');
-        $result = $validationService->applyToSubject($subject);
+        $result = $validationService->apply($subject);
 
         $this->assertFalse($result);
         $this->assertCount(1, $validationService->getFailures());
