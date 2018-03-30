@@ -16,7 +16,9 @@ class ValidationLocator extends AbstractLocator
     protected function getDefaultFactories(): array
     {
         return [
-            'isBool' => function() {return new IsBool();},
+            'isBool' => function () {
+                return new IsBool();
+            },
         ];
     }
 }

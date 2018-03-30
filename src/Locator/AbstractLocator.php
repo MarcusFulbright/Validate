@@ -85,7 +85,7 @@ abstract class AbstractLocator
         $mapped = isset($this->factories[$name])
             || isset($this->instances[$name]);
         if (! $mapped) {
-            throw NashPhpValidationException::RuleNotMappedException($name);
+            throw NashPhpValidationException::ruleNotMappedException($name);
         }
         if (! isset($this->instances[$name])) {
             $this->instances[$name] = call_user_func($this->factories[$name]);

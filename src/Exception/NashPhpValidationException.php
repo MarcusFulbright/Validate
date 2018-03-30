@@ -11,7 +11,7 @@ class NashPhpValidationException extends \Exception
      *
      * @return NashPhpValidationException
      */
-    public static function RuleNotMappedException($rule): self
+    public static function ruleNotMappedException($rule): self
     {
         return new self("Could not find mapping for [$rule]");
     }

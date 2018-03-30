@@ -91,7 +91,7 @@ class Validator
      * @param string $field
      * @param string $ruleName
      * @param array $args
-     * 
+     *
      * @throws NashPhpValidationException
      *
      * @return SanitizeSpec
@@ -175,7 +175,9 @@ class Validator
      */
     protected function applySpec($subject, AbstractSpec $spec): bool
     {
-        if ($spec($subject)) return true;
+        if ($spec($subject)) {
+            return true;
+        }
 
         $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
 
