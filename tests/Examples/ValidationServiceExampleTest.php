@@ -3,8 +3,9 @@
 namespace Nashphp\Validation\Tests\Examples;
 
 use Nashphp\Validation\ValidatorFactory;
+use PHPUnit\Framework\TestCase;
 
-class ValidatorExampleTest extends \PHPUnit_Framework_TestCase
+class ValidatorExampleTest extends TestCase
 {
     public function testSanitizeToBool()
     {
