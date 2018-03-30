@@ -2,48 +2,20 @@
 
 namespace Nashphp\Validation\Tests\Examples;
 
-use Nashphp\Validation\Failure\FailureCollection;
-use Nashphp\Validation\Locator\SanitizeLocator;
-use Nashphp\Validation\Locator\ValidationLocator;
-use Nashphp\Validation\ValidationService;
+use Nashphp\Validation\ValidatorFactory;
 
-class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
+class ValidatorExampleTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getValidationLocator(): ValidationLocator
-    {
-        return new ValidationLocator();
-    }
-
-    protected function getSanitizeLocator(): SanitizeLocator
-    {
-        return new SanitizeLocator();
-    }
-
-    protected function getFailureCollection(): FailureCollection
-    {
-        return new FailureCollection();
-    }
-
-    protected function getValidationService(
-        ValidationLocator $validationLocator = null,
-        SanitizeLocator $sanitizeLocator = null,
-        FailureCollection $failureCollection = null
-    ): ValidationService {
-        $validationLocator =  $validationLocator ?? $this->getValidationLocator();
-        $sanitizeLocator = $sanitizeLocator ?? $this->getSanitizeLocator();
-        $failureCollection = $failureCollection ?? $this->getFailureCollection();
-
-        return new ValidationService($validationLocator, $sanitizeLocator, $failureCollection);
-    }
-
     public function testSanitizeToBool()
     {
         $subject = new \stdClass();
         $subject->testField = 1;
-        $validationService = $this->getValidationService();
 
-        $validationService->sanitize('testField', 'toBool');
-        $validationService->apply($subject);
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->sanitize('testField', 'toBool');
+        $validator->apply($subject);
 
         $this->assertTrue($subject->testField);
     }
@@ -53,9 +25,11 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         $subject = new \stdClass();
         $subject->testField = true;
 
-        $validationService = $this->getValidationService();
-        $validationService->validate('testField', 'isBool');
-        $result = $validationService->apply($subject);
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->validate('testField', 'isBool');
+        $result = $validator->apply($subject);
 
         $this->assertTrue($result);
     }
@@ -70,12 +44,14 @@ class ValidationServiceExampleTest extends \PHPUnit_Framework_TestCase
         $subject = new \stdClass();
         $subject->testField = 1;
 
-        $validationService = $this->getValidationService();
-        $validationService->validate('testField', 'isBool');
-        $result = $validationService->apply($subject);
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->validate('testField', 'isBool');
+        $result = $validator->apply($subject);
 
         $this->assertFalse($result);
-        $this->assertCount(1, $validationService->getFailures());
-        $this->assertEquals($expectedMessages, $validationService->getFailures()->getMessages());
+        $this->assertCount(1, $validator->getFailures());
+        $this->assertEquals($expectedMessages, $validator->getFailures()->getMessages());
     }
 }

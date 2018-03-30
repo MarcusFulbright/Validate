@@ -6,7 +6,7 @@ use Nashphp\Validation\Failure\FailureCollection;
 use Nashphp\Validation\Locator\SanitizeLocator;
 use Nashphp\Validation\Locator\ValidationLocator;
 
-class ValidationServiceFactory
+class ValidatorFactory
 {
     /** @var array */
     protected $customValidate;
@@ -15,7 +15,7 @@ class ValidationServiceFactory
     protected $customSanitize;
 
     /**
-     * ValidationServiceFactory constructor.
+     * ValidatorFactory constructor.
      *
      * Custom sanitize or validate rules can get injected to this factory. The key for each array needs to be the 'name'
      * of the rule and the value should be a callable that will return an instance of the rule. Example:
@@ -61,13 +61,13 @@ class ValidationServiceFactory
     }
 
     /**
-     * Get a new ValidationService that's ready to use.
+     * Get a new Validator that's ready to use.
      *
-     * @return ValidationService
+     * @return Validator
      */
-    public function newValidationService(): ValidationService
+    public function newValidator(): Validator
     {
-        return new ValidationService(
+        return new Validator(
             $this->newValidationLocator(),
             $this->newSanitizeLocator(),
             $this->newFailureCollection()

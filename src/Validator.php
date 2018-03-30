@@ -10,7 +10,7 @@ use Nashphp\Validation\Spec\SanitizeSpec;
 use Nashphp\Validation\Spec\ValidateSpec;
 use Nashphp\Validation\Failure\FailureCollection;
 
-class ValidationService
+class Validator
 {
     /** @var ValidationLocator */
     protected $validationLocator;
@@ -40,7 +40,7 @@ class ValidationService
     protected $sanitizeSpecs = [];
 
     /**
-     * ValidationService constructor.
+     * Validator constructor.
      *
      * @param ValidationLocator $validationLocator
      * @param SanitizeLocator $sanitizeLocator
@@ -66,7 +66,7 @@ class ValidationService
     }
 
     /**
-     * Configure the service to validate the given $field, with the given $rule.
+     * Configure the validator to validate the given $field, with the given $rule.
      *
      * @param string $field
      * @param string $ruleName
@@ -86,7 +86,7 @@ class ValidationService
     }
 
     /**
-     * Configure the service to sanitize the given $field, with the given $rule.
+     * Configure the validator to sanitize the given $field, with the given $rule.
      *
      * @param string $field
      * @param string $ruleName

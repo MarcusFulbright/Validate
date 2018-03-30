@@ -26,7 +26,7 @@ The act of _Validating_ an object means execution a series of Sanitize Rules and
 
 ## Basic Usage
 
-The `ValidationServiceFactory` provides the easiest way to get started. It can provide ValidationServices that are ready for use.
+The `ValidatorFactory` provides the easiest way to get started. It can provide Validators that are ready for use.
 
 ```php
 $factory = new ValidationServiceFactory();
@@ -36,11 +36,11 @@ $service = $factory->newValidationService();
 
 ## Validating Objects
 
-The ValidationService can validate objects and arrays by specifying what sanatize and validate rules to apply to each property (referred to as 'field' from here on).
+The Validator can validate objects and arrays by specifying what sanatize and validate rules to apply to each property (referred to as 'field' from here on).
 
 ### Rules
 
-Once you've got a ValidationService, you can add Validate and Sanitize rules to it:
+Once you've got a Validator, you can add Validate and Sanitize rules to it:
 
 ```php
 // Ensure that a field is a boolean
@@ -59,9 +59,9 @@ Every rule can also get configured to use a custom validation message:
 $validationService->validate('isPublished', 'isBool')->setMessage('the field [isPublished] must be a boolean]);
 ```
 
-### Applying the Service
+### Applying the Validator
 
-Once you have a ValidationService configured with all your rules:
+Once you have a Validator configured with all your rules:
 
 ```php
 $subject = [
@@ -76,7 +76,7 @@ if (!$isValid) {
 }
 ```
 
-Any failures can get retrieved by calling `ValidationService::getFailures()`. This returns an instance of `FailureCollection`. The FailureCollection class implements _ArrayObject_ which means you can treat it like an array. Every failure will be represented in the collection with a `ValidationFailure` object. The ValidationFailure object has the following methods:
+Any failures can get retrieved by calling `Validator::getFailures()`. This returns an instance of `FailureCollection`. The FailureCollection class implements _ArrayObject_ which means you can treat it like an array. Every failure will be represented in the collection with a `ValidationFailure` object. The ValidationFailure object has the following methods:
 
 * getField(): string [returns the field the rule applies to]
 * getMessage(): string [returns the failure message]
@@ -87,7 +87,7 @@ These methods can get used in various combinations to create a custom error outp
 
 ## Supported Sanitize Rules
 
-The following rule names can be passed as the 2nd argument to `ValidationService::sanitize()`
+The following rule names can be passed as the 2nd argument to `Validator::sanitize()`
 
 #### toBool 
 Applies the native `(bool)` typecast
@@ -95,7 +95,7 @@ Applies the native `(bool)` typecast
 
 ## Supported Validate Rules
 
-The following rule names can be passed as the 2nd argument to `ValidationService::validate()`
+The following rule names can be passed as the 2nd argument to `Validator::validate()`
 
 #### isBool
 Applies the native `is_bool()` function
