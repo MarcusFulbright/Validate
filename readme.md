@@ -1,6 +1,6 @@
 # PHP-Validation
 
-**NashPhp\Validation** is a dead simple standalone validation library for PHP that is inspired by [Aura.Filter](). It has no dependencies, relies on PHP 7.0+, and can be used in any project.
+**NashPhp\Validation** is a dead simple standalone validation library for PHP that is inspired by [Aura.Filter](). It has no dependencies, relies on PHP 7.1+, and can be used in any project.
 
 ## Goals
 
