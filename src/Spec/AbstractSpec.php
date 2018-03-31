@@ -46,8 +46,8 @@ abstract class AbstractSpec
     {
         array_unshift($this->args, $this->field);
         array_unshift($this->args, $subject);
-        
-        return call_user_func_array($this->rule, $this->args);
+
+        return ($this->rule)(...$this->args);
     }
 
     /**

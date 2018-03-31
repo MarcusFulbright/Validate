@@ -55,4 +55,19 @@ class ValidatorExampleTest extends TestCase
         $this->assertCount(1, $validator->getFailures());
         $this->assertEquals($expectedMessages, $validator->getFailures()->getMessages());
     }
+
+    public function testIsBetween()
+    {
+        $subject = (object) [
+            'success' => 5,
+        ];
+
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->validate('success', 'isBetween', [1, 10]);
+        $result = $validator->apply($subject);
+
+        $this->assertTrue($result);
+    }
 }

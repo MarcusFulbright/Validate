@@ -99,3 +99,15 @@ The following rule names can be passed as the 2nd argument to `Validator::valida
 
 #### isBool
 Applies the native `is_bool()` function
+
+#### isAlphaNum
+Only allows alpha-numeric characters
+
+#### isAlpha
+Only allows alphabetic characters
+
+#### isAlphaDash
+Accepts alpha-numeric characters, underscores, and dashes
+
+#### isBetween
+Checks that a value is between the given minimum and maximum values
