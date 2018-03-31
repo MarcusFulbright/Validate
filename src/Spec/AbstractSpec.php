@@ -26,7 +26,6 @@ abstract class AbstractSpec
      * @param callable $rule
      * @param string $ruleName
      * @param array $args
-     * @param string $message
      */
     public function __construct(string $field, callable $rule, string $ruleName, array $args)
     {
@@ -61,6 +60,8 @@ abstract class AbstractSpec
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
     }
 
     /**

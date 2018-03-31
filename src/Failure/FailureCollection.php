@@ -5,6 +5,20 @@ namespace Nashphp\Validation\Failure;
 class FailureCollection extends \ArrayObject
 {
     /**
+     * Factory method to return a new Failure object.
+     *
+     * @param string $field The field that failed
+     * @param string $message The failure message
+     * @param array $args The arguments passed to the rule specification
+     *
+     * @return ValidationFailure
+     */
+    protected function newFailure(string $field, string $message, array $args = []): ValidationFailure
+    {
+        return new ValidationFailure($field, $message, $args);
+    }
+
+    /**
      * Returns bool indicating if the array is empty.
      *
      * @return bool
@@ -46,20 +60,6 @@ class FailureCollection extends \ArrayObject
         $this[$field][] = $failure;
 
         return $failure;
-    }
-
-    /**
-     * Factory method to return a new Failure object.
-     *
-     * @param string $field The field that failed
-     * @param string $message The failure message
-     * @param array $args The arguments passed to the rule specification
-     *
-     * @return ValidationFailure
-     */
-    protected function newFailure(string $field, string $message, array $args = []): ValidationFailure
-    {
-        return new ValidationFailure($field, $message, $args);
     }
 
     /**

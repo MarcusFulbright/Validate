@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Locator;
 
-use Nashphp\Validation\Exception\NashPhpValidationException;
+use Nashphp\Validation\Exception\ValidationException;
 
 abstract class AbstractLocator
 {
@@ -78,14 +78,14 @@ abstract class AbstractLocator
      * @param string $name The rule to retrieve.
      * @return callable A callable rule.
      *
-     * @throws NashPhpValidationException
+     * @throws ValidationException
      */
     public function get($name)
     {
         $mapped = isset($this->factories[$name])
             || isset($this->instances[$name]);
         if (! $mapped) {
-            throw NashPhpValidationException::ruleNotMappedException($name);
+            throw ValidationException::ruleNotMappedException($name);
         }
         if (! isset($this->instances[$name])) {
             $this->instances[$name] = call_user_func($this->factories[$name]);

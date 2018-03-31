@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation;
 
-use Nashphp\Validation\Exception\NashPhpValidationException;
+use Nashphp\Validation\Exception\ValidationException;
 use Nashphp\Validation\Locator\SanitizeLocator;
 use Nashphp\Validation\Locator\ValidationLocator;
 use Nashphp\Validation\Spec\AbstractSpec;
@@ -72,7 +72,7 @@ class Validator
      * @param string $ruleName
      * @param array $args
      *
-     * @throws NashPhpValidationException
+     * @throws ValidationException
      *
      * @return ValidateSpec
      */
@@ -92,7 +92,7 @@ class Validator
      * @param string $ruleName
      * @param array $args
      *
-     * @throws NashPhpValidationException
+     * @throws ValidationException
      *
      * @return SanitizeSpec
      */

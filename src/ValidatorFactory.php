@@ -35,7 +35,7 @@ class ValidatorFactory
      *
      * @return ValidationLocator
      */
-    protected function newValidationLocator(): ValidationLocator
+    public function newValidationLocator(): ValidationLocator
     {
         return new ValidationLocator($this->customValidate);
     }
@@ -45,7 +45,7 @@ class ValidatorFactory
      *
      * @return SanitizeLocator
      */
-    protected function newSanitizeLocator(): SanitizeLocator
+    public function newSanitizeLocator(): SanitizeLocator
     {
         return new SanitizeLocator($this->customSanitize);
     }
@@ -55,7 +55,7 @@ class ValidatorFactory
      *
      * @return FailureCollection
      */
-    protected function newFailureCollection(): FailureCollection
+    public function newFailureCollection(): FailureCollection
     {
         return new FailureCollection();
     }
