@@ -133,4 +133,31 @@ class ValidatorExampleTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testCustomRulesExample()
+    {
+        $validateRules = [
+            'foo' => function() {
+                return new ExampleCustomValidateRule();
+            }
+        ];
+        $sanitizeRules = [
+            'foo' => function() {
+                return new ExampleCustomSanitizeRule();
+            }
+        ];
+
+        $factory = new ValidatorFactory($validateRules, $sanitizeRules);
+        $validator = $factory->newValidator();
+
+        $subject = (object) [
+            'testField' => 'bar'
+        ];
+
+        $validator->sanitize('testField')->to('foo');
+        $validator->validate('testField')->is('foo');
+        $result = $validator->apply($subject);
+
+        $this->assertTrue($result);
+    }
 }

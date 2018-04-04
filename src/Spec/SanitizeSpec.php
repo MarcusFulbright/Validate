@@ -63,5 +63,7 @@ class SanitizeSpec extends AbstractSpec
     {
         $this->allowBlanks = true;
         $this->blankValue = $blankValue;
+
+        return $this;
     }
 }

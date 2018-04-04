@@ -184,3 +184,62 @@ Checks that a value is between the given minimum and maximum values
 ```php
 $validator->validate('field')->is('between', 5, 10);
 ```
+
+## Custom Rules
+Defining your own rules is very easy. Weather your custom rule is a Sanitize or Validate rule, it needs to implement the `RuleInterface`
+
+
+Validate rules **MUST NOT** manipulate any data on on the `$subject`.
+```php
+use Nashphp\Validation\Rule\RuleInterface;
+
+class MyCustomValidateRule implements RuleInterface
+{
+    public function __invoke($subject, string $field): bool
+    {
+        return $subject->$field === 'foo';
+    }
+}
+```
+Sanitize Rules **MAY** manipulate data on the subject as needed
+```php
+use Nashphp\Validation\Rule\RuleInterface;
+
+class MyCustomSanitizeRule implements RuleInterface
+{
+    public function __invoke($subject, string $field): bool
+    {
+        $value = $subject->$field
+        
+        //manipulate $value
+        
+        $subject->$field = $value;
+        
+        return true;        
+    }
+}
+```
+
+`$field`: A string for the name of the field to be operated on 
+`$subject`: An object representing the data to be evaluated.
+> This library will convert arrays to stdClass so $subject will *always* be an object
+
+Once your rule is defined, you'll need to inject them into the the FilterFactory
+
+```php
+$validateRules = [
+    'customValidate' => function() {return new MyCustomValidateRule();}
+];
+$sanitizeRules = [
+    'customSanitize' => function() {return new MyCustomSanitizeRule;}
+
+$factory = new ValidatorFactory($validateRules, $sanitizeRules);
+$validator = $factory->newValidator();
+```
+
+Now you're ready to use the rule:
+
+```php
+$validator->sanitize('field')->to('customSanitize');
+$validator->validate('field')->is('customValidate');
+```
