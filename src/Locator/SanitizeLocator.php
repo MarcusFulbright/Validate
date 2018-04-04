@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Locator;
 
-use Nashphp\Validation\Rule\Sanitize\ToBool;
+use Nashphp\Validation\Rule\Sanitize\Boolean;
 
 class SanitizeLocator extends AbstractLocator
 {
@@ -17,7 +17,7 @@ class SanitizeLocator extends AbstractLocator
     {
         return [
             'bool' => function () {
-                return new ToBool();
+                return new Boolean();
             }
         ];
     }

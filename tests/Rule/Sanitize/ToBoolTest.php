@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Sanitize;
 
-use Nashphp\Validation\Rule\Sanitize\ToBool;
+use Nashphp\Validation\Rule\Sanitize\Boolean;
 use PHPUnit\Framework\TestCase;
 
 class ToBoolTest extends TestCase
@@ -12,7 +12,7 @@ class ToBoolTest extends TestCase
         $subject = (object) [
             'castToBool' => '1',
         ];
-        $rule = new ToBool();
+        $rule = new Boolean();
 
         $rule($subject, 'castToBool');
 
