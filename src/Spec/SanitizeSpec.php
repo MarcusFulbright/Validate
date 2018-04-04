@@ -35,11 +35,13 @@ class SanitizeSpec extends AbstractSpec
     }
 
     /**
+     * Set the Sanitize rule to be used.
+     *
      * @param string $ruleName*
      *
      * @throws ValidationException
      *
-     * @return self
+     * @return SanitizeSpec
      */
     public function to(string $ruleName): self
     {
@@ -48,7 +50,16 @@ class SanitizeSpec extends AbstractSpec
         return $this;
     }
 
-    public function usingBlank($blankValue)
+    /**
+     * Sets the blank value to use.
+     *
+     * Defaults to null.
+     *
+     * @param $blankValue
+     *
+     * @return SanitizeSpec
+     */
+    public function usingBlank($blankValue = null): self
     {
         $this->allowBlanks = true;
         $this->blankValue = $blankValue;

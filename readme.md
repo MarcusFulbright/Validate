@@ -19,9 +19,9 @@ This library uses the following terms:
 
 * Sanitize: The process of manipulating data into a known format or type. Example: converting `(int) 0` to `(bool) false`
 
-* Validate: Determine if a value meets expectations, but does _not_ manipulate the value
+* Validate: Determine if a value meets expectations, but do _not_ manipulate the value
 
-The act of _Validating_ an object means execution a series of Sanitize Rules and Validate rules against the object. 
+The act of _Validating_ an object means execution of a series of Sanitize rules and Validate rules against the object. 
 > Note: Sanitize Rules always run before Validate Rules
 
 ## Basic Usage
@@ -36,7 +36,7 @@ $service = $factory->newValidationService();
 
 ## Validating Objects
 
-The Validator can validate objects and arrays by specifying what sanitize and validate rules to apply to each property (referred to as 'field' from here on).
+The Validator can validate and sanitize objects and arrays by specifying what sanitize and validate rules to apply to each property (referred to as 'field' from here on).
 
 ### Rules
 
@@ -59,7 +59,7 @@ $subject = [
     'isPublished' => false;
 ];
 
-$isValid = $validationService->apply($subject);
+$isValid = validator->apply($subject);
 
 if (!$isValid) {
     $failures = $validationService->getFailures();
@@ -103,6 +103,9 @@ The following rules can all be supplied to the `to()` function:
 #### bool 
 Applies the native `(bool)` typecast
 
+### int
+Applies the native `(int)` typecast
+
 
 ## Validate
 After calling `Validator::validate('fieldName)`, a fluent interface provides several methods to configured the desired validation behavior:
@@ -111,8 +114,8 @@ After calling `Validator::validate('fieldName)`, a fluent interface provides sev
 > A complete list of all validate rules can be found below
 * `isNot('ruleName)`: effectively negates the given thus ensuring that a field does _not_ pass the given rule
 * `setMessage('message)`: sets the message to use when this rule fails for the given field 
-* `allowBlanks($extraBlanks)`: allows blank values if a field does not pass the validation rule. Takes an array of additional blank values that are deemed acceptable.
-> The additional rules are evaluated first so they can override the default behavior
+* `allowBlanks()`: allows blank values without running the validation rule
+*`setBlankValues($whiteList)`: Accepts an array of values that should be treated as blank values. These values will override default behavior.
 
 **On Blank values:**
 This library does not rely on a simple `isset()` or `empty()` check to determine if a field is blank. A field is blank if: 
@@ -121,12 +124,14 @@ This library does not rely on a simple `isset()` or `empty()` check to determine
 * it is an empty string
 * a string composed only of white space
 
-This means that by default things like the following values are *not* considered blank:
+This means that by default things like the following values are *not* considered blank by default:
 * (int) 0
 * (float) 0.00
 * (bool) false
 * []
 * new \stdClass()
+
+> `setBlankValues($whiteList)` can set an array of values that should be treated as blank values. These values will override default behavior.
 
 **Validation Example**
 ```php
@@ -140,7 +145,10 @@ $validator->validate('fieldName')->isNot('bool')
 $validator->validate('fieldName')->is('bool')->setMessage('[fieldname] Must Be A Boolean') 
 
 //validate that a field is a boolean or blank and specify that (int)0 is a valid blank value
-$validator->validate('fieldName')->is('bool')->allowBlanks([0])
+$validator->validate('fieldName')->is('bool')->allowBlanks()->setBlanks([0])
+
+//validate that a field is an integer, but prevent `(int) 0`
+$validator->validate('fieldName')->is('int')->setBlankValues([0])
 ```
 
 ## Supported Validate Rules

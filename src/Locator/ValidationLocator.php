@@ -7,6 +7,7 @@ use Nashphp\Validation\Rule\Validate\AlphaDash;
 use Nashphp\Validation\Rule\Validate\AlphaNum;
 use Nashphp\Validation\Rule\Validate\Between;
 use Nashphp\Validation\Rule\Validate\Boolean;
+use Nashphp\Validation\Rule\Validate\Integer;
 
 class ValidationLocator extends AbstractLocator
 {
@@ -34,6 +35,9 @@ class ValidationLocator extends AbstractLocator
             },
             'between' => function () {
                 return new Between();
+            },
+            'int' => function() {
+                return new Integer();
             }
         ];
     }

@@ -3,6 +3,7 @@
 namespace Nashphp\Validation\Locator;
 
 use Nashphp\Validation\Rule\Sanitize\Boolean;
+use Nashphp\Validation\Rule\Sanitize\Integer;
 
 class SanitizeLocator extends AbstractLocator
 {
@@ -18,6 +19,9 @@ class SanitizeLocator extends AbstractLocator
         return [
             'bool' => function () {
                 return new Boolean();
+            },
+            'int' => function () {
+                return new Integer();
             }
         ];
     }

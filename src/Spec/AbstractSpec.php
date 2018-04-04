@@ -186,35 +186,32 @@ abstract class AbstractSpec
      * Values are considered blank if they are, not sent, null, or strings that trim down to nothing. integers, floats,
      * arrays, resources, objects, etc., are never considered blank. Even a value of `(int) 0` will *not* evaluate as
      * blank.
-     * The optional `$validBlanks` argument can be passed in to provide a list of additional values that should get
-     * considered as blank. These values are evaluated *before* the default blank values.
+     * The optional second argument is used to supply an array of white listed items that should be considered blank.
      *
      * @param mixed $subject
-     * @param array $validBlanks
+     * @param array $blankWhiteList
      *
      * @return bool
      */
-    protected function subjectFieldIsBlank($subject, array $validBlanks = []): bool
+    protected function subjectFieldIsBlank($subject, array $blankWhiteList = []): bool
     {
-        $field = $this->field;
-
-        foreach ($validBlanks as $blank) {
-            if ($field === $blank) {
-                return false;
+        foreach ($blankWhiteList as $item) {
+            if ($subject->{$this->field} === $item) {
+                return true;
             }
         }
 
         // not set, or null, means it is blank
-        if (! isset($subject->$field) || $subject->$field === null) {
+        if (!isset($subject->{$this->field}) || $subject->{$this->field} === null) {
             return true;
         }
 
         // non-strings are not blank: int, float, object, array, resource, etc
-        if (! is_string($subject->$field)) {
+        if (!is_string($subject->{$this->field})) {
             return false;
         }
 
         // strings that trim down to exactly nothing are blank
-        return trim($subject->$field) === '';
+        return trim($subject->{$this->field}) === '';
     }
 }
