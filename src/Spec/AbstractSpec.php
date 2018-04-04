@@ -147,12 +147,47 @@ abstract class AbstractSpec
      *
      * @return AbstractSpec
      */
-    protected function setRule($ruleName): self
+    public function setRule($ruleName): self
     {
         $this->rule = $this->locator->get($ruleName);
         $this->ruleName = $ruleName;
 
         return $this;
+    }
+
+    /**
+     * Determines if the field is a `valid` blank value.
+     *
+     * Values are considered blank if they are, not sent, null, or strings that trim down to nothing. integers, floats,
+     * arrays, resources, objects, etc., are never considered blank. Even a value of `(int) 0` will *not* evaluate as
+     * blank.
+     * The optional second argument is used to supply an array of white listed items that should be considered blank.
+     *
+     * @param mixed $subject
+     * @param array $blankWhiteList
+     *
+     * @return bool
+     */
+    public function subjectFieldIsBlank($subject, array $blankWhiteList = []): bool
+    {
+        foreach ($blankWhiteList as $item) {
+            if ($subject->{$this->field} === $item) {
+                return true;
+            }
+        }
+
+        // not set, or null, means it is blank
+        if (!isset($subject->{$this->field}) || $subject->{$this->field} === null) {
+            return true;
+        }
+
+        // non-strings are not blank: int, float, object, array, resource, etc
+        if (!is_string($subject->{$this->field})) {
+            return false;
+        }
+
+        // strings that trim down to exactly nothing are blank
+        return trim($subject->{$this->field}) === '';
     }
 
     /**
@@ -177,41 +212,5 @@ abstract class AbstractSpec
         }
 
         return '(' . implode(', ', $this->args) . ')';
-    }
-
-
-    /**
-     * Determines if the field is a `valid` blank value.
-     *
-     * Values are considered blank if they are, not sent, null, or strings that trim down to nothing. integers, floats,
-     * arrays, resources, objects, etc., are never considered blank. Even a value of `(int) 0` will *not* evaluate as
-     * blank.
-     * The optional second argument is used to supply an array of white listed items that should be considered blank.
-     *
-     * @param mixed $subject
-     * @param array $blankWhiteList
-     *
-     * @return bool
-     */
-    protected function subjectFieldIsBlank($subject, array $blankWhiteList = []): bool
-    {
-        foreach ($blankWhiteList as $item) {
-            if ($subject->{$this->field} === $item) {
-                return true;
-            }
-        }
-
-        // not set, or null, means it is blank
-        if (!isset($subject->{$this->field}) || $subject->{$this->field} === null) {
-            return true;
-        }
-
-        // non-strings are not blank: int, float, object, array, resource, etc
-        if (!is_string($subject->{$this->field})) {
-            return false;
-        }
-
-        // strings that trim down to exactly nothing are blank
-        return trim($subject->{$this->field}) === '';
     }
 }
