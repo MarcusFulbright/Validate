@@ -5,7 +5,7 @@ namespace Nashphp\Validation\Tests\Rule\Sanitize;
 use Nashphp\Validation\Rule\Sanitize\Boolean;
 use PHPUnit\Framework\TestCase;
 
-class ToBoolTest extends TestCase
+class BoolTest extends TestCase
 {
     public function testToBool()
     {

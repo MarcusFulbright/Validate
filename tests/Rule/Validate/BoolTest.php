@@ -5,7 +5,7 @@ namespace Nashphp\Validation\Tests\Rule\Validate;
 use Nashphp\Validation\Rule\Validate\Boolean;
 use PHPUnit\Framework\TestCase;
 
-class IsBoolTest extends TestCase
+class BoolTest extends TestCase
 {
     public function testIsBool()
     {

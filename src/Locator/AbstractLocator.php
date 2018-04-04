@@ -22,6 +22,16 @@ abstract class AbstractLocator
     protected $instances = [];
 
     /**
+     * Returns an array of default factories for a locator to use.
+     *
+     * These key value pairs should have the rule name as the key, and a callable that returns a new instance of the
+     * rule as the value.
+     *
+     * @return array
+     */
+    abstract protected function getDefaultFactories(): array;
+
+    /**
      * Constructor.
      *
      * @param array $factories An array of key-value pairs where the key is the
@@ -32,16 +42,6 @@ abstract class AbstractLocator
         $mergedFactories = array_merge($factories, $this->getDefaultFactories());
         $this->initFactories($mergedFactories);
     }
-
-    /**
-     * Returns an array of default factories for a locator to use.
-     *
-     * These key value pairs should have the rule name as the key, and a callable that returns a new instance of the
-     * rule as the value.
-     *
-     * @return array
-     */
-    abstract protected function getDefaultFactories(): array;
 
     /**
      * Initialize the $factories property for the first time.
@@ -76,20 +76,22 @@ abstract class AbstractLocator
      * Gets a rule by name, whether an existing instance or from a factory.
      *
      * @param string $name The rule to retrieve.
-     * @return callable A callable rule.
      *
      * @throws ValidationException
+     *
+     * @return callable A callable rule.
      */
-    public function get($name)
+    public function get($name): callable
     {
-        $mapped = isset($this->factories[$name])
-            || isset($this->instances[$name]);
-        if (! $mapped) {
+        $mapped = isset($this->factories[$name]) || isset($this->instances[$name]);
+        if (!$mapped) {
             throw ValidationException::ruleNotMappedException($name);
         }
-        if (! isset($this->instances[$name])) {
+
+        if (!isset($this->instances[$name])) {
             $this->instances[$name] = call_user_func($this->factories[$name]);
         }
+
         return $this->instances[$name];
     }
 }

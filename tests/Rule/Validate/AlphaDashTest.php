@@ -5,14 +5,15 @@ namespace Nashphp\Validation\Tests\Rule\Validate;
 use Nashphp\Validation\Rule\Validate\AlphaDash;
 use PHPUnit\Framework\TestCase;
 
-class IsAlphaDashTest extends TestCase
+class AlphaDashTest extends TestCase
 {
     public function testIsAlphaDash()
     {
         $subject = (object) [
             'success' => '3this_is-acceptable1',
             'allowsNumbers' => 123,
-            'noWhiteSpace' => '2this is not_accept-able'
+            'noWhiteSpace' => '2this is not_accept-able',
+            'excludesWrongType' => []
         ];
         $rule = new AlphaDash();
 
@@ -24,5 +25,8 @@ class IsAlphaDashTest extends TestCase
 
         $noWhiteSpaceActual = $rule($subject, 'noWhiteSpace');
         $this->assertFalse($noWhiteSpaceActual);
+
+        $excludesWrongTypeActual = $rule($subject, 'excludesWrongType');
+        $this->assertFalse($excludesWrongTypeActual);
     }
 }

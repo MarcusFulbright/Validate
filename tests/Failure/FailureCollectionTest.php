@@ -75,4 +75,38 @@ class FailureCollectionTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testGetMessages()
+    {
+        $fakeField1 = 'fakeField1';
+        $fakeMessage1 = 'fakeMessage1';
+        $fakeField2 = 'fakeField2';
+        $fakeMessage2 = 'fakeMessage2';
+        $this->collection->add($fakeField1, $fakeMessage1);
+        $this->collection->add($fakeField2, $fakeMessage2);
+
+        $expected = [
+            $fakeField1 => [$fakeMessage1],
+            $fakeField2 => [$fakeMessage2]
+        ];
+        $actual = $this->collection->getMessages();
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetMessagesForFieldReturnsBlank()
+    {
+        $actual = $this->collection->getMessagesForField('fakeField');
+
+        $this->assertTrue(is_array($actual));
+        $this->assertEmpty($actual);
+    }
+
+    public function testForFieldReturnsBlank()
+    {
+        $actual = $this->collection->forField('fakeField');
+
+        $this->assertTrue(is_array($actual));
+        $this->assertEmpty($actual);
+    }
 }

@@ -9,5 +9,18 @@ use Nashphp\Validation\Spec\AbstractSpec;
  */
 class DummySpec extends AbstractSpec
 {
+    public function addRuleMock($rule)
+    {
+        $this->rule = $rule;
+    }
 
+    public function addArgs($args)
+    {
+        $this->args = $args;
+    }
+
+    public function addRuleName($ruleName)
+    {
+        $this->ruleName = $ruleName;
+    }
 }

@@ -5,7 +5,7 @@ namespace Nashphp\Validation\Tests\Rule\Validate;
 use Nashphp\Validation\Rule\Validate\Alpha;
 use PHPUnit\Framework\TestCase;
 
-class IsAlphaTest extends TestCase
+class AlphaTest extends TestCase
 {
     public function testIsAlpha()
     {

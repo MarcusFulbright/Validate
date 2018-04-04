@@ -17,7 +17,7 @@ class AlphaDash implements RuleInterface
     public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
-        if (! is_string($value) && ! is_numeric($value)) {
+        if (!is_string($value) && !is_numeric($value)) {
             return false;
         }
 

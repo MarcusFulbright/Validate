@@ -5,7 +5,7 @@ namespace Nashphp\Validation\Tests\Rule\Validate;
 use Nashphp\Validation\Rule\Validate\AlphaNum;
 use PHPUnit\Framework\TestCase;
 
-class IsAlphaNumTest extends TestCase
+class AlphaNumTest extends TestCase
 {
     public function testIsAlphaNum()
     {
