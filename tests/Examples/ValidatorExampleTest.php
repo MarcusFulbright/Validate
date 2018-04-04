@@ -5,6 +5,9 @@ namespace Nashphp\Validation\Tests\Examples;
 use Nashphp\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group Examples
+ */
 class ValidatorExampleTest extends TestCase
 {
     public function testSanitizeToBool()
