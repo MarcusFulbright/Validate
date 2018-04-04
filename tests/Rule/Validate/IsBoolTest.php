@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\IsBool;
+use Nashphp\Validation\Rule\Validate\Boolean;
 use PHPUnit\Framework\TestCase;
 
 class IsBoolTest extends TestCase
@@ -13,7 +13,7 @@ class IsBoolTest extends TestCase
             'isBool' => false,
             'isNotBool' => 'false'
         ];
-        $rule = new IsBool();
+        $rule = new Boolean();
 
         $expectedTrue = $rule($subject, 'isBool');
         $this->assertTrue($expectedTrue);

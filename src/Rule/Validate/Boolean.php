@@ -4,20 +4,20 @@ namespace Nashphp\Validation\Rule\Validate;
 
 use Nashphp\Validation\Rule\RuleInterface;
 
-class IsAlpha implements RuleInterface
+class Boolean implements RuleInterface
 {
     /**
-     * Validates if the specified field contains only alphabetic characters.
+     * Returns bool indicating if the specified field is a boolean.
      *
-     * @param $subject
+     * Leverages native `is_bool()` function.
+     *
+     * @param object $subject
      * @param string $field
      *
      * @return bool
      */
     public function __invoke($subject, string $field): bool
     {
-        $value = $subject->$field;
-
-        return is_string($value) && preg_match('/^[\pL\pM]+$/u', $value);
+        return is_bool($subject->$field);
     }
 }

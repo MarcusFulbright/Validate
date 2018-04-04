@@ -4,7 +4,7 @@ namespace Nashphp\Validation\Rule\Validate;
 
 use Nashphp\Validation\Rule\RuleInterface;
 
-class IsAlphaNum implements RuleInterface
+class AlphaNum implements RuleInterface
 {
     /**
      * Returns bool indicating if the value consists of only alpha numeric characters.

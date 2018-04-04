@@ -2,11 +2,11 @@
 
 namespace Nashphp\Validation\Locator;
 
-use Nashphp\Validation\Rule\Validate\IsAlpha;
-use Nashphp\Validation\Rule\Validate\IsAlphaDash;
-use Nashphp\Validation\Rule\Validate\IsAlphaNum;
-use Nashphp\Validation\Rule\Validate\IsBetween;
-use Nashphp\Validation\Rule\Validate\IsBool;
+use Nashphp\Validation\Rule\Validate\Alpha;
+use Nashphp\Validation\Rule\Validate\AlphaDash;
+use Nashphp\Validation\Rule\Validate\AlphaNum;
+use Nashphp\Validation\Rule\Validate\Between;
+use Nashphp\Validation\Rule\Validate\Boolean;
 
 class ValidationLocator extends AbstractLocator
 {
@@ -21,19 +21,19 @@ class ValidationLocator extends AbstractLocator
     {
         return [
             'bool' => function () {
-                return new IsBool();
+                return new Boolean();
             },
             'alphaNum' => function () {
-                return new IsAlphaNum();
+                return new AlphaNum();
             },
             'alpha' => function () {
-                return new IsAlpha();
+                return new Alpha();
             },
             'alphaDash' => function () {
-                return new IsAlphaDash();
+                return new AlphaDash();
             },
             'between' => function () {
-                return new IsBetween();
+                return new Between();
             }
         ];
     }

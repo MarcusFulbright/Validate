@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\IsAlpha;
+use Nashphp\Validation\Rule\Validate\Alpha;
 use PHPUnit\Framework\TestCase;
 
 class IsAlphaTest extends TestCase
@@ -15,7 +15,7 @@ class IsAlphaTest extends TestCase
             'noNumbers' => '123',
         ];
 
-        $rule = new IsAlpha();
+        $rule = new Alpha();
 
         $successActual = $rule($subject, 'success');
         $this->assertTrue($successActual);

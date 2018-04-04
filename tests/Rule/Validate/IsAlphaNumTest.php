@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\IsAlphaNum;
+use Nashphp\Validation\Rule\Validate\AlphaNum;
 use PHPUnit\Framework\TestCase;
 
 class IsAlphaNumTest extends TestCase
@@ -15,7 +15,7 @@ class IsAlphaNumTest extends TestCase
             'noWhiteSpace' => 'only Alpha Num 123',
             'noOthertypes' => false
         ];
-        $rule = new IsAlphaNum();
+        $rule = new AlphaNum();
 
         $successActual = $rule($subject, 'success');
         $this->assertTrue($successActual);

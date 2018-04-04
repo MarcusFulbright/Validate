@@ -4,7 +4,7 @@ namespace Nashphp\Validation\Rule\Validate;
 
 use Nashphp\Validation\Rule\RuleInterface;
 
-class IsAlphaDash implements RuleInterface
+class AlphaDash implements RuleInterface
 {
     /**
      * Validates that the specified field only contains alpha-numeric characters, dashes, and underscores.

@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\IsAlphaDash;
+use Nashphp\Validation\Rule\Validate\AlphaDash;
 use PHPUnit\Framework\TestCase;
 
 class IsAlphaDashTest extends TestCase
@@ -14,7 +14,7 @@ class IsAlphaDashTest extends TestCase
             'allowsNumbers' => 123,
             'noWhiteSpace' => '2this is not_accept-able'
         ];
-        $rule = new IsAlphaDash();
+        $rule = new AlphaDash();
 
         $successActual = $rule($subject, 'success');
         $this->assertTrue($successActual);

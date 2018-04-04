@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\IsBetween;
+use Nashphp\Validation\Rule\Validate\Between;
 use PHPUnit\Framework\TestCase;
 
 class IsBetweenTest extends TestCase
@@ -15,7 +15,7 @@ class IsBetweenTest extends TestCase
             'intFailure' => 0,
             'stringFailure' => 'short'
         ];
-        $rule = new IsBetween();
+        $rule = new Between();
 
         $intSuccessActual = $rule($subject, 'intSuccess', 4, 6);
         $this->assertTrue($intSuccessActual);

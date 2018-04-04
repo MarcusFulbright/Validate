@@ -2,7 +2,7 @@
 
 namespace Nashphp\Validation\Rule\Validate;
 
-class IsBetween
+class Between
 {
     /**
      * Validates that a field's value is between the given min and max.
