@@ -10,7 +10,7 @@ class DummyLocator extends AbstractLocator
     {
         return [
             'foo' => function () {
-                return function() {
+                return function () {
                     return 'foo';
                 };
             }
