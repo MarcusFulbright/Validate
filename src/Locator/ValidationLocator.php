@@ -36,7 +36,7 @@ class ValidationLocator extends AbstractLocator
             'between' => function () {
                 return new Between();
             },
-            'int' => function() {
+            'int' => function () {
                 return new Integer();
             }
         ];

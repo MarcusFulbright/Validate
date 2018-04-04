@@ -137,12 +137,12 @@ class ValidatorExampleTest extends TestCase
     public function testCustomRulesExample()
     {
         $validateRules = [
-            'foo' => function() {
+            'foo' => function () {
                 return new ExampleCustomValidateRule();
             }
         ];
         $sanitizeRules = [
-            'foo' => function() {
+            'foo' => function () {
                 return new ExampleCustomSanitizeRule();
             }
         ];
