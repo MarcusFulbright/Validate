@@ -69,17 +69,12 @@ class Validator
      * Configure the validator to validate the given $field, with the given $rule.
      *
      * @param string $field
-     * @param string $ruleName
-     * @param array $args
-     *
-     * @throws ValidationException
      *
      * @return ValidateSpec
      */
-    public function validate(string $field, string $ruleName, array $args = []): ValidateSpec
+    public function validate(string $field): ValidateSpec
     {
-        $rule = $this->validationLocator->get($ruleName);
-        $spec = new ValidateSpec($field, $rule, $ruleName, $args);
+        $spec = new ValidateSpec($field, $this->validationLocator);
         $this->validateSpecs[] = $spec;
 
         return $spec;
@@ -96,10 +91,9 @@ class Validator
      *
      * @return SanitizeSpec
      */
-    public function sanitize(string $field, string $ruleName, array $args = []): SanitizeSpec
+    public function sanitize(string $field): SanitizeSpec
     {
-        $rule = $this->sanitizeLocator->get($ruleName);
-        $spec = new SanitizeSpec($field, $rule, $ruleName, $args);
+        $spec = new SanitizeSpec($field, $this->sanitizeLocator);
         $this->sanitizeSpecs[] = $spec;
 
         return $spec;

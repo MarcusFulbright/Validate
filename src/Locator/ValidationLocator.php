@@ -7,7 +7,6 @@ use Nashphp\Validation\Rule\Validate\IsAlphaDash;
 use Nashphp\Validation\Rule\Validate\IsAlphaNum;
 use Nashphp\Validation\Rule\Validate\IsBetween;
 use Nashphp\Validation\Rule\Validate\IsBool;
-use Nashphp\Validation\Tests\Rule\Validate\IsBetweenTest;
 
 class ValidationLocator extends AbstractLocator
 {
@@ -21,19 +20,19 @@ class ValidationLocator extends AbstractLocator
     protected function getDefaultFactories(): array
     {
         return [
-            'isBool' => function () {
+            'bool' => function () {
                 return new IsBool();
             },
-            'isAlphaNum' => function () {
+            'alphaNum' => function () {
                 return new IsAlphaNum();
             },
-            'isAlpha' => function () {
+            'alpha' => function () {
                 return new IsAlpha();
             },
-            'isAlphaDash' => function () {
+            'alphaDash' => function () {
                 return new IsAlphaDash();
             },
-            'isBetween' => function () {
+            'between' => function () {
                 return new IsBetween();
             }
         ];

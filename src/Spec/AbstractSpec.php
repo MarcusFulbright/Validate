@@ -2,37 +2,70 @@
 
 namespace Nashphp\Validation\Spec;
 
+use Nashphp\Validation\Exception\ValidationException;
+use Nashphp\Validation\Locator\AbstractLocator;
+
 abstract class AbstractSpec
 {
-    /** @var string */
+    /**
+     * Field name for the spec to operate on.
+     *
+     * @var string
+     */
     protected $field;
 
-    /** @var callable */
+    /**
+     * Locator to fetch rules from.
+     *
+     * @var AbstractLocator
+     */
+    protected $locator;
+
+    /**
+     * Rule to invoke.
+     *
+     * @var callable
+     */
     protected $rule;
 
-    /** @var array */
-    protected $args;
+    /**
+     * Arguments supplied to the rule
+     *
+     * @var array
+     */
+    protected $args = [];
 
-    /** @var string */
+    /**
+     * Failure message to be used instead of the default message.
+     *
+     * @var string
+     */
     protected $message;
 
-    /** @var string */
+    /**
+     * Name of the rule to execute.
+     *
+     * @var string
+     */
     protected $ruleName;
+
+    /**
+     * Flag that determines the allowance of blank values.
+     *
+     * @var bool
+     */
+    protected $allowBlanks = false;
 
     /**
      * AbstractSpec constructor.
      *
      * @param string $field
-     * @param callable $rule
-     * @param string $ruleName
-     * @param array $args
+     * @param AbstractLocator $locator
      */
-    public function __construct(string $field, callable $rule, string $ruleName, array $args)
+    public function __construct(string $field, AbstractLocator $locator)
     {
         $this->field = $field;
-        $this->rule = $rule;
-        $this->args = $args;
-        $this->ruleName = $ruleName;
+        $this->locator = $locator;
     }
 
     /**
@@ -44,10 +77,7 @@ abstract class AbstractSpec
      */
     public function __invoke($subject): bool
     {
-        array_unshift($this->args, $this->field);
-        array_unshift($this->args, $subject);
-
-        return ($this->rule)(...$this->args);
+        return ($this->rule)($subject, $this->field, ...array_values($this->args));
     }
 
     /**
@@ -84,6 +114,7 @@ abstract class AbstractSpec
         if (!$this->message) {
             $this->message = $this->getDefaultMessage();
         }
+
         return $this->message;
     }
 
@@ -108,6 +139,23 @@ abstract class AbstractSpec
     }
 
     /**
+     * Sets the rule and ruleName for the spec.
+     *
+     * @param $ruleName
+     *
+     * @throws ValidationException
+     *
+     * @return AbstractSpec
+     */
+    protected function setRule($ruleName): self
+    {
+        $this->rule = $this->locator->get($ruleName);
+        $this->ruleName = $ruleName;
+
+        return $this;
+    }
+
+    /**
      * Returns the default failure message for this rule specification.
      *
      * @return string
@@ -124,39 +172,49 @@ abstract class AbstractSpec
      */
     protected function argsToString(): string
     {
-        if (! $this->args) {
-            return '';
-        }
-        $vals = array();
-        foreach ($this->args as $arg) {
-            $vals[] = $this->argToString($arg);
+        if (!$this->args) {
+            return '()';
         }
 
-        return '(' . implode(', ', $vals) . ')';
+        return '(' . implode(', ', $this->args) . ')';
     }
 
+
     /**
-     * Converts one arg to a string.
+     * Determines if the field is a `valid` blank value.
      *
-     * @param mixed $arg The arg.
+     * Values are considered blank if they are, not sent, null, or strings that trim down to nothing. integers, floats,
+     * arrays, resources, objects, etc., are never considered blank. Even a value of `(int) 0` will *not* evaluate as
+     * blank.
+     * The optional `$validBlanks` argument can be passed in to provide a list of additional values that should get
+     * considered as blank. These values are evaluated *before* the default blank values.
      *
-     * @return string
+     * @param mixed $subject
+     * @param array $validBlanks
+     *
+     * @return bool
      */
-    protected function argToString($arg): string
+    protected function subjectFieldIsBlank($subject, array $validBlanks = []): bool
     {
-        switch (true) {
-            case $arg instanceof \Closure:
-                return '*Closure*';
-            case is_object($arg):
-                return '*' . get_class($arg) . '*';
-            case is_array($arg):
-                return '*array*';
-            case is_resource($arg):
-                return '*resource*';
-            case is_null($arg):
-                return '*null*';
-            default:
-                return $arg;
+        $field = $this->field;
+
+        foreach ($validBlanks as $blank) {
+            if ($field === $blank) {
+                return false;
+            }
         }
+
+        // not set, or null, means it is blank
+        if (! isset($subject->$field) || $subject->$field === null) {
+            return true;
+        }
+
+        // non-strings are not blank: int, float, object, array, resource, etc
+        if (! is_string($subject->$field)) {
+            return false;
+        }
+
+        // strings that trim down to exactly nothing are blank
+        return trim($subject->$field) === '';
     }
 }

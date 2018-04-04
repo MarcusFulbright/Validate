@@ -66,9 +66,9 @@ abstract class AbstractLocator
      *
      * @return void
      */
-    public function set($name, $spec): void
+    public function set($name, $rule): void
     {
-        $this->factories[$name] = $spec;
+        $this->factories[$name] = $rule;
         unset($this->instances[$name]);
     }
 

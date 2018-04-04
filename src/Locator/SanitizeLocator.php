@@ -16,7 +16,7 @@ class SanitizeLocator extends AbstractLocator
     protected function getDefaultFactories(): array
     {
         return [
-            'toBool' => function () {
+            'bool' => function () {
                 return new ToBool();
             }
         ];

@@ -15,7 +15,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->sanitize('testField', 'toBool');
+        $validator->sanitize('testField')->to('bool');
         $validator->apply($subject);
 
         $this->assertTrue($subject->testField);
@@ -29,7 +29,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField', 'isBool');
+        $validator->validate('testField')->is('bool');
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -39,7 +39,7 @@ class ValidatorExampleTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField did not pass isBool(*stdClass*, testField)'
+                'testField did not pass bool()'
             ]
         ];
         $subject = new \stdClass();
@@ -48,7 +48,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField', 'isBool');
+        $validator->validate('testField')->is('bool');
         $result = $validator->apply($subject);
 
         $this->assertFalse($result);
@@ -65,7 +65,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('success', 'isBetween', [1, 10]);
+        $validator->validate('success')->is('between', 1, 10);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
