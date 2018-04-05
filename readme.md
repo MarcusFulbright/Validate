@@ -119,7 +119,7 @@ After calling `Validator::validate('fieldName)`, a fluent interface provides sev
 * `allowBlanks()`: allows blank values without running the validation rule
 *`setBlankValues($whiteList)`: Accepts an array of values that should be treated as blank values. These values will override default behavior.
 
-**On Blank values:**
+##On Blank values:
 This library does not rely on a simple `isset()` or `empty()` check to determine if a field is blank. A field is blank if: 
 * it is not set
 * it is set to null
@@ -133,7 +133,16 @@ This means that by default things like the following values are *not* considered
 * []
 * new \stdClass()
 
-> `setBlankValues($whiteList)` can set an array of values that should be treated as blank values. These values will override default behavior.
+After calling `validate` *or* `sanitize` the method `setBlankValues($whiteList)` can be called to set a white list of values that should get treated as blanks. These values will override default behavior.
+
+```php
+$whiteList = [
+  0,
+  false
+];
+$validator->validate('field')->setBlankValues($whiteList);
+$validator->sanitize('field')->setBlankValues($whiteList);
+```
 
 **Validation Example**
 ```php
