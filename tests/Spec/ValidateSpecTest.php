@@ -60,4 +60,48 @@ class ValidateSpecTest extends TestCase
 
         $this->assertSame($this->spec, $actual);
     }
+
+    public function testInvokeAllowBlankValue()
+    {
+        $subject = new \stdClass();
+        $this->spec->allowBlank();
+
+        $actual = ($this->spec)($subject);
+
+        $this->assertTrue($actual);
+    }
+
+    public function testInvokeRule()
+    {
+        $fakeCallable = function () {
+            return true;
+        };
+        $subject = (object) [
+            'testField' => true
+        ];
+
+        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
+        $this->spec->is('fakeRule', []);
+
+        $actual = ($this->spec)($subject);
+
+        $this->assertTrue($actual);
+    }
+
+    public function testInvokeNegated()
+    {
+        $fakeCallable = function () {
+            return true;
+        };
+        $subject = (object) [
+            'testField' => true
+        ];
+
+        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
+        $this->spec->isNot('fakeRule', []);
+
+        $actual = ($this->spec)($subject);
+
+        $this->assertFalse($actual);
+    }
 }

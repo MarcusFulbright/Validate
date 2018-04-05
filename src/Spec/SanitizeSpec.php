@@ -25,6 +25,7 @@ class SanitizeSpec extends AbstractSpec
         if (!$this->subjectFieldIsBlank($subject)) {
             return parent::__invoke($subject);
         }
+
         if (!$this->allowBlanks) {
             return false;
         }

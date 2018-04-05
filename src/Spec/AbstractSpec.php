@@ -57,6 +57,14 @@ abstract class AbstractSpec
     protected $allowBlanks = false;
 
     /**
+     * An array of values to be considered blank.
+     *
+     * @var array
+     */
+    protected $blankWhiteList = [];
+
+
+    /**
      * AbstractSpec constructor.
      *
      * @param string $field
@@ -151,6 +159,20 @@ abstract class AbstractSpec
     {
         $this->rule = $this->locator->get($ruleName);
         $this->ruleName = $ruleName;
+
+        return $this;
+    }
+
+    /**
+     * Sets the white list of values that should be considered blank.
+     *
+     * @param array $blankWhiteList
+     *
+     * @return ValidateSpec
+     */
+    public function setBlankValues(array $blankWhiteList): self
+    {
+        $this->blankWhiteList = $blankWhiteList;
 
         return $this;
     }

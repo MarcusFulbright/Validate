@@ -7,13 +7,6 @@ use Nashphp\Validation\Exception\ValidationException;
 class ValidateSpec extends AbstractSpec
 {
     /**
-     * An array of values to be considered blank.
-     *
-     * @var array
-     */
-    protected $blankWhiteList = [];
-
-    /**
      * Flag to indicate if the negated value of the rule should be returned.
      *
      * @var bool
@@ -36,6 +29,7 @@ class ValidateSpec extends AbstractSpec
         }
 
         if (!$isBlank) {
+
             $result = parent::__invoke($subject);
 
             return $this->negated ? !$result : $result;
@@ -90,20 +84,6 @@ class ValidateSpec extends AbstractSpec
     public function allowBlank(): self
     {
         $this->allowBlanks = true;
-
-        return $this;
-    }
-
-    /**
-     * Sets the white list of values that should be considered blank.
-     *
-     * @param array $blankWhiteList
-     *
-     * @return ValidateSpec
-     */
-    public function setBlankValues(array $blankWhiteList): self
-    {
-        $this->blankWhiteList = $blankWhiteList;
 
         return $this;
     }
