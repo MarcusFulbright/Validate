@@ -29,7 +29,6 @@ class ValidateSpec extends AbstractSpec
         }
 
         if (!$isBlank) {
-
             $result = parent::__invoke($subject);
 
             return $this->negated ? !$result : $result;
