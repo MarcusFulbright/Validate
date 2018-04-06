@@ -12,9 +12,7 @@ class ValidatorExampleTest extends TestCase
 {
     public function testSanitizeToBool()
     {
-        $subject = (object) [
-            'testField' => 1
-        ];
+        $subject = (object) ['testField' => 1];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -25,12 +23,23 @@ class ValidatorExampleTest extends TestCase
         $this->assertTrue($subject->testField);
     }
 
+    public function testSanitizeArray()
+    {
+        $subject = ['testField' => 1];
+
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->sanitize('testField')->to('bool');
+        $validator->apply($subject);
+
+        $this->assertTrue($subject['testField']);
+    }
+
     public function testSanitizeWithBlankValue()
     {
         $expectedBlank = 'expectedBlankValue';
-        $subject = (object) [
-            'testField' => ''
-        ];
+        $subject = (object) ['testField' => ''];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -44,8 +53,20 @@ class ValidatorExampleTest extends TestCase
 
     public function testValidateBoolSuccess()
     {
-        $subject = new \stdClass();
-        $subject->testField = true;
+        $subject = (object) ['testField' => true];
+
+        $validatorFactory = new ValidatorFactory();
+        $validator = $validatorFactory->newValidator();
+
+        $validator->validate('testField')->is('bool');
+        $result = $validator->apply($subject);
+
+        $this->assertTrue($result);
+    }
+
+    public function testCanValidateArray()
+    {
+        $subject = ['testField' => true];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -63,8 +84,7 @@ class ValidatorExampleTest extends TestCase
                 'testField did not pass bool()'
             ]
         ];
-        $subject = new \stdClass();
-        $subject->testField = 1;
+        $subject = (object) ['testField' => 1];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -79,9 +99,7 @@ class ValidatorExampleTest extends TestCase
 
     public function testAllowBlankValues()
     {
-        $subject = (object)[
-            'testField' => null
-        ];
+        $subject = (object)['testField' => null];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -94,9 +112,7 @@ class ValidatorExampleTest extends TestCase
 
     public function testAllowCustomBlankValue()
     {
-        $subject = (object)[
-            'testField' => 0
-        ];
+        $subject = (object)['testField' => 0];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -109,9 +125,7 @@ class ValidatorExampleTest extends TestCase
 
     public function testPreventCustomBlankValue()
     {
-        $subject = (object)[
-            'testField' => 0
-        ];
+        $subject = (object)['testField' => 0];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
@@ -124,9 +138,7 @@ class ValidatorExampleTest extends TestCase
 
     public function testIsBetween()
     {
-        $subject = (object) [
-            'success' => 5,
-        ];
+        $subject = (object) ['success' => 5,];
 
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
