@@ -63,7 +63,6 @@ abstract class AbstractSpec
      */
     protected $blankWhiteList = [];
 
-
     /**
      * AbstractSpec constructor.
      *
@@ -190,9 +189,9 @@ abstract class AbstractSpec
      *
      * @return bool
      */
-    public function subjectFieldIsBlank($subject, array $blankWhiteList = []): bool
+    public function subjectFieldIsBlank($subject): bool
     {
-        foreach ($blankWhiteList as $item) {
+        foreach ($this->blankWhiteList as $item) {
             if ($subject->{$this->field} === $item) {
                 return true;
             }

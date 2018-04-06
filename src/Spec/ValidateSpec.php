@@ -88,6 +88,16 @@ class ValidateSpec extends AbstractSpec
     }
 
     /**
+     * Indicates if the spec accepts blank values.
+     *
+     * @return bool
+     */
+    public function acceptBlanks(): bool
+    {
+        return $this->allowBlanks;
+    }
+
+    /**
      * Generates the default message for validation failure.
      *
      * @return string

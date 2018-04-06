@@ -151,6 +151,20 @@ class Validator
         }
 
         foreach ($this->validateSpecs as $validateSpec) {
+            //handle blanks
+            $isBlank = $validateSpec->subjectFieldIsBlank($subject);
+
+            if ($validateSpec->acceptBlanks() && $isBlank) {
+                return true;
+            }
+
+            if (!$validateSpec->acceptBlanks() && $isBlank) {
+                $this->addFailure($validateSpec->getField(), "{$validateSpec->getField()} should not be blank");
+
+                return false;
+            }
+
+            //field is not blank, invoke the spec
             $this->applySpec($subject, $validateSpec);
         }
 
@@ -173,8 +187,19 @@ class Validator
             return true;
         }
 
-        $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
+        $this->addFailure($spec->getField(), $spec->getMessage(), $spec->getArgs());
 
         return false;
+    }
+
+    /**
+     * Adds a failure to the collection.
+     *
+     * @param string $field
+     * @param string $message
+     */
+    protected function addFailure(string $field, string $message, array $args = []): void
+    {
+        $this->failures->add($field, $message, $args);
     }
 }

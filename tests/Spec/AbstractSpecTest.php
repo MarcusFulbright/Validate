@@ -122,8 +122,9 @@ class AbstractSpecTest extends TestCase
 
         $locator = \Mockery::mock(AbstractLocator::class);
         $spec = new DummySpec('testField', $locator);
+        $spec->setBlankValues($whiteList);
 
-        $actual = $spec->subjectFieldIsBlank($subject, $whiteList);
+        $actual = $spec->subjectFieldIsBlank($subject);
 
         $this->assertTrue($actual);
     }
