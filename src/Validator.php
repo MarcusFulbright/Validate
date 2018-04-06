@@ -21,23 +21,18 @@ class Validator
     /** @var FailureCollection */
     protected $failures;
 
-    /**
-     * The validate rules configured to be applied to a given subject.
-     *
-     * The keys represent the subject's property name and the value is an array of validation rules to apply.
-     *
-     * @var array
-     */
+    /** @var ValidateSpec[] */
     protected $validateSpecs = [];
 
+    /** @var SanitizeSpec[] */
+    protected $sanitizeSpecs = [];
+
     /**
-     * The sanitize rules configured to be applied to a given subject.
-     *
-     * The keys represent the subject's property name and the value is an array of sanitize rules to apply.
+     * Fields to skip during validation.
      *
      * @var array
      */
-    protected $sanitizeSpecs = [];
+    protected $skip = [];
 
     /**
      * Validator constructor.
@@ -146,26 +141,21 @@ class Validator
      */
     protected function applyToObject($subject): bool
     {
+        $continue = true;
         foreach ($this->sanitizeSpecs as $sanitizeSpec) {
-            $this->applySpec($subject, $sanitizeSpec);
+            $continue = $this->applySpec($subject, $sanitizeSpec);
+            if (!$continue) {
+                break;
+            }
         }
 
-        foreach ($this->validateSpecs as $validateSpec) {
-            //handle blanks
-            $isBlank = $validateSpec->subjectFieldIsBlank($subject);
-
-            if ($validateSpec->acceptBlanks() && $isBlank) {
-                return true;
+        if ($continue) {
+            foreach ($this->validateSpecs as $validateSpec) {
+                $continue = $this->applySpec($subject, $validateSpec);
+                if (!$continue) {
+                    break;
+                }
             }
-
-            if (!$validateSpec->acceptBlanks() && $isBlank) {
-                $this->addFailure($validateSpec->getField(), "{$validateSpec->getField()} should not be blank");
-
-                return false;
-            }
-
-            //field is not blank, invoke the spec
-            $this->applySpec($subject, $validateSpec);
         }
 
         return $this->failures->isEmpty();
@@ -183,23 +173,35 @@ class Validator
      */
     protected function applySpec($subject, AbstractSpec $spec): bool
     {
+        if (isset($this->skip[$spec->getField()])) {
+            return true;
+        }
+
         if ($spec($subject)) {
             return true;
         }
 
-        $this->addFailure($spec->getField(), $spec->getMessage(), $spec->getArgs());
+        $this->failSpec($spec);
 
-        return false;
+        if ($spec->getFailureMode() === $spec::HALTING_FAILURE) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * Adds a failure to the collection.
+     * Handles failing a spec.
      *
-     * @param string $field
-     * @param string $message
+     * If the spec is set to a HardFailure, add its field to the skip list.
+     *
+     * @param AbstractSpec $spec
      */
-    protected function addFailure(string $field, string $message, array $args = []): void
+    protected function failSpec(AbstractSpec $spec): void
     {
-        $this->failures->add($field, $message, $args);
+        if ($spec->getFailureMode() === $spec::HARD_FAILURE) {
+            $this->skip = [];
+        }
+        $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
     }
 }

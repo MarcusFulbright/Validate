@@ -22,19 +22,19 @@ class ValidateSpec extends AbstractSpec
      */
     public function __invoke($subject): bool
     {
-        $isBlank = $this->subjectFieldIsBlank($subject, $this->blankWhiteList);
+        $isBlank = $this->subjectFieldIsBlank($subject);
 
-        if ($this->allowBlanks && $isBlank) {
+        if ($isBlank && $this->allowBlanks) {
             return true;
         }
 
-        if (!$isBlank) {
-            $result = parent::__invoke($subject);
-
-            return $this->negated ? !$result : $result;
+        if ($isBlank && !$this->allowBlanks) {
+            return false;
         }
 
-        return false;
+        $result = parent::__invoke($subject);
+
+        return $this->negated ? !$result : $result;
     }
 
     /**
@@ -98,12 +98,25 @@ class ValidateSpec extends AbstractSpec
     }
 
     /**
-     * Generates the default message for validation failure.
+     * Returns the default failure message for this rule specification.
      *
      * @return string
      */
     protected function getDefaultMessage(): string
     {
-        return "{$this->field} did not pass " . parent::getDefaultMessage();
+        $message = $this->field . ' should';
+        if (!$this->allowBlanks) {
+            $message .= ' not be blank and';
+        }
+
+        if ($this->allowBlanks) {
+            $message .= ' have been blank or';
+        }
+
+        if ($this->negated) {
+            $message .= ' not';
+        }
+
+        return "{$message} have validated as " . parent::getDefaultMessage();
     }
 }

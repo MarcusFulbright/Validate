@@ -8,6 +8,27 @@ use Nashphp\Validation\Locator\AbstractLocator;
 abstract class AbstractSpec
 {
     /**
+     * Failure Mode for a halting failure.
+     *
+     * @var string
+     */
+    const HALTING_FAILURE = 'HALTING_FAILURE';
+
+    /**
+     * Failure Mode for a hard failure.
+     *
+     * @var string
+     */
+    const HARD_FAILURE = 'HARD_FAILURE';
+
+    /**
+     * Failure Mode for a soft failure.
+     *
+     * @var string
+     */
+    const SOFT_FAILURE = 'SOFT_FAILURE';
+
+    /**
      * Field name for the spec to operate on.
      *
      * @var string
@@ -62,6 +83,13 @@ abstract class AbstractSpec
      * @var array
      */
     protected $blankWhiteList = [];
+
+    /**
+     * Failure mode for the rule.
+     *
+     * @var string
+     */
+    protected $failureMode = 'SOFT_FAILURE';
 
     /**
      * AbstractSpec constructor.
@@ -174,6 +202,52 @@ abstract class AbstractSpec
         $this->blankWhiteList = $blankWhiteList;
 
         return $this;
+    }
+
+    /**
+     * Sets the rule to halt the entire validation process on the subject.
+     *
+     * @return AbstractSpec
+     */
+    public function asHaltingRule(): self
+    {
+        $this->failureMode = self::HALTING_FAILURE;
+
+        return $this;
+    }
+
+    /**
+     * Sets the rule to stop further rules from applying to the same field.
+     *
+     * @return AbstractSpec
+     */
+    public function asHardFailure(): self
+    {
+        $this->failureMode = self::HARD_FAILURE;
+
+        return $this;
+    }
+
+    /**
+     * Sets the rule to allow other rules to operate on the same field.
+     *
+     * @return AbstractSpec
+     */
+    public function asSoftFailure(): self
+    {
+        $this->failureMode = self::SOFT_FAILURE;
+
+        return $this;
+    }
+
+    /**
+     * Returns the current failure mode.
+     *
+     * @return string
+     */
+    public function getFailureMode(): string
+    {
+        return $this->failureMode;
     }
 
     /**

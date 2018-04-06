@@ -22,7 +22,7 @@ class ValidatorTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField did not pass bool()'
+                'testField should not be blank and have validated as bool()'
             ]
         ];
         $subject = (object) ['testField' => 1];
@@ -39,7 +39,7 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should not be blank'
+                'testField should not be blank and have validated as bool()'
             ]
         ];
         $subject = (object) [];
