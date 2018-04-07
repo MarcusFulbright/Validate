@@ -81,7 +81,7 @@ class ValidatorExampleTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField should not be blank and have validated as bool()'
+                'testField should not be blank and validated as bool()'
             ]
         ];
         $subject = (object) ['testField' => 1];

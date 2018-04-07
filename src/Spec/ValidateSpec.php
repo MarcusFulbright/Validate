@@ -14,6 +14,13 @@ class ValidateSpec extends AbstractSpec
     protected $negated = false;
 
     /**
+     * Failure mode for the rule.
+     *
+     * @var string
+     */
+    protected $failureMode = 'SOFT_FAILURE';
+
+    /**
      * Invokes the rule that this spec is configured for.
      *
      * @param object $subject
@@ -117,6 +124,6 @@ class ValidateSpec extends AbstractSpec
             $message .= ' not';
         }
 
-        return "{$message} have validated as " . parent::getDefaultMessage();
+        return "{$message} validated as " . parent::getDefaultMessage();
     }
 }

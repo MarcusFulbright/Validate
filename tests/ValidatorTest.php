@@ -22,7 +22,7 @@ class ValidatorTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField should not be blank and have validated as bool()'
+                'testField should not be blank and validated as bool()'
             ]
         ];
         $subject = (object) ['testField' => 1];
@@ -31,7 +31,7 @@ class ValidatorTest extends TestCase
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
-        $this->assertCount(1, $this->validator->getFailures());
+        $this->assertCount(1, $this->validator->getFailures()->getMessages());
         $this->assertEquals($expectedMessages, $this->validator->getFailures()->getMessages());
     }
 
@@ -39,7 +39,7 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should not be blank and have validated as bool()'
+                'testField should not be blank and validated as bool()'
             ]
         ];
         $subject = (object) [];
@@ -48,7 +48,63 @@ class ValidatorTest extends TestCase
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
-        $this->assertCount(1, $this->validator->getFailures());
+        $this->assertCount(1, $this->validator->getFailures()->getMessages());
+        $this->assertEquals($expectedMessage, $this->validator->getFailures()->getMessages());
+    }
+
+    public function testHardRules()
+    {
+        $expectedMessage = [
+            'testField' => [
+                'testField should not be blank and validated as int()'
+            ]
+        ];
+        $subject = (object) [];
+
+        $this->validator->validate('testField')->is('int')->asHardRule();
+        //this rule should never run
+        $this->validator->validate('testField')->is('bool');
+        $result = $this->validator->apply($subject);
+
+        $this->assertFalse($result);
+        $this->assertCount(1, $this->validator->getFailures()->getMessagesForField('testField'));
+        $this->assertEquals($expectedMessage, $this->validator->getFailures()->getMessages());
+    }
+
+    public function testSoftRules()
+    {
+        $expectedMessage = [
+            'testField' => [
+                'testField should have sanitized to int()',
+                'testField should have sanitized to bool()'
+            ]
+        ];
+        $subject = (object) [];
+
+        $this->validator->sanitize('testField')->to('int');
+        $this->validator->sanitize('testField')->to('bool');
+        $result = $this->validator->apply($subject);
+
+        $this->assertFalse($result);
+        $this->assertCount(2, $this->validator->getFailures()->getMessagesForField('testField'));
+        $this->assertEquals($expectedMessage, $this->validator->getFailures()->getMessages());
+    }
+
+    public function testHaltingRule()
+    {
+        $expectedMessage = [
+            'testField' => [
+                'testField should have sanitized to int()'
+            ]
+        ];
+        $subject = (object) [];
+
+        $this->validator->sanitize('testField')->to('int')->asHaltingRule();
+        $this->validator->validate('testField')->is('int');
+        $result = $this->validator->apply($subject);
+
+        $this->assertFalse($result);
+        $this->assertCount(1, $this->validator->getFailures()->getMessagesForField('testField'));
         $this->assertEquals($expectedMessage, $this->validator->getFailures()->getMessages());
     }
 }

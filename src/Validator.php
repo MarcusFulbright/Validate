@@ -173,7 +173,7 @@ class Validator
      */
     protected function applySpec($subject, AbstractSpec $spec): bool
     {
-        if (isset($this->skip[$spec->getField()])) {
+        if (in_array($spec->getField(), $this->skip)) {
             return true;
         }
 
@@ -200,7 +200,7 @@ class Validator
     protected function failSpec(AbstractSpec $spec): void
     {
         if ($spec->getFailureMode() === $spec::HARD_FAILURE) {
-            $this->skip = [];
+            $this->skip[] = $spec->getField();
         }
         $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
     }

@@ -50,7 +50,7 @@ $validationService->sanitize('isPublished')->to('bool');
 $validationService->validate('isPublished')->is('bool');
 ```
 
-Multiple validation rules can apply to the same field, however there is no point to set up multiple sanitize rules for the same field.
+Multiple Validation and Sanitize rules can apply to the same field. Sanitize rules are ran before Validate rules. Within each group, the rules are ran in the order they are defined.
 
 ### Applying the Validator
 
@@ -98,17 +98,6 @@ $validator->sanitize('someField')->to('bool')->usingBlank(false)
 $validator->sanitize('someField')->to('bool)->setMessage('Could not sanitize [someField] to a boolean value')
 ```
 
-### Supported Sanitize Rules
-
-The following rules can all be supplied to the `to()` function:
-
-#### bool 
-Applies the native `(bool)` typecast
-
-### int
-Applies the native `(int)` typecast
-
-
 ## Validate
 After calling `Validator::validate('fieldName)`, a fluent interface provides several methods to configured the desired validation behavior:
 
@@ -119,7 +108,7 @@ After calling `Validator::validate('fieldName)`, a fluent interface provides sev
 * `allowBlanks()`: allows blank values without running the validation rule
 *`setBlankValues($whiteList)`: Accepts an array of values that should be treated as blank values. These values will override default behavior.
 
-##On Blank values:
+## On Blank values:
 This library does not rely on a simple `isset()` or `empty()` check to determine if a field is blank. A field is blank if: 
 * it is not set
 * it is set to null
@@ -162,7 +151,30 @@ $validator->validate('fieldName')->is('bool')->allowBlanks()->setBlanks([0])
 $validator->validate('fieldName')->is('int')->setBlankValues([0])
 ```
 
-## Supported Validate Rules
+## Failure Modes
+
+The following methods can be used fluently after calling `validate()` or `sanitize()` to se the rules failure mode:
+
+* `asSoftRule()`: if the rule fails, the validator will continue to apply all subsequent rules. This is the default behavior for Validate Rules.
+
+* `asHardRule()`: if the rule fails, do not perform any more operations on the same field. This is the default behavior for Sanitize Rules.
+
+* `asHaltingRule()`: if this rule fails, do not perform any more validation on the subject and halt, returning any errors that have occurred up to this point.
+
+## Rules
+
+### Sanitize Rules
+
+The following rules can all be supplied to the `to()` function:
+
+#### bool 
+Applies the native `(bool)` typecast
+
+### int
+Applies the native `(int)` typecast
+
+
+### Validate Rules
 
 The following rule names can be passed as the 2nd argument to `Validator::validate()`
 

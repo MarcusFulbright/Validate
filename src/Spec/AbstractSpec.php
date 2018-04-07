@@ -85,13 +85,6 @@ abstract class AbstractSpec
     protected $blankWhiteList = [];
 
     /**
-     * Failure mode for the rule.
-     *
-     * @var string
-     */
-    protected $failureMode = 'SOFT_FAILURE';
-
-    /**
      * AbstractSpec constructor.
      *
      * @param string $field
@@ -221,7 +214,7 @@ abstract class AbstractSpec
      *
      * @return AbstractSpec
      */
-    public function asHardFailure(): self
+    public function asHardRule(): self
     {
         $this->failureMode = self::HARD_FAILURE;
 
@@ -233,7 +226,7 @@ abstract class AbstractSpec
      *
      * @return AbstractSpec
      */
-    public function asSoftFailure(): self
+    public function asSoftRule(): self
     {
         $this->failureMode = self::SOFT_FAILURE;
 

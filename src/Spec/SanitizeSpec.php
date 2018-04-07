@@ -14,6 +14,13 @@ class SanitizeSpec extends AbstractSpec
     protected $blankValue;
 
     /**
+     * Failure mode for the rule.
+     *
+     * @var string
+     */
+    protected $failureMode = 'SOFT_FAILURE';
+
+    /**
      * Invokes the rule the spec is configured for.
      *
      * @param object $subject
@@ -66,5 +73,21 @@ class SanitizeSpec extends AbstractSpec
         $this->blankValue = $blankValue;
 
         return $this;
+    }
+
+    /**
+     * Returns the default failure message for this rule specification.
+     *
+     * @return string
+     */
+    protected function getDefaultMessage(): string
+    {
+        $message = $this->field . ' should have sanitized to ';
+
+        if ($this->allowBlanks) {
+            $message .= 'blank or ';
+        }
+
+        return "{$message}" . parent::getDefaultMessage();
     }
 }
