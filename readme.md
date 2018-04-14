@@ -161,6 +161,14 @@ The following methods can be used fluently after calling `validate()` or `saniti
 
 * `asHaltingRule()`: if this rule fails, do not perform any more validation on the subject and halt, returning any errors that have occurred up to this point.
 
+## Field Level Messages
+
+A _Field Message_ is used when _any_ rules fail on that field instead of displaying messages for each rule that failed.
+
+```php
+$validator->setFieldMessage('fieldName', 'custom message');
+```
+
 ## Rules
 
 ### Sanitize Rules

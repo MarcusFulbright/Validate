@@ -18,7 +18,7 @@ class SanitizeSpec extends AbstractSpec
      *
      * @var string
      */
-    protected $failureMode = 'SOFT_FAILURE';
+    protected $failureMode = 'HARD_FAILURE';
 
     /**
      * Invokes the rule the spec is configured for.

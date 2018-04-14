@@ -81,7 +81,7 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->sanitize('testField')->to('int');
+        $this->validator->sanitize('testField')->to('int')->asSoftRule();
         $this->validator->sanitize('testField')->to('bool');
         $result = $this->validator->apply($subject);
 
@@ -101,6 +101,24 @@ class ValidatorTest extends TestCase
 
         $this->validator->sanitize('testField')->to('int')->asHaltingRule();
         $this->validator->validate('testField')->is('int');
+        $result = $this->validator->apply($subject);
+
+        $this->assertFalse($result);
+        $this->assertCount(1, $this->validator->getFailures()->getMessagesForField('testField'));
+        $this->assertEquals($expectedMessage, $this->validator->getFailures()->getMessages());
+    }
+
+    public function testFieldLevelMessage()
+    {
+        $expectedMessage = [
+            'testField' => [
+                'customFieldMessage'
+            ]
+        ];
+        $subject = (object) [];
+
+        $this->validator->validate('testField')->is('int');
+        $this->validator->setFieldMessage('testField', 'customFieldMessage');
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);

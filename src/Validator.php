@@ -35,6 +35,15 @@ class Validator
     protected $skip = [];
 
     /**
+     * Messages to use for a field.
+     *
+     * Index is the fieldName, value is the message.
+     *
+     * @var array
+     */
+    protected $filedMessages = [];
+
+    /**
      * Validator constructor.
      *
      * @param ValidationLocator $validationLocator
@@ -92,6 +101,19 @@ class Validator
         $this->sanitizeSpecs[] = $spec;
 
         return $spec;
+    }
+
+    /**
+     * @param string $fieldName
+     * @param string $message
+     *
+     * @return Validator
+     */
+    public function setFieldMessage(string $fieldName, string $message): self
+    {
+        $this->filedMessages[$fieldName] = $message;
+
+        return $this;
     }
 
     /**
@@ -199,9 +221,16 @@ class Validator
      */
     protected function failSpec(AbstractSpec $spec): void
     {
+        $field = $spec->getField();
+
         if ($spec->getFailureMode() === $spec::HARD_FAILURE) {
-            $this->skip[] = $spec->getField();
+            $this->skip[] = $field;
         }
-        $this->failures->add($spec->getField(), $spec->getMessage(), $spec->getArgs());
+
+        if (isset($this->filedMessages[$spec->getField()])) {
+            $this->failures->set($field, $this->filedMessages[$field]);
+        } else {
+            $this->failures->add($field, $spec->getMessage(), $spec->getArgs());
+        }
     }
 }
