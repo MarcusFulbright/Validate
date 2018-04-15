@@ -216,6 +216,22 @@ Checks that a value is between the given minimum and maximum values
 $validator->validate('field')->is('between', 5, 10);
 ```
 
+## Extending The Validator Class
+It may be helpful to have a custom Validator class that knows how to configure itself to validate a specific object or data set. You can do so by overriding the `init()` method:
+
+```php
+class CustomValidator extends Validator
+{
+    protected function init()
+    {
+        $this->sanitize('field')->to('rule');
+        $this->validate('field')->is('rule');
+        $this->useFieldMessage('field', 'message');
+    }
+}
+
+```
+
 ## Custom Rules
 Defining your own rules is very easy. Weather your custom rule is a Sanitize or Validate rule, it needs to implement the `RuleInterface`
 

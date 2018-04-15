@@ -57,6 +57,17 @@ class Validator
         $this->validationLocator = $validationLocator;
         $this->sanitizeLocator = $sanitizeLocator;
         $this->failures = $failureCollection;
+        $this->init();
+    }
+
+    /**
+     * Hook function that can be implemented in an extended custom validator class.
+     *
+     * If a custom class extends Validator, this method is the hook to provide some default rule configuration.
+     */
+    protected function init(): void
+    {
+        //do nothing
     }
 
     /**
