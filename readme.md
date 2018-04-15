@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/MarcusFulbright/php-validation.svg?branch=master)](https://travis-ci.org/MarcusFulbright/php-validation)
 
-**NashPhp\Validation** is a dead simple standalone validation library for PHP that is inspired by [Aura.Filter](). It has no dependencies, relies on PHP 7.1+, and can be used in any project.
+**Mbright\Validation** is a dead simple standalone validation library for PHP that is inspired by [Aura.Filter](). It has no dependencies, relies on PHP 7.1+, and can be used in any project.
 
 ## Goals
 
@@ -229,7 +229,6 @@ class CustomValidator extends Validator
         $this->useFieldMessage('field', 'message');
     }
 }
-
 ```
 
 ## Custom Rules
@@ -238,7 +237,7 @@ Defining your own rules is very easy. Weather your custom rule is a Sanitize or 
 
 Validate rules **MUST NOT** manipulate any data on on the `$subject`.
 ```php
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class MyCustomValidateRule implements RuleInterface
 {
@@ -250,7 +249,7 @@ class MyCustomValidateRule implements RuleInterface
 ```
 Sanitize Rules **MAY** manipulate data on the subject as needed
 ```php
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class MyCustomSanitizeRule implements RuleInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Locator;
+namespace Mbright\Validation\Locator;
 
-use Nashphp\Validation\Exception\ValidationException;
+use Mbright\Validation\Exception\ValidationException;
 
 abstract class AbstractLocator
 {

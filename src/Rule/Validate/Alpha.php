@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Rule\Validate;
+namespace Mbright\Validation\Rule\Validate;
 
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class Alpha implements RuleInterface
 {

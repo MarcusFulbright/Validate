@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Examples;
+namespace Mbright\Validation\Tests\Examples;
 
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class ExampleCustomSanitizeRule implements RuleInterface
 {

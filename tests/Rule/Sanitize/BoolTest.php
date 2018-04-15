@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Rule\Sanitize;
+namespace Mbright\Validation\Tests\Rule\Sanitize;
 
-use Nashphp\Validation\Rule\Sanitize\Boolean;
+use Mbright\Validation\Rule\Sanitize\Boolean;
 use PHPUnit\Framework\TestCase;
 
 class BoolTest extends TestCase

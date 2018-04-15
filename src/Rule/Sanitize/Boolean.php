@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Rule\Sanitize;
+namespace Mbright\Validation\Rule\Sanitize;
 
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class Boolean implements RuleInterface
 {

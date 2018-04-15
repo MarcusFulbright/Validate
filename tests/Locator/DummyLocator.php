@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Locator;
+namespace Mbright\Validation\Tests\Locator;
 
-use Nashphp\Validation\Locator\AbstractLocator;
+use Mbright\Validation\Locator\AbstractLocator;
 
 class DummyLocator extends AbstractLocator
 {

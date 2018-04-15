@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Examples;
+namespace Mbright\Validation\Tests\Examples;
 
-use Nashphp\Validation\ValidatorFactory;
+use Mbright\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
 
 /**

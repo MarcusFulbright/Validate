@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Spec;
+namespace Mbright\Validation\Spec;
 
-use Nashphp\Validation\Exception\ValidationException;
+use Mbright\Validation\Exception\ValidationException;
 
 class SanitizeSpec extends AbstractSpec
 {

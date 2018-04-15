@@ -1,6 +1,6 @@
 <?php
 
-namespace Nashphp\Validation\Rule\Validate;
+namespace Mbright\Validation\Rule\Validate;
 
 class Between
 {

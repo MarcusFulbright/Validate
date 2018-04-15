@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests;
+namespace Mbright\Validation\Tests;
 
-use Nashphp\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\RuleInterface;
 
 class DummyRule implements RuleInterface
 {

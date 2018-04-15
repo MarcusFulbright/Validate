@@ -1,12 +1,12 @@
 {
-    "name": "nashphp/validation",
+    "name": "Mbright/validation",
     "type": "library",
     "description": "A standalone validation library for php",
     "keywords": [
-        "NashPhp",
+        "Mbright",
         "Validation"
     ],
-    "homepage": "https://github.com/NashPhp/Validation",
+    "homepage": "https://github.com/MarcusFulbright/Validate",
     "license": "MIT",
     "authors": [
         {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nashphp\\Validation\\": "./src/"
+            "Mbright\\Validation\\": "./src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nashphp\\Validation\\Tests\\": "./tests/"
+            "Mbright\\Validation\\Tests\\": "./tests/"
         }
     },
     "scripts": {

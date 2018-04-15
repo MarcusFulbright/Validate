@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Locator;
+namespace Mbright\Validation\Tests\Locator;
 
-use Nashphp\Validation\Exception\ValidationException;
+use Mbright\Validation\Exception\ValidationException;
 use PHPUnit\Framework\TestCase;
 
 class AbstractLocatorTest extends TestCase

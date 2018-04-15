@@ -1,9 +1,9 @@
 <?php
 
-namespace Nashphp\Validation\Tests;
+namespace Mbright\Validation\Tests;
 
-use Nashphp\Validation\Validator;
-use Nashphp\Validation\ValidatorFactory;
+use Mbright\Validation\Validator;
+use Mbright\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase

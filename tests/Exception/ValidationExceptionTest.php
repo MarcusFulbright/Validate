@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Exception;
+namespace Mbright\Validation\Tests\Exception;
 
-use Nashphp\Validation\Exception\ValidationException;
+use Mbright\Validation\Exception\ValidationException;
 use PHPUnit\Framework\TestCase;
 
 class ValidationExceptionTest extends TestCase

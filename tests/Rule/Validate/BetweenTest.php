@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Rule\Validate;
+namespace Mbright\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\Between;
+use Mbright\Validation\Rule\Validate\Between;
 use PHPUnit\Framework\TestCase;
 
 class BetweenTest extends TestCase

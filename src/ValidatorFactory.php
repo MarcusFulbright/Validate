@@ -1,10 +1,10 @@
 <?php
 
-namespace Nashphp\Validation;
+namespace Mbright\Validation;
 
-use Nashphp\Validation\Failure\FailureCollection;
-use Nashphp\Validation\Locator\SanitizeLocator;
-use Nashphp\Validation\Locator\ValidationLocator;
+use Mbright\Validation\Failure\FailureCollection;
+use Mbright\Validation\Locator\SanitizeLocator;
+use Mbright\Validation\Locator\ValidationLocator;
 
 class ValidatorFactory
 {

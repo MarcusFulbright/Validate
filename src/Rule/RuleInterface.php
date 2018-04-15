@@ -1,6 +1,6 @@
 <?php
 
-namespace Nashphp\Validation\Rule;
+namespace Mbright\Validation\Rule;
 
 interface RuleInterface
 {

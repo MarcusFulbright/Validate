@@ -1,6 +1,6 @@
 <?php
 
-namespace Nashphp\Validation\Failure;
+namespace Mbright\Validation\Failure;
 
 class ValidationFailure implements \JsonSerializable
 {

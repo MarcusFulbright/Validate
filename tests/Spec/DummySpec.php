@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Spec;
+namespace Mbright\Validation\Tests\Spec;
 
-use Nashphp\Validation\Spec\AbstractSpec;
+use Mbright\Validation\Spec\AbstractSpec;
 
 /**
  * This is a dummy class used for testing methods on AbstractSpec

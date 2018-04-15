@@ -1,10 +1,10 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Spec;
+namespace Mbright\Validation\Tests\Spec;
 
 use Mockery\MockInterface;
-use Nashphp\Validation\Locator\AbstractLocator;
-use Nashphp\Validation\Spec\ValidateSpec;
+use Mbright\Validation\Locator\AbstractLocator;
+use Mbright\Validation\Spec\ValidateSpec;
 use PHPUnit\Framework\TestCase;
 
 class ValidateSpecTest extends TestCase

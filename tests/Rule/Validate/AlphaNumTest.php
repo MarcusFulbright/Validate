@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Rule\Validate;
+namespace Mbright\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\AlphaNum;
+use Mbright\Validation\Rule\Validate\AlphaNum;
 use PHPUnit\Framework\TestCase;
 
 class AlphaNumTest extends TestCase

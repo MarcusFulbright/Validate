@@ -1,9 +1,9 @@
 <?php
 
-namespace Nashphp\Validation\Locator;
+namespace Mbright\Validation\Locator;
 
-use Nashphp\Validation\Rule\Sanitize\Boolean;
-use Nashphp\Validation\Rule\Sanitize\Integer;
+use Mbright\Validation\Rule\Sanitize\Boolean;
+use Mbright\Validation\Rule\Sanitize\Integer;
 
 class SanitizeLocator extends AbstractLocator
 {

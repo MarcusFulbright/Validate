@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Rule\Sanitize;
+namespace Mbright\Validation\Tests\Rule\Sanitize;
 
-use Nashphp\Validation\Rule\Sanitize\Integer;
+use Mbright\Validation\Rule\Sanitize\Integer;
 use PHPUnit\Framework\TestCase;
 
 class IntTest extends TestCase

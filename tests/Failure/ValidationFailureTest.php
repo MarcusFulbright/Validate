@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Failure;
+namespace Mbright\Validation\Tests\Failure;
 
-use Nashphp\Validation\Failure\ValidationFailure;
+use Mbright\Validation\Failure\ValidationFailure;
 use PHPUnit\Framework\TestCase;
 
 class ValidationFailureTest extends TestCase

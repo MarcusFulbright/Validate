@@ -1,8 +1,8 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Rule\Validate;
+namespace Mbright\Validation\Tests\Rule\Validate;
 
-use Nashphp\Validation\Rule\Validate\Integer;
+use Mbright\Validation\Rule\Validate\Integer;
 use PHPUnit\Framework\TestCase;
 
 class IntTest extends TestCase

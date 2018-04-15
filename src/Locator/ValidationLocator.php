@@ -1,13 +1,13 @@
 <?php
 
-namespace Nashphp\Validation\Locator;
+namespace Mbright\Validation\Locator;
 
-use Nashphp\Validation\Rule\Validate\Alpha;
-use Nashphp\Validation\Rule\Validate\AlphaDash;
-use Nashphp\Validation\Rule\Validate\AlphaNum;
-use Nashphp\Validation\Rule\Validate\Between;
-use Nashphp\Validation\Rule\Validate\Boolean;
-use Nashphp\Validation\Rule\Validate\Integer;
+use Mbright\Validation\Rule\Validate\Alpha;
+use Mbright\Validation\Rule\Validate\AlphaDash;
+use Mbright\Validation\Rule\Validate\AlphaNum;
+use Mbright\Validation\Rule\Validate\Between;
+use Mbright\Validation\Rule\Validate\Boolean;
+use Mbright\Validation\Rule\Validate\Integer;
 
 class ValidationLocator extends AbstractLocator
 {

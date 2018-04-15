@@ -1,12 +1,12 @@
 <?php
 
-namespace Nashphp\Validation\Tests;
+namespace Mbright\Validation\Tests;
 
-use Nashphp\Validation\Failure\FailureCollection;
-use Nashphp\Validation\Locator\SanitizeLocator;
-use Nashphp\Validation\Locator\ValidationLocator;
-use Nashphp\Validation\Validator;
-use Nashphp\Validation\ValidatorFactory;
+use Mbright\Validation\Failure\FailureCollection;
+use Mbright\Validation\Locator\SanitizeLocator;
+use Mbright\Validation\Locator\ValidationLocator;
+use Mbright\Validation\Validator;
+use Mbright\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
 
 class ValidatorFactoryTest extends TestCase

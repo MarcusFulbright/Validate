@@ -1,9 +1,9 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Spec;
+namespace Mbright\Validation\Tests\Spec;
 
-use Nashphp\Validation\Locator\AbstractLocator;
-use Nashphp\Validation\Spec\AbstractSpec;
+use Mbright\Validation\Locator\AbstractLocator;
+use Mbright\Validation\Spec\AbstractSpec;
 use PHPUnit\Framework\TestCase;
 
 class AbstractSpecTest extends TestCase

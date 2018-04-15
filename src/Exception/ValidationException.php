@@ -1,6 +1,6 @@
 <?php
 
-namespace Nashphp\Validation\Exception;
+namespace Mbright\Validation\Exception;
 
 class ValidationException extends \Exception
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Nashphp\Validation;
+namespace Mbright\Validation;
 
-use Nashphp\Validation\Exception\ValidationException;
-use Nashphp\Validation\Locator\SanitizeLocator;
-use Nashphp\Validation\Locator\ValidationLocator;
-use Nashphp\Validation\Spec\AbstractSpec;
-use Nashphp\Validation\Spec\SanitizeSpec;
-use Nashphp\Validation\Spec\ValidateSpec;
-use Nashphp\Validation\Failure\FailureCollection;
+use Mbright\Validation\Exception\ValidationException;
+use Mbright\Validation\Locator\SanitizeLocator;
+use Mbright\Validation\Locator\ValidationLocator;
+use Mbright\Validation\Spec\AbstractSpec;
+use Mbright\Validation\Spec\SanitizeSpec;
+use Mbright\Validation\Spec\ValidateSpec;
+use Mbright\Validation\Failure\FailureCollection;
 
 class Validator
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Nashphp\Validation\Spec;
+namespace Mbright\Validation\Spec;
 
-use Nashphp\Validation\Exception\ValidationException;
-use Nashphp\Validation\Locator\AbstractLocator;
+use Mbright\Validation\Exception\ValidationException;
+use Mbright\Validation\Locator\AbstractLocator;
 
 abstract class AbstractSpec
 {

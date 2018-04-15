@@ -1,10 +1,10 @@
 <?php
 
-namespace Nashphp\Validation\Tests\Failure;
+namespace Mbright\Validation\Tests\Failure;
 
-use Nashphp\Validation\Failure\ValidationFailure;
+use Mbright\Validation\Failure\ValidationFailure;
 use PHPUnit\Framework\TestCase;
-use Nashphp\Validation\Failure\FailureCollection;
+use Mbright\Validation\Failure\FailureCollection;
 
 class FailureCollectionTest extends TestCase
 {
