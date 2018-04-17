@@ -175,8 +175,45 @@ $validator->setFieldMessage('fieldName', 'custom message');
 
 The following rules can all be supplied to the `to()` function:
 
+#### alphaNum
+Strips all non alpha-numeric characters
+```php
+$validator->sanitize('field')->to('alphaNum');
+```
+
+#### alpha
+Strips all non-alpha characters
+```php
+$validator->sanitize('field')->to('alpha');
+```
+
+#### between(min, max)
+If the value is less than the given min, set it to the min. If it is over the given max, set it to the max.
+```php
+$validator->sanitize('field')->to('between', 5, 10);
+```
+
 #### bool 
 Applies the native `(bool)` typecast
+```php
+$validator->sanitize('field')->to('bool');
+```
+
+#### callback
+Sanitizes using a given callable.
+```php
+$callable = function ($subject, string $field) { $subject->$field = 'foo';};
+$validator->sanitize('field')->to('callback', $callable);
+```
+> Note, the callable must have its first argument be the $subject and the 2nd argument must be a string representation of the field name under validation. Extra arguments may be passed after these two
+
+#### dateTime(format)
+Converts the given field to a dateTime of the given format.
+```php
+$validator->sanitize('field')->to('dateTime', 'Y-m-d H:i:s')
+```
+> Defaults to the format `Y-m-d H:i:s`
+
 
 ### int
 Applies the native `(int)` typecast

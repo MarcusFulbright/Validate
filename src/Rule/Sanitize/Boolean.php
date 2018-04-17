@@ -2,9 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-use Mbright\Validation\Rule\RuleInterface;
-
-class Boolean implements RuleInterface
+class Boolean
 {
     /**
      * TypeCasts the given field to a boolean.

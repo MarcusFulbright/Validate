@@ -2,9 +2,7 @@
 
 namespace Mbright\Validation\Tests;
 
-use Mbright\Validation\Rule\RuleInterface;
-
-class DummyRule implements RuleInterface
+class DummyRule
 {
     public function __invoke($subject, string $field): bool
     {

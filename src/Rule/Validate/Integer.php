@@ -2,9 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-use Mbright\Validation\Rule\RuleInterface;
-
-class Integer implements RuleInterface
+class Integer
 {
     /**
      * Validates if the field is an integer.

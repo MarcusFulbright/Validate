@@ -2,8 +2,7 @@
 
 namespace Mbright\Validation\Locator;
 
-use Mbright\Validation\Rule\Sanitize\Boolean;
-use Mbright\Validation\Rule\Sanitize\Integer;
+use Mbright\Validation\Rule\Sanitize;
 
 class SanitizeLocator extends AbstractLocator
 {
@@ -17,11 +16,26 @@ class SanitizeLocator extends AbstractLocator
     protected function getDefaultFactories(): array
     {
         return [
+            'alphaNum' => function () {
+                return new Sanitize\AlphaNum();
+            },
+            'alpha' => function () {
+                return new Sanitize\Alpha();
+            },
+            'between' => function () {
+                return new Sanitize\Between();
+            },
             'bool' => function () {
-                return new Boolean();
+                return new Sanitize\Boolean();
+            },
+            'callback' => function () {
+                return new Sanitize\Callback();
+            },
+            'dateTime' => function () {
+                return new Sanitize\DateTime();
             },
             'int' => function () {
-                return new Integer();
+                return new Sanitize\Integer();
             }
         ];
     }

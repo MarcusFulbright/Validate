@@ -2,9 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-use Mbright\Validation\Rule\RuleInterface;
-
-class Boolean implements RuleInterface
+class Boolean
 {
     /**
      * Returns bool indicating if the specified field is a boolean.
