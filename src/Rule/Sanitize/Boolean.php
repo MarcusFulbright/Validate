@@ -2,21 +2,37 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Boolean
+use Mbright\Validation\Rule\AbstractBooleanCase;
+
+class Boolean extends AbstractBooleanCase
 {
     /**
-     * TypeCasts the given field to a boolean.
+     * Sanitize the value to a boolean, or a pseudo-boolean.
      *
-     * Ues internal (bool) type cast.
+     * @param object $subject The subject to be filtered.
+     * @param string $field The subject field name.
+     * @param mixed $true Use this value for `true`.
+     * @param mixed $false Use this value for `false`.
      *
-     * @param object $subject
-     * @param string $field
-     *
-     * @return bool
+     * @return bool Always true.
      */
-    public function __invoke($subject, string $field): bool
+    public function __invoke($subject, $field, $true = true, $false = false)
     {
-        $subject->$field = (bool) $subject->$field;
+        $value = $subject->$field;
+
+        if ($this->isTrue($value)) {
+            $subject->$field = $true;
+
+            return true;
+        }
+
+        if ($this->isFalse($value)) {
+            $subject->$field = $false;
+
+            return true;
+        }
+
+        $subject->$field = $value ? $true : $false;
 
         return true;
     }

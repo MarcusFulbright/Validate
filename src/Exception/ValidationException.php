@@ -15,4 +15,9 @@ class ValidationException extends \Exception
     {
         return new self("Could not find mapping for [$rule]");
     }
+
+    public static function malformedUtf8(): self
+    {
+        return new self();
+    }
 }

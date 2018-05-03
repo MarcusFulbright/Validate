@@ -2,12 +2,12 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-use Mbright\Validation\Rule\AbstractBooleanCase;
+use Mbright\Validation\Rule\AbstractUuidCase;
 
-class Boolean extends AbstractBooleanCase
+class Uuid extends AbstractUuidCase
 {
     /**
-     * Validates that the value is a boolean representation.
+     * Validates that the value is a canonical human-readable UUID.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
@@ -16,8 +16,6 @@ class Boolean extends AbstractBooleanCase
      */
     public function __invoke($subject, $field)
     {
-        $value = $subject->$field;
-
-        return $this->isTrue($value) || $this->isFalse($value);
+        return $this->isCanonical($subject->$field);
     }
 }

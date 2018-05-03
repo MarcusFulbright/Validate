@@ -2,10 +2,10 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Integer
+class Double
 {
     /**
-     * Validates that the value represents an integer.
+     * Validates that the value represents a float.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
@@ -16,11 +16,11 @@ class Integer
     {
         $value = $subject->$field;
 
-        if (is_int($value)) {
+        if (is_float($value)) {
             return true;
         }
 
-        // otherwise, must be numeric, and must be same as when cast to int
-        return is_numeric($value) && $value == (int) $value;
+        // otherwise, must be numeric, and must be same as when cast to float
+        return is_numeric($value) && $value == (float) $value;
     }
 }

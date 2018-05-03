@@ -2,22 +2,23 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-use Mbright\Validation\Rule\AbstractBooleanCase;
+use Mbright\Validation\Rule\AbstractDateTime;
 
-class Boolean extends AbstractBooleanCase
+class DateTime extends AbstractDateTime
 {
     /**
-     * Validates that the value is a boolean representation.
+     * Validate that a value can be represented as a date/time.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
      *
-     * @return bool True if valid, false if not.
+     * @return bool
      */
     public function __invoke($subject, $field)
     {
         $value = $subject->$field;
+        $datetime = $this->newDateTime($value);
 
-        return $this->isTrue($value) || $this->isFalse($value);
+        return (bool) $datetime;
     }
 }

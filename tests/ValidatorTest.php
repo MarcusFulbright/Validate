@@ -25,7 +25,7 @@ class ValidatorTest extends TestCase
                 'testField should not be blank and validated as bool()'
             ]
         ];
-        $subject = (object) ['testField' => 1];
+        $subject = (object) ['testField' => 'notABool'];
 
         $this->validator->validate('testField')->is('bool');
         $result = $this->validator->apply($subject);

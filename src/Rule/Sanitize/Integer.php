@@ -7,8 +7,6 @@ class Integer
     /**
      * Converts the field to an integer.
      *
-     * Uses the native `(int)` type cast.
-     *
      * @param $subject
      * @param string $field
      *

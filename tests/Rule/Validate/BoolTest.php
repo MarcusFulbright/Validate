@@ -11,7 +11,7 @@ class BoolTest extends TestCase
     {
         $subject = (object)[
             'isBool' => false,
-            'isNotBool' => 'false'
+            'isNotBool' => 'notABool'
         ];
         $rule = new Boolean();
 

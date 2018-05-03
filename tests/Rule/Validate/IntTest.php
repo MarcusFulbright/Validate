@@ -11,7 +11,7 @@ class IntTest extends TestCase
     {
         $subject = (object) [
             'valid' => 1,
-            'invalid' => '1'
+            'invalid' => 'nope'
         ];
         $rule = new Integer();
 

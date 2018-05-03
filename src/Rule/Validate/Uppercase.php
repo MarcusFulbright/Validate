@@ -2,10 +2,12 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Integer
+use Mbright\Validation\Rule\AbstractStringCase;
+
+class Uppercase extends AbstractStringCase
 {
     /**
-     * Validates that the value represents an integer.
+     * Validates that the string is uppercase.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
@@ -15,12 +17,10 @@ class Integer
     public function __invoke($subject, $field)
     {
         $value = $subject->$field;
-
-        if (is_int($value)) {
-            return true;
+        if (!is_scalar($value)) {
+            return false;
         }
 
-        // otherwise, must be numeric, and must be same as when cast to int
-        return is_numeric($value) && $value == (int) $value;
+        return $this->strtoupper($value) == $value;
     }
 }
