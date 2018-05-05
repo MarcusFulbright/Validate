@@ -13,7 +13,7 @@ class InKeys
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, array $array)
+    public function __invoke($subject, string $field, array $array): bool
     {
         $value = $subject->$field;
         if (!is_string($value) && !is_int($value)) {

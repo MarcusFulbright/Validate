@@ -2,31 +2,26 @@
 
 namespace Mbright\Validation\Tests\Rule\Validate;
 
-use Mbright\Validation\Rule\Validate\AlphaDash;
-use PHPUnit\Framework\TestCase;
-
-class AlphaDashTest extends TestCase
+class AlphaDashTest extends AbstractValidateTest
 {
-    public function testIsAlphaDash()
+    public function providerIs()
     {
-        $subject = (object) [
-            'success' => '3this_is-acceptable1',
-            'allowsNumbers' => 123,
-            'noWhiteSpace' => '2this is not_accept-able',
-            'excludesWrongType' => []
+        return [
+            ['alphaOnly'],
+            ['alphaNum123'],
+            ['_'],
+            ['-'],
+            ['1'],
+            ['alpha_Num_Dash-1']
         ];
-        $rule = new AlphaDash();
+    }
 
-        $successActual = $rule($subject, 'success');
-        $this->assertTrue($successActual);
-
-        $allowsNumbersActual = $rule($subject, 'allowsNumbers');
-        $this->assertTrue($allowsNumbersActual);
-
-        $noWhiteSpaceActual = $rule($subject, 'noWhiteSpace');
-        $this->assertFalse($noWhiteSpaceActual);
-
-        $excludesWrongTypeActual = $rule($subject, 'excludesWrongType');
-        $this->assertFalse($excludesWrongTypeActual);
+    public function providerIsNot()
+    {
+        return [
+            ['no white space'],
+            [(object)[]],
+            [[]]
+        ];
     }
 }

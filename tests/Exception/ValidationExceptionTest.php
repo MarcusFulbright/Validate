@@ -18,4 +18,11 @@ class ValidationExceptionTest extends TestCase
         $actualMessage = $actual->getMessage();
         $this->assertEquals($expectedMessage, $actualMessage);
     }
+
+    public function testMalFormedUtf8Exception()
+    {
+        $actual = ValidationException::malformedUtf8();
+
+        $this->assertInstanceOf(ValidationException::class, $actual);
+    }
 }

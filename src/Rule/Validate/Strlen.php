@@ -11,11 +11,11 @@ class Strlen extends AbstractStringCase
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $len The minimum valid length.
+     * @param int $len The minimum valid length.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, $len)
+    public function __invoke($subject, string $field, int $len): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

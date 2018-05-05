@@ -13,7 +13,7 @@ class Value
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, $field, $otherValue)
+    public function __invoke($subject, string $field, $otherValue): bool
     {
         $subject->$field = $otherValue;
 

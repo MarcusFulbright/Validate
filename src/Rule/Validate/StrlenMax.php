@@ -11,12 +11,12 @@ class StrlenMax extends AbstractStringCase
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $max The value must have no more than this many
+     * @param int $max The value must have no more than this many
      * characters.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, $max)
+    public function __invoke($subject, string $field, int $max): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

@@ -11,11 +11,11 @@ class StrlenMin extends AbstractStringCase
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $min The value must have at least this many characters.
+     * @param int $min The value must have at least this many characters.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, $min)
+    public function __invoke($subject, string $field, int $min): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

@@ -11,17 +11,17 @@ class StrictEqualToField
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param string $other_field Check against the value of this element in $subject.
+     * @param string $otherField Check against the value of this element in $subject.
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, $field, $other_field)
+    public function __invoke($subject, string $field, string $otherField): bool
     {
         // the other field needs to exist and *not* be null
-        if (! isset($subject->$other_field)) {
+        if (! isset($subject->$otherField)) {
             return false;
         }
 
-        return $subject->$field === $subject->$other_field;
+        return $subject->$field === $subject->$otherField;
     }
 }

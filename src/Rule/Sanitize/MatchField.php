@@ -13,7 +13,7 @@ class MatchField
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $otherField)
+    public function __invoke($subject, string $field, string $otherField): bool
     {
         if (!isset($subject->$otherField)) {
             return false;

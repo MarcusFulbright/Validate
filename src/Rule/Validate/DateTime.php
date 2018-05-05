@@ -14,7 +14,7 @@ class DateTime extends AbstractDateTime
      *
      * @return bool
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
         $datetime = $this->newDateTime($value);

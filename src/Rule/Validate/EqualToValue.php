@@ -9,12 +9,12 @@ class EqualToValue
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $other_value The other value.
+     * @param mixed $otherValue The other value.
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, $field, $other_value)
+    public function __invoke($subject, string $field, string $otherValue): bool
     {
-        return $subject->$field == $other_value;
+        return $subject->$field == $otherValue;
     }
 }

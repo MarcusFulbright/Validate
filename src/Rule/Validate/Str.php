@@ -15,12 +15,14 @@ class Str
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
-        if (is_object($subject)) {
-            return method_exists($subject, '__toString');
+        $value = $subject->$field;
+
+        if (is_object($value)) {
+            return method_exists($value, '__toString');
         }
 
-        return is_scalar($subject->$field);
+        return is_scalar($value);
     }
 }

@@ -15,7 +15,7 @@ class DateTime extends AbstractDateTime
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, string $field, $format = 'Y-m-d H:i:s'): bool
+    public function __invoke($subject, string $field, string $format = 'Y-m-d H:i:s'): bool
     {
         $value = $subject->$field;
         $datetime = $this->newDateTime($value);

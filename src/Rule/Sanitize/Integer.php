@@ -26,10 +26,29 @@ class Integer
         }
 
         if (!is_string($value)) {
+            // cannot sanitize a non-string
             return false;
         }
 
-        $subject->$field = (int) $subject->$field;
+        // it's a non-numeric string, attempt to extract an integer from it.
+
+        // remove all chars except digit and minus. this removes all + signs; any - sign takes precedence because
+        //     0 + -1 = -1
+        //     0 - +1 = -1
+        // ... at least it seems that way to me now.
+        $value = preg_replace('/[^0-9-]/', '', $value);
+
+        // remove all trailing minuses
+        $value = rtrim($value, '-');
+
+        // remove all minuses not at the front
+        $isNegative = preg_match('/^-/', $value);
+        $value = str_replace('-', '', $value);
+        if ($isNegative) {
+            $value = '-' . $value;
+        }
+
+        $subject->$field = (int) $value;
 
         return true;
     }

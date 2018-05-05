@@ -11,12 +11,12 @@ class StrlenBetween extends AbstractStringCase
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $min The minimum valid length.
-     * @param mixed $max The maximum valid length.
+     * @param int $min The minimum valid length.
+     * @param int $max The maximum valid length.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, $min, $max)
+    public function __invoke($subject, string $field, int $min, int $max): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

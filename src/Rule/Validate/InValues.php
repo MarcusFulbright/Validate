@@ -16,7 +16,7 @@ class InValues
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, array $array)
+    public function __invoke($subject, string $field, array $array): bool
     {
         return in_array($subject->$field, $array, true);
     }

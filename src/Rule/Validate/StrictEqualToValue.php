@@ -9,12 +9,12 @@ class StrictEqualToValue
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param string $other_value
+     * @param string $otherValue
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, $field, $other_value)
+    public function __invoke($subject, string $field, $otherValue): bool
     {
-        return $subject->$field === $other_value;
+        return $subject->$field === $otherValue;
     }
 }

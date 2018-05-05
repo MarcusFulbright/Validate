@@ -11,16 +11,16 @@ class EqualToField
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param string $other_field Check against the value of this subject field.
+     * @param string $otherField Check against the value of this subject field.
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, $field, $other_field)
+    public function __invoke($subject, string $field, string $otherField): bool
     {
-        if (!isset($subject->$other_field)) {
+        if (!isset($subject->$otherField)) {
             return false;
         }
 
-        return $subject->$field == $subject->$other_field;
+        return $subject->$field == $subject->$otherField;
     }
 }

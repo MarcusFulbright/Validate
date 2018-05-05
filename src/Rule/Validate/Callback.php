@@ -13,7 +13,7 @@ class Callback
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field, callable $callable)
+    public function __invoke($subject, string $field, callable $callable): bool
     {
         return $callable($subject, $field);
     }

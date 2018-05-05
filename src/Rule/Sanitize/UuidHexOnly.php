@@ -14,7 +14,7 @@ class UuidHexOnly extends AbstractUuidCase
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         $value = preg_replace('/[^a-f0-9]/i', '', $subject->$field);
         if ($this->isHexOnly($value)) {

@@ -17,8 +17,13 @@ class StrlenMin extends AbstractStringCase
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $min, $padString = ' ', $padType = STR_PAD_RIGHT)
-    {
+    public function __invoke(
+        $subject,
+        string $field,
+        int $min,
+        string $padString = ' ',
+        int $padType = STR_PAD_RIGHT
+    ): bool {
         $value = $subject->$field;
         if (!is_scalar($value)) {
             return false;

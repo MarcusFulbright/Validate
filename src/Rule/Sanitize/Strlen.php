@@ -17,8 +17,13 @@ class Strlen extends AbstractStringCase
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $len, $padString = ' ', $padType = STR_PAD_RIGHT)
-    {
+    public function __invoke(
+        $subject,
+        string $field,
+        int $len,
+        string $padString = ' ',
+        int $padType = STR_PAD_RIGHT
+    ): bool {
         $value = $subject->$field;
         if (!is_scalar($value)) {
             return false;

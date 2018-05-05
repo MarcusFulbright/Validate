@@ -11,12 +11,12 @@ class Between
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $min The minimum valid value.
-     * @param mixed $max The maximum valid value.
+     * @param int $min The minimum valid value.
+     * @param int $max The maximum valid value.
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, string $field, $min, $max): bool
+    public function __invoke($subject, string $field, int $min, int $max): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

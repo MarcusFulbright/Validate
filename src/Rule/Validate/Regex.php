@@ -13,7 +13,7 @@ class Regex
      *
      * @return bool True if the value matches the expression, false if not.
      */
-    public function __invoke($subject, $field, $expr)
+    public function __invoke($subject, string $field, string $expr): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

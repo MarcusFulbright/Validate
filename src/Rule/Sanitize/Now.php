@@ -13,7 +13,7 @@ class Now
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, $field, $format = 'Y-m-d H:i:s')
+    public function __invoke($subject, string $field, string $format = 'Y-m-d H:i:s'): bool
     {
         $subject->$field = date($format);
 

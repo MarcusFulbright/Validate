@@ -14,7 +14,7 @@ class UuidHexOnly extends AbstractUuidCase
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         return $this->isHexOnly($subject->$field);
     }

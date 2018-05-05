@@ -12,7 +12,7 @@ class Integer
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
 

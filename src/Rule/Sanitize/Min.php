@@ -13,7 +13,7 @@ class Min
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $min)
+    public function __invoke($subject, string $field, int $min): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

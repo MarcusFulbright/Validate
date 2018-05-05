@@ -10,9 +10,9 @@ class Alpha
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
      *
-     * @return bool Always true.
+     * @return bool Always true
      */
-    public function __invoke($subject, $field): bool
+    public function __invoke($subject, string $field): bool
     {
         $subject->$field = preg_replace('/[^\p{L}]/u', '', $subject->$field);
 

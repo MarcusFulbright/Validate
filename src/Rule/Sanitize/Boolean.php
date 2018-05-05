@@ -16,7 +16,7 @@ class Boolean extends AbstractBooleanCase
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, $field, $true = true, $false = false)
+    public function __invoke($subject, string $field, $true = true, $false = false): bool
     {
         $value = $subject->$field;
 

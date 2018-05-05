@@ -14,7 +14,7 @@ class Lowercase extends AbstractStringCase
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

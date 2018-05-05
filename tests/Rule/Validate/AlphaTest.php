@@ -2,28 +2,36 @@
 
 namespace Mbright\Validation\Tests\Rule\Validate;
 
-use Mbright\Validation\Rule\Validate\Alpha;
-use PHPUnit\Framework\TestCase;
-
-class AlphaTest extends TestCase
+class AlphaTest extends AbstractValidateTest
 {
-    public function testIsAlpha()
+    public function providerIs()
     {
-        $subject = (object) [
-            'success' => 'onlyAlphaNumeric',
-            'noWhiteSpace' => 'not only alpha numeric',
-            'noNumbers' => '123',
+        return [
+            ['alphaonly'],
+            ['AlphaOnly'],
+            ['AlphaOnlyБуква'],
+            ['самоБуква'],
         ];
+    }
 
-        $rule = new Alpha();
-
-        $successActual = $rule($subject, 'success');
-        $this->assertTrue($successActual);
-
-        $noWhiteSpaceActual = $rule($subject, 'noWhiteSpace');
-        $this->assertFalse($noWhiteSpaceActual);
-
-        $noNumbersActual = $rule($subject, 'noNumbers');
-        $this->assertFalse($noNumbersActual);
+    public function providerIsNot()
+    {
+        return [
+            [' '],
+            [''],
+            [0],
+            [1],
+            [2],
+            [5],
+            ['0'],
+            ['1'],
+            ['2'],
+            ['5'],
+            ["Seven 8 nine"],
+            ["non:alpha-numeric's"],
+            ['someThing8else'],
+            ['Буква88'],
+            [[]],
+        ];
     }
 }

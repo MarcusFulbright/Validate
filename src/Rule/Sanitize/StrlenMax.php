@@ -15,7 +15,7 @@ class StrlenMax extends AbstractStringCase
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $max)
+    public function __invoke($subject, string $field, int $max): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {

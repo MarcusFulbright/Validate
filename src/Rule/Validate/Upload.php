@@ -16,7 +16,7 @@ class Upload
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
 
@@ -46,8 +46,12 @@ class Upload
      *
      * @return bool
      */
-    protected function preCheck(array &$value)
+    protected function preCheck(&$value)
     {
+        if (!is_array($value)) {
+            return false;
+        }
+
         // presorted list of expected keys
         $expect = ['error', 'name', 'size', 'tmp_name', 'type'];
 

@@ -12,7 +12,7 @@ class Remove
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, $field)
+    public function __invoke($subject, string $field): bool
     {
         unset($subject->$field);
 
