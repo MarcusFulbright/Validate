@@ -12,6 +12,7 @@ class MatchFieldTest extends AbstractSanitizeTest
     {
         $subject = parent::getSubject($value);
         $subject->{$this->other_field} = $this->other_value;
+
         return $subject;
     }
 
@@ -19,6 +20,7 @@ class MatchFieldTest extends AbstractSanitizeTest
     {
         $args = parent::getArgs();
         $args[] = 'other';
+
         return $args;
     }
 
