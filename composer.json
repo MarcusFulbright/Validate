@@ -1,5 +1,5 @@
 {
-    "name": "Mbright/validation",
+    "name": "mbright/validation",
     "type": "library",
     "description": "A standalone validation library for php",
     "keywords": [
