@@ -1,4 +1,13 @@
+## Documentation Index
+
+* [Getting Started](/docs/GettingStarted.md)
+* [Custom Rules](/docs/CustomRules.md)
+* [Validator Reuse](/docs/ValidateReuse.md)
+* [Available Sanitize Rules](/docs/SanitizeRules.md)
+* [Available Validate Rules](/docs/ValidateRules.md)
+
 # On Blank Values:
+
 This library does not rely on a simple `isset()` or `empty()` check to determine if a field is blank. A field is blank if: 
 * it is not set
 * it is set to null

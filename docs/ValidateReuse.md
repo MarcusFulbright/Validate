@@ -1,4 +1,12 @@
-## Validator Reuse
+## Documentation Index
+
+* [Getting Started](/docs/GettingStarted.md)
+* [Blank Values](/docs/BlankValues.md)
+* [Custom Rules](/docs/CustomRules.md)
+* [Available Sanitize Rules](/docs/SanitizeRules.md)
+* [Available Validate Rules](/docs/ValidateRules.md)
+
+# Validator Reuse
 It can become tedious to configure every Validator on the fly. Instead, you might find it advantageous to have a custom Validator class that already has all of its own rules and messages pre-configured. To do so, simply extend the Validator class and override its `init()` method:
 
 ```php

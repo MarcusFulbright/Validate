@@ -40,7 +40,7 @@ class ValidationLocator extends AbstractLocator
             'dateTime' => function () {
                 return new Validate\DateTime();
             },
-            'double' => function () {
+            'float' => function () {
                 return new Validate\Double();
             },
             'email' => function () {

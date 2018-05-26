@@ -34,7 +34,7 @@ class SanitizeLocator extends AbstractLocator
             'dateTime' => function () {
                 return new Sanitize\DateTime();
             },
-            'double' => function () {
+            'float' => function () {
                 return new Sanitize\Double();
             },
             'hex' => function () {
@@ -70,7 +70,7 @@ class SanitizeLocator extends AbstractLocator
             'remove' => function () {
                 return new Sanitize\Remove();
             },
-            'str' => function () {
+            'string' => function () {
                 return new Sanitize\Str();
             },
             'strBetween' => function () {

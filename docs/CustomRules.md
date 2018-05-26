@@ -1,3 +1,11 @@
+## Documentation Index
+
+* [Getting Started](/docs/GettingStarted.md)
+* [Blank Values](/docs/BlankValues.md)
+* [Validator Reuse](/docs/ValidateReuse.md)
+* [Available Sanitize Rules](/docs/SanitizeRules.md)
+* [Available Validate Rules](/docs/ValidateRules.md)
+
 # Custom Rules
 
 Defining your own custom Sanitize and Validate rules is very easy. The bare bones for each rule look the same:
