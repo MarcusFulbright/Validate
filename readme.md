@@ -16,7 +16,9 @@
 
 ## Installation
 
-This package will be made available to install via composer and packagist when it hits `0.1`
+This package can be installed via composer:
+
+`composer require mbright/validation`
 
 ## Documentation Index
 
