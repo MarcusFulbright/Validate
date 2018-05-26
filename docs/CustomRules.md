@@ -11,9 +11,7 @@
 Defining your own custom Sanitize and Validate rules is very easy. The bare bones for each rule look the same:
 
 ```php
-use Mbright\Validation\Rule\RuleInterface;
-
-class MyCustomValidateRule implements RuleInterface
+class MyCustomValidateRule
 {
     public function __invoke($subject, string $field): bool
     {

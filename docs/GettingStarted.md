@@ -39,23 +39,16 @@ Sanitize rules can be added to the Validator like so:
 $validator->sanitize('fieldName')->to('ruleName');
 ```
 
-Example:
-
-```php
-//Sanitize a field to a boolean or fail
-$validator->sanitize('someField')->to('bool')
-```
-
 ### Adding Validate Rules
 
 Validate rules can be used to confirm that field meets the rule's expectations, or that the field does _not_ meet the rule's expectations:
 
 ```php
 //validate that a field is a boolean
-$validator->validate('fieldName')->is('bool)
+$validator->validate('fieldName')->is('ruleName')
 
 //validate that a field is *not* a boolean
-$validator->validate('fieldName')->isNot('bool')
+$validator->validate('fieldName')->isNot('ruleName')
 ```
 
 ### Failure Modes
@@ -66,7 +59,7 @@ The following methods can be used fluently after calling `validate()` or `saniti
 
 * `asHardRule()`: if the rule fails, do not perform any more operations on the same field, but continue processing other fields. This is the default behavior for Sanitize Rules.
 
-* `asHaltingRule()`: if this rule fails, do not perform any more validation on the subject and halt, returning any errors that have occurred up to this point.
+* `asHaltingRule()`: if this rule fails, do not perform any more validation on the subject and halt.
 
 ### Failure Messages
 
