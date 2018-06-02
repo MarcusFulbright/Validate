@@ -23,7 +23,7 @@ class StrBetween extends AbstractStringCase
         string $field,
         int $min,
         int $max,
-        string $padString = ' ',
+        string $padstring = ' ',
         int$padType = STR_PAD_RIGHT
     ): bool {
         $value = $subject->$field;
@@ -31,7 +31,7 @@ class StrBetween extends AbstractStringCase
             return false;
         }
         if ($this->strlen($value) < $min) {
-            $subject->$field = $this->strpad($value, $min, $padString, $padType);
+            $subject->$field = $this->strpad($value, $min, $padstring, $padType);
         }
         if ($this->strlen($value) > $max) {
             $subject->$field = $this->substr($value, 0, $max);

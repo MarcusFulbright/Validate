@@ -27,8 +27,10 @@ If a Sanitize Rule cannot be ran successfully, the rule can set the field to an 
 
 Example:
 ```php
+use Mbright\Validation\Sanitize;
+
 //Sanitize a field to a boolean, or set it to false
-$validator->sanitize('someField')->to('bool')->usingBlank(false)
+$validator->sanitize('someField')->to(Sanitize/Rule::class)->usingBlank(false)
 ```
 
 ## Validate Rules & Blanks
@@ -38,7 +40,9 @@ Validation rules can be configured to allow blank values.
 Example
 
 ```php
-$validator->validate('fieldName')->is('rule')->allowBlanks();
+use Mbright\Validation\Rule\Validate;
+
+$validator->validate('fieldName')->is(Validate\Rule::class)->allowBlanks();
 ```
 
 > Note: If the field is a valid blank value, then the rule will never get invoked

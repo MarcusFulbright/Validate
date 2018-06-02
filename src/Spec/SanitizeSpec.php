@@ -45,15 +45,15 @@ class SanitizeSpec extends AbstractSpec
     /**
      * Set the Sanitize rule to be used.
      *
-     * @param string $ruleName*
+     * @param string $ruleClass
      *
      * @throws ValidationException
      *
      * @return SanitizeSpec
      */
-    public function to(string $ruleName): self
+    public function to(string $ruleClass): self
     {
-        $this->setRule($ruleName);
+        $this->setRule($ruleClass);
 
         return $this;
     }

@@ -66,20 +66,12 @@ class MyCustomSanitizeRule implements RuleInterface
 
 ## Using Custom Rules:
 
-Once your rule is defined, you'll need to inject it into the the FilterFactory:
+Once your rule is defined, you can pass it to a Validator like any other rule:
 
 ```php
-$validateRules = [
-    'customValidate' => function() {return new MyCustomValidateRule();}
-];
-$sanitizeRules = [
-    'customSanitize' => function() {return new MyCustomSanitizeRule;}
-
-$factory = new ValidatorFactory($validateRules, $sanitizeRules);
+$factory = new ValidatorFactory();
 $validator = $factory->newValidator();
 
-//Now you're ready to use the rule:
-
-$validator->sanitize('field')->to('customSanitize');
-$validator->validate('field')->is('customValidate');
+$validator->sanitize('field')->to(MyCustomSanitizeRule::class);
+$validator->validate('field')->is(MyCustomValidateRule::class);
 ```

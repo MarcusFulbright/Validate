@@ -21,6 +21,6 @@ class DummySpec extends AbstractSpec
 
     public function addRuleName($ruleName)
     {
-        $this->ruleName = $ruleName;
+        $this->ruleClass = $ruleName;
     }
 }

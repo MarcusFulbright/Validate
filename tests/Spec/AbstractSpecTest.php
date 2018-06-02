@@ -2,8 +2,8 @@
 
 namespace Mbright\Validation\Tests\Spec;
 
-use Mbright\Validation\Locator\AbstractLocator;
 use Mbright\Validation\Spec\AbstractSpec;
+use Mbright\Validation\Tests\Examples\ExampleCustomValidateRule;
 use PHPUnit\Framework\TestCase;
 
 class AbstractSpecTest extends TestCase
@@ -16,8 +16,7 @@ class AbstractSpecTest extends TestCase
     public function testSetMessage()
     {
         $expectedMessage = 'fake expected message';
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('fakeField', $locator);
+        $spec = new DummySpec('fakeField');
 
         $actual = $spec->setMessage($expectedMessage);
 
@@ -28,8 +27,7 @@ class AbstractSpecTest extends TestCase
     public function testGetField()
     {
         $expectedField = 'expectedField';
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec($expectedField, $locator);
+        $spec = new DummySpec($expectedField);
 
         $actual = $spec->getField();
 
@@ -38,8 +36,7 @@ class AbstractSpecTest extends TestCase
 
     public function testGetArgs()
     {
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('fakeField', $locator);
+        $spec = new DummySpec('fakeField');
 
         $expected = ['fakeArgs' => 'fake'];
         $spec->addArgs($expected);
@@ -50,20 +47,18 @@ class AbstractSpecTest extends TestCase
 
     public function testGetName()
     {
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('fakeField', $locator);
+        $spec = new DummySpec('fakeField');
 
         $expected = 'fakeName';
         $spec->addRuleName($expected);
-        $actual = $spec->getRuleName();
+        $actual = $spec->getRuleClass();
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testGetDefaultMessage()
     {
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('fakeField', $locator);
+        $spec = new DummySpec('fakeField');
 
         $spec->addRuleName('fakeRule');
         $spec->addArgs(['fakeArgs' => 'arg']);
@@ -83,8 +78,7 @@ class AbstractSpecTest extends TestCase
             return $subject === $fakeSubject && $fakeField === $field && array_values($fakeArgs) === $args;
         };
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec($fakeField, $locator);
+        $spec = new DummySpec($fakeField);
 
         $spec->addArgs($fakeArgs);
         $spec->addRuleMock($fakeRule);
@@ -96,18 +90,12 @@ class AbstractSpecTest extends TestCase
     
     public function testSetRule()
     {
-        $fakeCallable = function () {
-            return;
-        };
-        $fakeRuleName = 'fakeRuleName';
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $locator->shouldReceive('get')->withArgs([$fakeRuleName])->andReturn($fakeCallable);
-        $spec = new DummySpec('fakeField', $locator);
+        $spec = new DummySpec('fakeField');
 
-        $actual = $spec->setRule($fakeRuleName);
+        $actual = $spec->setRule(ExampleCustomValidateRule::class);
 
         $this->assertSame($spec, $actual);
-        $this->assertEquals($fakeRuleName, $spec->getRuleName());
+        $this->assertEquals(ExampleCustomValidateRule::class, $spec->getRuleClass());
     }
 
     public function testSubjectFieldIsBlankRespectsWhiteList()
@@ -120,8 +108,7 @@ class AbstractSpecTest extends TestCase
             'testField' => 'foo'
         ];
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('testField', $locator);
+        $spec = new DummySpec('testField');
         $spec->setBlankValues($whiteList);
 
         $actual = $spec->subjectFieldIsBlank($subject);
@@ -133,8 +120,7 @@ class AbstractSpecTest extends TestCase
     {
         $subject = new \stdClass();
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('non-existing-field', $locator);
+        $spec = new DummySpec('non-existing-field');
 
         $actual = $spec->subjectFieldIsBlank($subject);
 
@@ -147,8 +133,7 @@ class AbstractSpecTest extends TestCase
             'nullField' => null
         ];
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('nullField', $locator);
+        $spec = new DummySpec('nullField');
 
         $actual = $spec->subjectFieldIsBlank($subject);
 
@@ -161,8 +146,7 @@ class AbstractSpecTest extends TestCase
             'notBlank' => 0
         ];
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('notBlank', $locator);
+        $spec = new DummySpec('notBlank');
 
         $actual = $spec->subjectFieldIsBlank($subject);
 
@@ -175,8 +159,7 @@ class AbstractSpecTest extends TestCase
             'shouldBeBlank' => '  '
         ];
 
-        $locator = \Mockery::mock(AbstractLocator::class);
-        $spec = new DummySpec('shouldBeBlank', $locator);
+        $spec = new DummySpec('shouldBeBlank');
 
         $actual = $spec->subjectFieldIsBlank($subject);
 

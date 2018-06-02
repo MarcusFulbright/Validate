@@ -19,20 +19,6 @@ class ValidatorFactoryTest extends TestCase
         $this->factory = new ValidatorFactory();
     }
 
-    public function testNewValidationLocator()
-    {
-        $actual = $this->factory->newValidationLocator();
-
-        $this->assertInstanceOf(ValidationLocator::class, $actual);
-    }
-
-    public function testNewSanitizeLocator()
-    {
-        $actual = $this->factory->newSanitizeLocator();
-
-        $this->assertInstanceOf(SanitizeLocator::class, $actual);
-    }
-
     public function testNewFailureCollection()
     {
         $actual = $this->factory->newFailureCollection();

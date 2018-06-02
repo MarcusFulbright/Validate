@@ -2,6 +2,8 @@
 
 namespace Mbright\Validation\Tests;
 
+use Mbright\Validation\Rule\Sanitize;
+use Mbright\Validation\Rule\Validate;
 use Mbright\Validation\Validator;
 use Mbright\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
@@ -22,12 +24,12 @@ class ValidatorTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField should not be blank and validated as bool()'
+                'testField should not be blank and validated as Mbright\Validation\Rule\Validate\Boolean()'
             ]
         ];
         $subject = (object) ['testField' => 'notABool'];
 
-        $this->validator->validate('testField')->is('bool');
+        $this->validator->validate('testField')->is(Validate\Boolean::class);
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -39,12 +41,12 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should not be blank and validated as bool()'
+                'testField should not be blank and validated as Mbright\Validation\Rule\Validate\Boolean()'
             ]
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is('bool');
+        $this->validator->validate('testField')->is(Validate\Boolean::class);
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -56,14 +58,14 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should not be blank and validated as int()'
+                'testField should not be blank and validated as Mbright\Validation\Rule\Validate\Integer()'
             ]
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is('int')->asHardRule();
+        $this->validator->validate('testField')->is(Validate\Integer::class)->asHardRule();
         //this rule should never run
-        $this->validator->validate('testField')->is('bool');
+        $this->validator->validate('testField')->is(Validate\Boolean::class);
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -75,14 +77,14 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should have sanitized to int()',
-                'testField should have sanitized to bool()'
+                'testField should have sanitized to Mbright\Validation\Rule\Sanitize\Integer()',
+                'testField should have sanitized to Mbright\Validation\Rule\Sanitize\Boolean()'
             ]
         ];
         $subject = (object) [];
 
-        $this->validator->sanitize('testField')->to('int')->asSoftRule();
-        $this->validator->sanitize('testField')->to('bool');
+        $this->validator->sanitize('testField')->to(Sanitize\Integer::class)->asSoftRule();
+        $this->validator->sanitize('testField')->to(Sanitize\Boolean::class);
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -94,13 +96,13 @@ class ValidatorTest extends TestCase
     {
         $expectedMessage = [
             'testField' => [
-                'testField should have sanitized to int()'
+                'testField should have sanitized to Mbright\Validation\Rule\Sanitize\Integer()'
             ]
         ];
         $subject = (object) [];
 
-        $this->validator->sanitize('testField')->to('int')->asHaltingRule();
-        $this->validator->validate('testField')->is('int');
+        $this->validator->sanitize('testField')->to(Sanitize\Integer::class)->asHaltingRule();
+        $this->validator->validate('testField')->is(Validate\Integer::class);
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -117,7 +119,7 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is('int');
+        $this->validator->validate('testField')->is(Validate\Integer::class);
         $this->validator->setFieldMessage('testField', 'customFieldMessage');
         $result = $this->validator->apply($subject);
 

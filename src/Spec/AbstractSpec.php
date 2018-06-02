@@ -2,8 +2,8 @@
 
 namespace Mbright\Validation\Spec;
 
+use Mbright\Validation\Exception\RuleClassNotDefinedException;
 use Mbright\Validation\Exception\ValidationException;
-use Mbright\Validation\Locator\AbstractLocator;
 
 abstract class AbstractSpec
 {
@@ -36,13 +36,6 @@ abstract class AbstractSpec
     protected $field;
 
     /**
-     * Locator to fetch rules from.
-     *
-     * @var AbstractLocator
-     */
-    protected $locator;
-
-    /**
      * Rule to invoke.
      *
      * @var callable
@@ -68,7 +61,7 @@ abstract class AbstractSpec
      *
      * @var string
      */
-    protected $ruleName;
+    protected $ruleClass;
 
     /**
      * Flag that determines the allowance of blank values.
@@ -88,12 +81,10 @@ abstract class AbstractSpec
      * AbstractSpec constructor.
      *
      * @param string $field
-     * @param AbstractLocator $locator
      */
-    public function __construct(string $field, AbstractLocator $locator)
+    public function __construct(string $field)
     {
         $this->field = $field;
-        $this->locator = $locator;
     }
 
     /**
@@ -161,24 +152,28 @@ abstract class AbstractSpec
      *
      * @return string
      */
-    public function getRuleName(): string
+    public function getRuleClass(): string
     {
-        return $this->ruleName;
+        return $this->ruleClass;
     }
 
     /**
-     * Sets the rule and ruleName for the spec.
+     * Sets the rule and ruleClass for the spec.
      *
-     * @param $ruleName
+     * @param string $ruleClass
      *
-     * @throws ValidationException
+     * @throws RuleClassNotDefinedException
      *
      * @return AbstractSpec
      */
-    public function setRule($ruleName): self
+    public function setRule(string $ruleClass): self
     {
-        $this->rule = $this->locator->get($ruleName);
-        $this->ruleName = $ruleName;
+        if (!class_exists($ruleClass)) {
+            throw new RuleClassNotDefinedException("Could not find mapping for [$ruleClass]");
+        }
+
+        $this->rule = new $ruleClass();
+        $this->ruleClass = $ruleClass;
 
         return $this;
     }
@@ -285,7 +280,7 @@ abstract class AbstractSpec
      */
     protected function getDefaultMessage(): string
     {
-        return $this->ruleName . $this->argsToString();
+        return $this->ruleClass . $this->argsTostring();
     }
 
     /**
@@ -293,7 +288,7 @@ abstract class AbstractSpec
      *
      * @return string
      */
-    protected function argsToString(): string
+    protected function argsTostring(): string
     {
         if (!$this->args) {
             return '()';

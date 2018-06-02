@@ -2,6 +2,7 @@
 
 namespace Mbright\Validation\Rule;
 
+use Mbright\Validation\Exception\MalformedUtf8Exception;
 use Mbright\Validation\Exception\ValidationException;
 
 class AbstractStringCase
@@ -9,7 +10,7 @@ class AbstractStringCase
     /**
      * Proxy to `mb_convert_case()` when available; fall back to `utf8_decode()` and `strtolower()` otherwise.
      *
-     * @param string $str String to convert case.
+     * @param string $str string to convert case.
      *
      * @return string
      */
@@ -25,7 +26,7 @@ class AbstractStringCase
     /**
      * Proxy to `mb_convert_case()` when available; fall back to `utf8_decode()` and `strtoupper()` otherwise.
      *
-     * @param string $str String to convert case.
+     * @param string $str string to convert case.
      *
      * @return string
      */
@@ -41,7 +42,7 @@ class AbstractStringCase
     /**
      * Proxy to `mb_convert_case()` when available; fall back to `utf8_decode()` and `ucwords()` otherwise.
      *
-     * @param string $str String to convert case.
+     * @param string $str string to convert case.
      *
      * @return int
      */
@@ -57,7 +58,7 @@ class AbstractStringCase
     /**
      * Proxy to `mb_convert_case()` when available; fall back to `utf8_decode()` and `strtoupper()` otherwise.
      *
-     * @param string $str String to convert case.
+     * @param string $str string to convert case.
      *
      * @return int
      */
@@ -80,7 +81,7 @@ class AbstractStringCase
     /**
      * Proxy to `mb_convert_case()` when available; fall back to `utf8_decode()` and `strtolower()` otherwise.
      *
-     * @param string $str String to convert case.
+     * @param string $str string to convert case.
      *
      * @return int
      */
@@ -168,7 +169,7 @@ class AbstractStringCase
      *
      * @param string $str Return the number of characters in this string.
      *
-     * @throws ValidationException
+     * @throws MalformedUtf8Exception
      *
      * @return int
      */
@@ -182,7 +183,7 @@ class AbstractStringCase
             return $strlen;
         }
 
-        throw ValidationException::malformedUtf8();
+        throw new MalformedUtf8Exception();
     }
 
     /**

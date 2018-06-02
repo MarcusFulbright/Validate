@@ -47,16 +47,16 @@ class ValidateSpec extends AbstractSpec
     /**
      * Sets a validation rule and its arguments.
      *
-     * @param string $ruleName
+     * @param string $ruleClass
      * @param array ...$args
      *
      * @throws ValidationException
      *
      * @return self
      */
-    public function is(string $ruleName, ...$args): self
+    public function is(string $ruleClass, ...$args): self
     {
-        $this->setRule($ruleName);
+        $this->setRule($ruleClass);
         $this->args = $args;
 
         return $this;
@@ -65,17 +65,17 @@ class ValidateSpec extends AbstractSpec
     /**
      * Sets a negated validation rule and its arguments.
      *
-     * @param string $ruleName
+     * @param string $ruleClass
      * @param array ...$args
      *
      * @throws ValidationException
      *
      * @return AbstractSpec
      */
-    public function isNot(string $ruleName, ...$args): self
+    public function isNot(string $ruleClass, ...$args): self
     {
         $this->negated = true;
-        $this->is($ruleName, ...$args);
+        $this->is($ruleClass, ...$args);
 
         return $this;
     }

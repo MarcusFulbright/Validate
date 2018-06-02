@@ -2,6 +2,8 @@
 
 namespace Mbright\Validation\Tests\Examples;
 
+use Mbright\Validation\Rule\Validate;
+use Mbright\Validation\Rule\Sanitize;
 use Mbright\Validation\ValidatorFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +19,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->sanitize('testField')->to('bool');
+        $validator->sanitize('testField')->to(Sanitize\Boolean::class);
         $validator->apply($subject);
 
         $this->assertTrue($subject->testField);
@@ -30,7 +32,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->sanitize('testField')->to('bool');
+        $validator->sanitize('testField')->to(Sanitize\Boolean::class);
         $validator->apply($subject);
 
         $this->assertTrue($subject['testField']);
@@ -44,7 +46,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->sanitize('testField')->to('bool')->usingBlank($expectedBlank);
+        $validator->sanitize('testField')->to(Sanitize\Boolean::class)->usingBlank($expectedBlank);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -58,7 +60,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('bool');
+        $validator->validate('testField')->is(Validate\Boolean::class);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -71,7 +73,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('bool');
+        $validator->validate('testField')->is(Validate\Boolean::class);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -81,7 +83,7 @@ class ValidatorExampleTest extends TestCase
     {
         $expectedMessages = [
             'testField' => [
-                'testField should not be blank and validated as bool()'
+                'testField should not be blank and validated as Mbright\Validation\Rule\Validate\Boolean()'
             ]
         ];
         $subject = (object) ['testField' => 'notABool'];
@@ -89,7 +91,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('bool');
+        $validator->validate('testField')->is(Validate\Boolean::class);
         $result = $validator->apply($subject);
 
         $this->assertFalse($result);
@@ -104,7 +106,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('bool')->allowBlank();
+        $validator->validate('testField')->is(Validate\Boolean::class)->allowBlank();
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -117,7 +119,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('bool')->allowBlank()->setBlankValues([0]);
+        $validator->validate('testField')->is(Validate\Boolean::class)->allowBlank()->setBlankValues([0]);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -130,7 +132,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('testField')->is('int')->setBlankValues([0]);
+        $validator->validate('testField')->is(Validate\Integer::class)->setBlankValues([0]);
         $result = $validator->apply($subject);
 
         $this->assertFalse($result);
@@ -143,7 +145,7 @@ class ValidatorExampleTest extends TestCase
         $validatorFactory = new ValidatorFactory();
         $validator = $validatorFactory->newValidator();
 
-        $validator->validate('success')->is('between', 1, 10);
+        $validator->validate('success')->is(Validate\Between::class, 1, 10);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);
@@ -151,26 +153,16 @@ class ValidatorExampleTest extends TestCase
 
     public function testCustomRulesExample()
     {
-        $validateRules = [
-            'foo' => function () {
-                return new ExampleCustomValidateRule();
-            }
-        ];
-        $sanitizeRules = [
-            'foo' => function () {
-                return new ExampleCustomSanitizeRule();
-            }
-        ];
 
-        $factory = new ValidatorFactory($validateRules, $sanitizeRules);
+        $factory = new ValidatorFactory();
         $validator = $factory->newValidator();
 
         $subject = (object) [
             'testField' => 'bar'
         ];
 
-        $validator->sanitize('testField')->to('foo');
-        $validator->validate('testField')->is('foo');
+        $validator->sanitize('testField')->to(ExampleCustomSanitizeRule::class);
+        $validator->validate('testField')->is(ExampleCustomValidateRule::class);
         $result = $validator->apply($subject);
 
         $this->assertTrue($result);

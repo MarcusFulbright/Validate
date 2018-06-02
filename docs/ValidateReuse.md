@@ -10,12 +10,15 @@
 It can become tedious to configure every Validator on the fly. Instead, you might find it advantageous to have a custom Validator class that already has all of its own rules and messages pre-configured. To do so, simply extend the Validator class and override its `init()` method:
 
 ```php
+use Mbright\Validaiton\Rule\Sanitize;
+use Mbright\Validation\Rule\Validate;
+
 class CustomValidator extends Validator
 {
     protected function init()
     {
-        $this->sanitize('field')->to('rule');
-        $this->validate('field')->is('rule');
+        $this->sanitize('field')->to(Sanitize\RuleClass::class);
+        $this->validate('field')->is(Validate\RuleClass::class);
         $this->useFieldMessage('field', 'message');
     }
 }

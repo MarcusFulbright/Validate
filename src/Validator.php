@@ -3,8 +3,7 @@
 namespace Mbright\Validation;
 
 use Mbright\Validation\Exception\ValidationException;
-use Mbright\Validation\Locator\SanitizeLocator;
-use Mbright\Validation\Locator\ValidationLocator;
+use Mbright\Validation\Exception\ValidationFailureException;
 use Mbright\Validation\Spec\AbstractSpec;
 use Mbright\Validation\Spec\SanitizeSpec;
 use Mbright\Validation\Spec\ValidateSpec;
@@ -12,12 +11,6 @@ use Mbright\Validation\Failure\FailureCollection;
 
 class Validator
 {
-    /** @var ValidationLocator */
-    protected $validationLocator;
-
-    /** @var SanitizeLocator */
-    protected $sanitizeLocator;
-
     /** @var FailureCollection */
     protected $failures;
 
@@ -46,18 +39,27 @@ class Validator
     /**
      * Validator constructor.
      *
-     * @param ValidationLocator $validationLocator
-     * @param SanitizeLocator $sanitizeLocator
+     * @param FailureCollection $failureCollection
      */
     public function __construct(
-        ValidationLocator $validationLocator,
-        SanitizeLocator $sanitizeLocator,
         FailureCollection $failureCollection
     ) {
-        $this->validationLocator = $validationLocator;
-        $this->sanitizeLocator = $sanitizeLocator;
         $this->failures = $failureCollection;
         $this->init();
+    }
+
+    /**
+     * Asserts the validator, throws a ValidationFailureException if anything fails
+     *
+     * @param $subject
+     *
+     * @throws ValidationFailureException
+     *
+     * @return bool
+     */
+    public function __invoke(&$subject): bool
+    {
+        return $this->assert($subject);
     }
 
     /**
@@ -81,6 +83,19 @@ class Validator
     }
 
     /**
+     * @param string $fieldName
+     * @param string $message
+     *
+     * @return Validator
+     */
+    public function setFieldMessage(string $fieldName, string $message): self
+    {
+        $this->filedMessages[$fieldName] = $message;
+
+        return $this;
+    }
+
+    /**
      * Configure the validator to validate the given $field, with the given $rule.
      *
      * @param string $field
@@ -89,7 +104,7 @@ class Validator
      */
     public function validate(string $field): ValidateSpec
     {
-        $spec = new ValidateSpec($field, $this->validationLocator);
+        $spec = new ValidateSpec($field);
         $this->validateSpecs[] = $spec;
 
         return $spec;
@@ -102,29 +117,37 @@ class Validator
      * @param string $ruleName
      * @param array $args
      *
-     * @throws ValidationException
-     *
      * @return SanitizeSpec
      */
     public function sanitize(string $field): SanitizeSpec
     {
-        $spec = new SanitizeSpec($field, $this->sanitizeLocator);
+        $spec = new SanitizeSpec($field);
         $this->sanitizeSpecs[] = $spec;
 
         return $spec;
     }
 
     /**
-     * @param string $fieldName
-     * @param string $message
+     * Applies the validator to the subject and throws an exception upon failure
      *
-     * @return Validator
+     * @param $subject
+     *
+     * @throws ValidationFailureException
+     *
+     * @return bool
      */
-    public function setFieldMessage(string $fieldName, string $message): self
+    public function assert(&$subject)
     {
-        $this->filedMessages[$fieldName] = $message;
+        if ($this->apply($subject)) {
+            return true;
+        }
 
-        return $this;
+        $message = $this->failures->getMessagesAsString();
+        $e = new ValidationFailureException($message);
+        $e->setFailures($this->failures);
+        $e->setSubject($subject);
+
+        throw $e;
     }
 
     /**

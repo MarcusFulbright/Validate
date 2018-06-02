@@ -2,45 +2,31 @@
 
 namespace Mbright\Validation\Tests\Spec;
 
-use Mockery\MockInterface;
-use Mbright\Validation\Locator\AbstractLocator;
 use Mbright\Validation\Spec\ValidateSpec;
+use Mbright\Validation\Tests\Examples\ExampleCustomSanitizeRule;
+use Mbright\Validation\Tests\Examples\ExampleCustomValidateRule;
 use PHPUnit\Framework\TestCase;
 
 class ValidateSpecTest extends TestCase
 {
-    /** @var MockInterface */
-    private $locator;
-
     /** @var ValidateSpec */
     private $spec;
 
     public function setUp()
     {
-        $this->locator = \Mockery::mock(AbstractLocator::class);
-        $this->spec = new ValidateSpec('testField', $this->locator);
+        $this->spec = new ValidateSpec('testField');
     }
 
     public function testIs()
     {
-        $fakeCallable = function () {
-            return;
-        };
-        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
-
-        $actual = $this->spec->is('fakeRule', []);
+        $actual = $this->spec->is(ExampleCustomValidateRule::class, []);
 
         $this->assertSame($this->spec, $actual);
     }
 
     public function testIsNot()
     {
-        $fakeCallable = function () {
-            return;
-        };
-        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
-
-        $actual = $this->spec->isNot('fakeRule', []);
+        $actual = $this->spec->isNot(ExampleCustomValidateRule::class, []);
 
         $this->assertSame($this->spec, $actual);
     }
@@ -73,15 +59,11 @@ class ValidateSpecTest extends TestCase
 
     public function testInvokeRule()
     {
-        $fakeCallable = function () {
-            return true;
-        };
         $subject = (object) [
-            'testField' => true
+            'testField' => 'foo'
         ];
 
-        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
-        $this->spec->is('fakeRule', []);
+        $this->spec->is(ExampleCustomValidateRule::class, []);
 
         $actual = ($this->spec)($subject);
 
@@ -90,15 +72,11 @@ class ValidateSpecTest extends TestCase
 
     public function testInvokeNegated()
     {
-        $fakeCallable = function () {
-            return true;
-        };
         $subject = (object) [
-            'testField' => true
+            'testField' => 'foo'
         ];
 
-        $this->locator->shouldReceive('get')->withArgs(['fakeRule'])->andReturn($fakeCallable);
-        $this->spec->isNot('fakeRule', []);
+        $this->spec->isNot(ExampleCustomValidateRule::class, []);
 
         $actual = ($this->spec)($subject);
 

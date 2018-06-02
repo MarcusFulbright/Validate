@@ -21,7 +21,7 @@ class Strlen extends AbstractStringCase
         $subject,
         string $field,
         int $len,
-        string $padString = ' ',
+        string $padstring = ' ',
         int $padType = STR_PAD_RIGHT
     ): bool {
         $value = $subject->$field;
@@ -29,7 +29,7 @@ class Strlen extends AbstractStringCase
             return false;
         }
         if ($this->strlen($value) < $len) {
-            $subject->$field = $this->strpad($value, $len, $padString, $padType);
+            $subject->$field = $this->strpad($value, $len, $padstring, $padType);
         }
         if ($this->strlen($value) > $len) {
             $subject->$field = $this->substr($value, 0, $len);

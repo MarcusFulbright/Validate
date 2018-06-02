@@ -71,7 +71,7 @@ class FailureCollection extends \ArrayObject
      */
     public function forField(string $field): array
     {
-        if (! isset($this[$field])) {
+        if (!isset($this[$field])) {
             return [];
         }
 
@@ -102,7 +102,7 @@ class FailureCollection extends \ArrayObject
      */
     public function getMessagesForField(string $field): array
     {
-        if (! isset($this[$field])) {
+        if (!isset($this[$field])) {
             return [];
         }
         $messages = [];
@@ -143,7 +143,7 @@ class FailureCollection extends \ArrayObject
      *
      * @return string
      */
-    public function getMessagesForFieldAsString($field, $prefix = ''): string
+    public function getMessagesForFieldAsstring($field, $prefix = ''): string
     {
         $string = '';
         foreach ($this->forField($field) as $failure) {

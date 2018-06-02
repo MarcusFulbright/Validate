@@ -36,7 +36,9 @@ There are two types of rules that can be added to your $validator:
 Sanitize rules can be added to the Validator like so:
 
 ```php
-$validator->sanitize('fieldName')->to('ruleName');
+use Mbright\Validation\Rule\Sanitize;
+
+$validator->sanitize('fieldName')->to(Sanitize\Rule::class);
 ```
 
 ### Adding Validate Rules
@@ -44,11 +46,13 @@ $validator->sanitize('fieldName')->to('ruleName');
 Validate rules can be used to confirm that field meets the rule's expectations, or that the field does _not_ meet the rule's expectations:
 
 ```php
+use Mbright\Validation\Rule\Validate;
+
 //validate that a field is a boolean
-$validator->validate('fieldName')->is('ruleName')
+$validator->validate('fieldName')->is(Validate\Rule::class)
 
 //validate that a field is *not* a boolean
-$validator->validate('fieldName')->isNot('ruleName')
+$validator->validate('fieldName')->isNot(Validate\Rule::class)
 ```
 
 ### Failure Modes

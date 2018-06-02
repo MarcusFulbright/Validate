@@ -21,7 +21,7 @@ class StrlenMin extends AbstractStringCase
         $subject,
         string $field,
         int $min,
-        string $padString = ' ',
+        string $padstring = ' ',
         int $padType = STR_PAD_RIGHT
     ): bool {
         $value = $subject->$field;
@@ -30,7 +30,7 @@ class StrlenMin extends AbstractStringCase
         }
 
         if ($this->strlen($value) < $min) {
-            $subject->$field = $this->strpad($value, $min, $padString, $padType);
+            $subject->$field = $this->strpad($value, $min, $padstring, $padType);
         }
 
         return true;
