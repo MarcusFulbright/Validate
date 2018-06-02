@@ -2,7 +2,6 @@
 
 namespace Mbright\Validation;
 
-use Mbright\Validation\Exception\ValidationException;
 use Mbright\Validation\Exception\ValidationFailureException;
 use Mbright\Validation\Spec\AbstractSpec;
 use Mbright\Validation\Spec\SanitizeSpec;

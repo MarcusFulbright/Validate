@@ -3,7 +3,6 @@
 namespace Mbright\Validation\Spec;
 
 use Mbright\Validation\Exception\RuleClassNotDefinedException;
-use Mbright\Validation\Exception\ValidationException;
 
 abstract class AbstractSpec
 {

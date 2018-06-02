@@ -2,8 +2,6 @@
 
 namespace Mbright\Validation\Spec;
 
-use Mbright\Validation\Exception\ValidationException;
-
 class ValidateSpec extends AbstractSpec
 {
     /**
@@ -49,8 +47,6 @@ class ValidateSpec extends AbstractSpec
      *
      * @param string $ruleClass
      * @param array ...$args
-     *
-     * @throws ValidationException
      *
      * @return self
      */

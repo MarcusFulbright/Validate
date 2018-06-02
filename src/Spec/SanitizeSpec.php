@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Spec;
 
-use Mbright\Validation\Exception\ValidationException;
+use Mbright\Validation\Exception\ValidationFailureException;
 
 class SanitizeSpec extends AbstractSpec
 {
@@ -46,8 +46,6 @@ class SanitizeSpec extends AbstractSpec
      * Set the Sanitize rule to be used.
      *
      * @param string $ruleClass
-     *
-     * @throws ValidationException
      *
      * @return SanitizeSpec
      */

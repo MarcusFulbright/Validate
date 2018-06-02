@@ -3,7 +3,6 @@
 namespace Mbright\Validation\Rule;
 
 use Mbright\Validation\Exception\MalformedUtf8Exception;
-use Mbright\Validation\Exception\ValidationException;
 
 class AbstractStringCase
 {
@@ -149,7 +148,7 @@ class AbstractStringCase
      * @param int $length End after this many characters.
      * @return string
      *
-     * @throws ValidationException
+     * @throws MalformedUtf8Exception
      */
     protected function substrIconv($str, $start, $length)
     {
@@ -161,7 +160,7 @@ class AbstractStringCase
             return $substr;
         }
 
-        throw ValidationException::malformedUtf8();
+        throw new MalformedUtf8Exception();
     }
 
     /**
