@@ -108,6 +108,36 @@ if (!$isValid) {
 ```
 > Note: $validator->apply() will return a boolean to indicate success
 
+### Asserting the Validator
+
+If you prefer to catch an exception with the validation failures you can apply the validator instead:
+
+```php
+$subject = [
+    'isPublished' => false;
+];
+
+try {
+    validator->assert($subject);
+} catch (ValidationFailureException $e) {
+    var_dump($e->getFailures());
+}
+```
+
+The Validator can also be invoked to acheive the same behavior:
+
+```php
+$subject = [
+    'isPublished' => false;
+];
+
+try {
+    validator($subject);
+} catch (ValidationFailureException $e) {
+    var_dump($e->getFailures());
+}
+```
+
 ## Working With Failures
 
 After applying a Validator, any failures can be retrieved by calling `$validator->getFailures()`. This returns an instance of `FailureCollection`. The FailureCollection class implements _ArrayObject_ which means you can treat it like an array. Every failure will be represented in the collection with a `ValidationFailure` object. The ValidationFailure object has the following methods:
