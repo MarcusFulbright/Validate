@@ -64,8 +64,6 @@ class ValidateSpec extends AbstractSpec
      * @param string $ruleClass
      * @param array ...$args
      *
-     * @throws ValidationException
-     *
      * @return AbstractSpec
      */
     public function isNot(string $ruleClass, ...$args): self
