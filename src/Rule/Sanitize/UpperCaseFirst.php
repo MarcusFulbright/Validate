@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 use Mbright\Validation\Rule\AbstractStringCase;
 
-class UpperCaseFirst extends AbstractStringCase
+class UpperCaseFirst extends AbstractStringCase implements SanitizeRuleInterface
 {
     /**
      * Sanitizes a string to begin with uppercase.

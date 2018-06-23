@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class AlphaNum
+class AlphaNum implements SanitizeRuleInterface
 {
     /**
      * Strips non-alphanumeric characters from the value.

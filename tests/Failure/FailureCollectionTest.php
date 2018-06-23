@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Tests\Failure;
 
-use Mbright\Validation\Failure\ValidationFailure;
+use Mbright\Validation\Failure\RuleValidationFailure;
 use PHPUnit\Framework\TestCase;
 use Mbright\Validation\Failure\FailureCollection;
 
@@ -34,7 +34,7 @@ class FailureCollectionTest extends TestCase
         $expected = $this->collection->forField($fakeField);
 
         $this->assertCount(1, $expected);
-        $this->assertInstanceOf(ValidationFailure::class, $expected[0]);
+        $this->assertInstanceOf(RuleValidationFailure::class, $expected[0]);
     }
 
     public function testAdd()
@@ -44,7 +44,7 @@ class FailureCollectionTest extends TestCase
         $actual = $this->collection->add($fakeField, $fakeMessage);
 
         $this->assertCount(1, $this->collection);
-        $this->assertInstanceOf(ValidationFailure::class, $actual);
+        $this->assertInstanceOf(RuleValidationFailure::class, $actual);
     }
 
     public function testGetMessagesAsString()

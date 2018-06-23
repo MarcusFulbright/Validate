@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractBooleanCase;
 
-class Boolean extends AbstractBooleanCase
+class Boolean extends AbstractBooleanCase implements ValidateRuleInterface
 {
     /**
      * Validates that the value is a boolean representation.

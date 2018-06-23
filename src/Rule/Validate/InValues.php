@@ -2,8 +2,19 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class InValues
+class InValues implements ValidateRuleInterface
 {
+    /** @var array */
+    protected $array;
+
+    /**
+     * @param array $array An array of allowed values.
+     */
+    public function __construct(array $array)
+    {
+        $this->array = $array;
+    }
+
     /**
      * Validates that the value is in a given array.
      *
@@ -12,12 +23,11 @@ class InValues
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param array $array An array of allowed values.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, string $field, array $array): bool
+    public function __invoke($subject, string $field): bool
     {
-        return in_array($subject->$field, $array, true);
+        return in_array($subject->$field, $this->array, true);
     }
 }

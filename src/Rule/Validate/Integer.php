@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Integer
+class Integer implements ValidateRuleInterface
 {
     /**
      * Validates that the value represents an integer.

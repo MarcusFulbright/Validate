@@ -2,8 +2,19 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Callback
+class Callback implements SanitizeRuleInterface
 {
+    /** @var callable */
+    protected $callback;
+
+    /**
+     * @param callable $callback Function to use.
+     */
+    public function __construct(callable $callback)
+    {
+        $this->callback = $callback;
+    }
+
     /**
      * Sanitizes a value using a callable/callback.
      *
@@ -13,8 +24,8 @@ class Callback
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, string $field, callable $callable): bool
+    public function __invoke($subject, string $field): bool
     {
-        return $callable($subject, $field);
+        return ($this->callback)($subject, $field);
     }
 }

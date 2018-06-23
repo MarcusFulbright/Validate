@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractStringCase;
 
-class TitleCase extends AbstractStringCase
+class TitleCase extends AbstractStringCase implements ValidateRuleInterface
 {
     /**
      * Validates that the string is title case.

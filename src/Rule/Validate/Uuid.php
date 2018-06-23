@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractUuidCase;
 
-class Uuid extends AbstractUuidCase
+class Uuid extends AbstractUuidCase implements ValidateRuleInterface
 {
     /**
      * Validates that the value is a canonical human-readable UUID.

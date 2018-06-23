@@ -2,18 +2,29 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Hex
+class Hex implements ValidateRuleInterface
 {
+    /** @var int */
+    protected $max;
+
+
+    /**
+     * @param int|null $max Maximum "ceiling" value for the hex
+     */
+    public function __construct(int $max = null)
+    {
+        $this->max = $max;
+    }
+
     /**
      * Sanitizes a value to a hex.
      *
      * @param $subject
      * @param $field
-     * @param null $max
      *
      * @return bool
      */
-    public function __invoke($subject, string $field, int $max = null): bool
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
 
@@ -26,7 +37,7 @@ class Hex
             return false;
         }
 
-        if ($max && strlen($value) > $max) {
+        if ($this->max && strlen($value) > $this->max) {
             return false;
         }
 

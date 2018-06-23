@@ -29,7 +29,7 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) ['testField' => 'notABool'];
 
-        $this->validator->validate('testField')->is(Validate\Boolean::class);
+        $this->validator->validate('testField')->is(new Validate\Boolean());
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -46,7 +46,7 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is(Validate\Boolean::class);
+        $this->validator->validate('testField')->is(new Validate\Boolean());
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -63,9 +63,9 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is(Validate\Integer::class)->asHardRule();
+        $this->validator->validate('testField')->is(new Validate\Integer())->asHardRule();
         //this rule should never run
-        $this->validator->validate('testField')->is(Validate\Boolean::class);
+        $this->validator->validate('testField')->is(new Validate\Boolean());
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -83,8 +83,8 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->sanitize('testField')->to(Sanitize\Integer::class)->asSoftRule();
-        $this->validator->sanitize('testField')->to(Sanitize\Boolean::class);
+        $this->validator->sanitize('testField')->to(new Sanitize\Integer())->asSoftRule();
+        $this->validator->sanitize('testField')->to(new Sanitize\Boolean());
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -101,8 +101,8 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->sanitize('testField')->to(Sanitize\Integer::class)->asHaltingRule();
-        $this->validator->validate('testField')->is(Validate\Integer::class);
+        $this->validator->sanitize('testField')->to(new Sanitize\Integer())->asHaltingRule();
+        $this->validator->validate('testField')->is(new Validate\Integer());
         $result = $this->validator->apply($subject);
 
         $this->assertFalse($result);
@@ -119,7 +119,7 @@ class ValidatorTest extends TestCase
         ];
         $subject = (object) [];
 
-        $this->validator->validate('testField')->is(Validate\Integer::class);
+        $this->validator->validate('testField')->is(new Validate\Integer());
         $this->validator->setFieldMessage('testField', 'customFieldMessage');
         $result = $this->validator->apply($subject);
 

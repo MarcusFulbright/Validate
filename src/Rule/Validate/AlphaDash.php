@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class AlphaDash
+class AlphaDash implements ValidateRuleInterface
 {
     /**
      * Validates that the specified field only contains alpha-numeric characters, dashes, and underscores.

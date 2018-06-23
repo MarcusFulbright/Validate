@@ -2,12 +2,12 @@
 
 namespace Mbright\Validation\Tests\Failure;
 
-use Mbright\Validation\Failure\ValidationFailure;
+use Mbright\Validation\Failure\RuleValidationFailure;
 use PHPUnit\Framework\TestCase;
 
 class ValidationFailureTest extends TestCase
 {
-    /** @var ValidationFailure */
+    /** @var RuleValidationFailure */
     private $failure;
 
     /** @var string */
@@ -21,7 +21,7 @@ class ValidationFailureTest extends TestCase
 
     public function setUp()
     {
-        $this->failure = new ValidationFailure($this->fakeField, $this->fakeMessage, $this->fakeArgs);
+        $this->failure = new RuleValidationFailure($this->fakeField, $this->fakeMessage, $this->fakeArgs);
     }
 
 

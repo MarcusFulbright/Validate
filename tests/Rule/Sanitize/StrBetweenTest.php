@@ -17,18 +17,18 @@ class StrBetweenTest extends AbstractSanitizeTest
     {
         return [
             [[], false, []],
-            ['abc',         true, 'abc '],
-            ['abcd',        true, 'abcd'],
-            ['abcde',       true, 'abcde'],
-            ['abcdef',      true, 'abcdef'],
-            ['abcdefg',     true, 'abcdef'],
-            ['abcdefgh',    true, 'abcdef'],
-            ['абв',         true, 'абв '],
-            ['абвг',        true, 'абвг'],
-            ['абвгд',       true, 'абвгд'],
-            ['абвгде',      true, 'абвгде'],
-            ['абвгдеж',     true, 'абвгде'],
-            ['абвгдежз',    true, 'абвгде'],
+            ['abc',  true, 'abc '],
+            ['abcd', true, 'abcd'],
+            ['abcde', true, 'abcde'],
+            ['abcdef', true, 'abcdef'],
+            ['abcdefg', true, 'abcdef'],
+            ['abcdefgh', true, 'abcdef'],
+            ['абв', true, 'абв '],
+            ['абвг', true, 'абвг'],
+            ['абвгд', true, 'абвгд'],
+            ['абвгде', true, 'абвгде'],
+            ['абвгдеж', true, 'абвгде'],
+            ['абвгдежз', true, 'абвгде'],
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Isbn
+class Isbn implements ValidateRuleInterface
 {
     /**
      * Validates that the value represents an ISBN.

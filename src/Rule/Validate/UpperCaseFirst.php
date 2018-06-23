@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractStringCase;
 
-class UpperCaseFirst extends AbstractStringCase
+class UpperCaseFirst extends AbstractStringCase implements ValidateRuleInterface
 {
     /**
      * Validates that the string begins with lowercase.

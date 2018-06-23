@@ -2,8 +2,24 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Between
+class Between implements SanitizeRuleInterface
 {
+    /** @var int */
+    protected $min;
+
+    /** @var int */
+    protected $max;
+
+    /**
+     * @param int $min The minimum value.
+     * @param int $max The maximum value.
+     */
+    public function __construct(int $min, int $max)
+    {
+        $this->min = $min;
+        $this->max = $max;
+    }
+
     /**
      * Check that the value is within the given range.
      *
@@ -11,24 +27,22 @@ class Between
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param int $min The minimum valid value.
-     * @param int $max The maximum valid value.
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, string $field, int $min, int $max): bool
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {
             return false;
         }
 
-        if ($value < $min) {
-            $subject->$field = $min;
+        if ($value < $this->min) {
+            $subject->$field = $this->min;
         }
 
-        if ($value > $max) {
-            $subject->$field = $max;
+        if ($value > $this->max) {
+            $subject->$field = $this->max;
         }
 
 

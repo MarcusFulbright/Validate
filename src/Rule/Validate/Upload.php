@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Upload
+class Upload implements ValidateRuleInterface
 {
     /**
      * Validates that the value is an array of file-upload information, and if a file is referred to, that is actually

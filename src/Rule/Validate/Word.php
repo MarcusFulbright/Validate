@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Word
+class Word implements ValidateRuleInterface
 {
     /**
      * Validates that the value is composed only of word characters (letters,numbers, and underscores).

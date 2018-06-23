@@ -4,8 +4,24 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 use Mbright\Validation\Rule\AbstractBooleanCase;
 
-class Boolean extends AbstractBooleanCase
+class Boolean extends AbstractBooleanCase implements SanitizeRuleInterface
 {
+    /** @var bool|mixed */
+    protected $trueValue;
+
+    /** @var bool|mixed */
+    protected $falseValue;
+
+    /**
+     * @param bool $true Use this value for `true`.
+     * @param bool $false Use this value for `false`.
+     */
+    public function __construct($true = true, $false = false)
+    {
+        $this->trueValue = $true;
+        $this->falseValue = $false;
+    }
+
     /**
      * Sanitize the value to a boolean, or a pseudo-boolean.
      *
@@ -16,23 +32,23 @@ class Boolean extends AbstractBooleanCase
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, string $field, $true = true, $false = false): bool
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
 
         if ($this->isTrue($value)) {
-            $subject->$field = $true;
+            $subject->$field = $this->trueValue;
 
             return true;
         }
 
         if ($this->isFalse($value)) {
-            $subject->$field = $false;
+            $subject->$field = $this->falseValue;
 
             return true;
         }
 
-        $subject->$field = $value ? $true : $false;
+        $subject->$field = $value ? $this->trueValue : $this->falseValue;
 
         return true;
     }

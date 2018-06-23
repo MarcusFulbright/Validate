@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Email
+class Email implements ValidateRuleInterface
 {
     /**
      * Validates that the value is an email address

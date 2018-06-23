@@ -2,8 +2,19 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class EqualToField
+class EqualToField implements ValidateRuleInterface
 {
+    /** @var string */
+    protected $otherField;
+
+    /**
+     * @param string $otherField Check against the value of this field on the subject.
+     */
+    public function __construct(string $otherField)
+    {
+        $this->otherField = $otherField;
+    }
+
     /**
      * Validates that this value is loosely equal to some other subject field.
      *
@@ -11,16 +22,15 @@ class EqualToField
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param string $otherField Check against the value of this subject field.
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, string $field, string $otherField): bool
+    public function __invoke($subject, string $field): bool
     {
-        if (!isset($subject->$otherField)) {
+        if (!isset($subject->{$this->otherField})) {
             return false;
         }
 
-        return $subject->$field == $subject->$otherField;
+        return $subject->$field == $subject->{$this->otherField};
     }
 }

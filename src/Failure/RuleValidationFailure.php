@@ -10,6 +10,9 @@ class ValidationFailure implements \JsonSerializable
     /** @var string */
     protected $message;
 
+    /** @var string[] */
+    protected $ruleClass;
+
     /** @var array */
     protected $args;
 
@@ -18,12 +21,14 @@ class ValidationFailure implements \JsonSerializable
      *
      * @param string $field
      * @param string $message
+     * @param string $ruleClass
      * @param array $args
      */
-    public function __construct(string $field, string $message, array $args)
+    public function __construct(string $field, string $message, array $ruleClass = [], array $args = [])
     {
         $this->field = $field;
         $this->message = $message;
+        $this->ruleClass = $ruleClass;
         $this->args = $args;
     }
 
@@ -44,6 +49,14 @@ class ValidationFailure implements \JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getRuleClass(): string
+    {
+        return $this->ruleClass;
+    }
+
+    /**
      * @return array
      */
     public function getArgs(): array
@@ -61,6 +74,7 @@ class ValidationFailure implements \JsonSerializable
         return [
             'field' => $this->field,
             'message' => $this->message,
+            'ruleClass' => $this->ruleClass,
             'args' => $this->args
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Integer
+class Integer implements SanitizeRuleInterface
 {
     /**
      * Converts the field to an integer.

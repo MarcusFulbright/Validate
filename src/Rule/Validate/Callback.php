@@ -2,19 +2,29 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Callback
+class Callback implements ValidateRuleInterface
 {
+    /** @var callable */
+    protected $callable;
+
+    /**
+     * @param callable $callable A PHP callable/callback.
+     */
+    public function __construct(callable $callable)
+    {
+        $this->callable = $callable;
+    }
+
     /**
      * Validates the value against a callable/callback.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param callable $callable A PHP callable/callback.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, string $field, callable $callable): bool
+    public function __invoke($subject, string $field): bool
     {
-        return $callable($subject, $field);
+        return ($this->callable)($subject, $field);
     }
 }

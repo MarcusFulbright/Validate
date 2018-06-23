@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 use Mbright\Validation\Rule\AbstractUuidCase;
 
-class Uuid extends AbstractUuidCase
+class Uuid extends AbstractUuidCase implements SanitizeRuleInterface
 {
     /**
      * Forces the value to a canonical UUID.

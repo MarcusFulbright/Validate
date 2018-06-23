@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Word
+class Word implements SanitizeRuleInterface
 {
     /**
      * Strips non-word characters within the value (letters, numbers, and

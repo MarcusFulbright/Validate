@@ -2,20 +2,30 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Value
+class Value implements SanitizeRuleInterface
 {
+    /** @var mixed */
+    protected $otherValue;
+
+    /**
+     * @param mixed $otherValue The value to set.
+     */
+    public function __construct($otherValue)
+    {
+        $this->otherValue = $otherValue;
+    }
+
     /**
      * Modifies the field value to match another value.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $other_value The value to set.
      *
      * @return bool Always true.
      */
-    public function __invoke($subject, string $field, $otherValue): bool
+    public function __invoke($subject, string $field): bool
     {
-        $subject->$field = $otherValue;
+        $subject->$field = $this->otherValue;
 
         return true;
     }

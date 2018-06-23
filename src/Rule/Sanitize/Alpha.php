@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Alpha
+class Alpha implements SanitizeRuleInterface
 {
     /**
      * Strips non-alphabetic characters from the value.
@@ -10,7 +10,7 @@ class Alpha
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
      *
-     * @return bool Always true
+     * @return bool Always true.
      */
     public function __invoke($subject, string $field): bool
     {

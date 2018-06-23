@@ -4,14 +4,24 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 class Hex
 {
+    /** @var int|null */
+    protected $max;
+
+    /**
+     * @param int|null $max
+     */
+    public function __construct(int $max = null)
+    {
+        $this->max = $max;
+    }
+
     /**
      * @param $subject
      * @param $field
-     * @param int $max
      *
      * @return bool
      */
-    public function __invoke($subject, string $field, int $max = null): bool
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
 
@@ -24,8 +34,8 @@ class Hex
             return false;
         }
 
-        if ($max && strlen($value) > $max) {
-            $value = substr($value, 0, $max);
+        if ($this->max && strlen($value) > $this->max) {
+            $value = substr($value, 0, $this->max);
         }
 
         $subject->$field = $value;

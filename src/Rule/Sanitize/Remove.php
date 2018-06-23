@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Remove
+class Remove implements SanitizeRuleInterface
 {
     /**
      * Removes the field from the subject with unset().

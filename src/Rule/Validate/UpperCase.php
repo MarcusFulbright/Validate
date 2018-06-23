@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractStringCase;
 
-class UpperCase extends AbstractStringCase
+class UpperCase extends AbstractStringCase implements ValidateRuleInterface
 {
     /**
      * Validates that the string is uppercase.

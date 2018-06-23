@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Alpha
+class Alpha implements ValidateRuleInterface
 {
     /**
      * Validates if the specified field contains only alphabetic characters.

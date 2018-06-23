@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Url
+class Url implements ValidateRuleInterface
 {
     /**
      * Validates the value as a URL.

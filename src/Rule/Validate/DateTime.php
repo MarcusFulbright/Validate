@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractDateTime;
 
-class DateTime extends AbstractDateTime
+class DateTime extends AbstractDateTime implements ValidateRuleInterface
 {
     /**
      * Validate that a value can be represented as a date/time.

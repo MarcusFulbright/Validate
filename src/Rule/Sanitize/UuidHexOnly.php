@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 use Mbright\Validation\Rule\AbstractUuidCase;
 
-class UuidHexOnly extends AbstractUuidCase
+class UuidHexOnly extends AbstractUuidCase implements SanitizeRuleInterface
 {
     /**
      * Forces the value to a hex-only UUID.

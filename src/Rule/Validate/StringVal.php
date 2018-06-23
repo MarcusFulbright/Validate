@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class StringVal
+class StringVal implements ValidateRuleInterface
 {
     /**
      * Validates that the value can be represented as a string.

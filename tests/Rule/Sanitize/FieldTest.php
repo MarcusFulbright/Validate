@@ -27,11 +27,11 @@ class FieldTest extends AbstractSanitizeTest
     public function providerTo()
     {
         return [
-            [0,         true, '1'],
-            [1,         true, '1'],
-            ['1',       true, '1'],
-            [true,      true, '1'],
-            [false,     true, '1'],
+            [0, true, '1'],
+            [1, true, '1'],
+            ['1', true, '1'],
+            [true, true, '1'],
+            [false, true, '1'],
         ];
     }
 
@@ -39,7 +39,7 @@ class FieldTest extends AbstractSanitizeTest
     {
         $subject = (object) ['foo' => '1'];
         $class = $this->getClass();
-        $rule = new $class();
+        $rule = $this->newRule();
         $this->assertFalse($rule->__invoke($subject, 'foo', 'no_such_field'));
     }
 }

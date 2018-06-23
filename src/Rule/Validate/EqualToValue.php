@@ -2,19 +2,29 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class EqualToValue
+class EqualToValue implements ValidateRuleInterface
 {
+    /** @var mixed */
+    protected $value;
+    
+    /**
+     * @param mixed $value The value to compare against
+     */
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
+
     /**
      * Validates that this value is loosely equal to another value.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param mixed $otherValue The other value.
      *
      * @return bool True if the values are equal, false if not equal.
      */
-    public function __invoke($subject, string $field, string $otherValue): bool
+    public function __invoke($subject, string $field): bool
     {
-        return $subject->$field == $otherValue;
+        return $subject->$field == $this->value;
     }
 }

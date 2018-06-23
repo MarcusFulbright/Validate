@@ -2,24 +2,34 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Field
+class Field implements SanitizeRuleInterface
 {
+    /** @var string */
+    protected $otherField;
+
+    /**
+     * @param string $other_field The name of the other subject field.
+     */
+    public function __construct(string $otherField)
+    {
+        $this->otherField = $otherField;
+    }
+
     /**
      * Modifies the field value to match that of another field.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param string $other_field The name of the other subject field.
      *
      * @return bool True if the value was sanitized, false if not.
      */
-    public function __invoke($subject, $field, $other_field): bool
+    public function __invoke($subject, string $field): bool
     {
         // the other field needs to exist and *not* be null
-        if (! isset($subject->$other_field)) {
+        if (! isset($subject->{$this->otherField})) {
             return false;
         }
-        $subject->$field = $subject->$other_field;
+        $subject->$field = $subject->{$this->otherField};
 
         return true;
     }

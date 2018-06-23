@@ -18,7 +18,8 @@ abstract class AbstractSanitizeTest extends TestCase
     protected function newRule()
     {
         $class = $this->getClass();
-        $rule = new $class();
+        $args = $this->getArgs();
+        $rule = new $class(...$args);
         return $rule;
     }
 
@@ -36,10 +37,7 @@ abstract class AbstractSanitizeTest extends TestCase
     {
         $subject = $this->getSubject($value);
         $field = 'foo';
-        $args = array_merge(
-            [$subject, $field],
-            (array) $this->getArgs()
-        );
+        $args = [$subject, $field];
         $rule = $this->newRule();
 
         return [

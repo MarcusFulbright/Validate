@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate;
 
 use Mbright\Validation\Rule\AbstractUuidCase;
 
-class UuidHexOnly extends AbstractUuidCase
+class UuidHexOnly extends AbstractUuidCase implements ValidateRuleInterface
 {
     /**
      * Validates that the value is a hex-only UUID.

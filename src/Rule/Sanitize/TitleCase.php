@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Sanitize;
 
 use Mbright\Validation\Rule\AbstractStringCase;
 
-class TitleCase extends AbstractStringCase
+class TitleCase extends AbstractStringCase implements SanitizeRuleInterface
 {
     /**
      * Sanitizes a string to title case.

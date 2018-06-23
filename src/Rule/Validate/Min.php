@@ -2,24 +2,34 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class Min
+class Min implements ValidateRuleInterface
 {
+    /** @var int */
+    protected $min;
+
+    /**
+     * @param int $min The minimum valid value.
+     */
+    public function __construct(int $min)
+    {
+        $this->min = $min;
+    }
+
     /**
      * Validates that the value is greater than or equal to a minimum.
      *
      * @param object $subject The subject to be filtered.
      * @param string $field The subject field name.
-     * @param int $min The minimum valid value.
      *
      * @return bool True if valid, false if not.
      */
-    public function __invoke($subject, string $field, int $min): bool
+    public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
         if (!is_scalar($value)) {
             return false;
         }
 
-        return $value >= $min;
+        return $value >= $this->min;
     }
 }

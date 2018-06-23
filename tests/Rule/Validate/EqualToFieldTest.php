@@ -45,7 +45,8 @@ class EqualToFieldTest extends AbstractValidateTest
     public function testIsFieldNotSet()
     {
         $subject = (object) ['foo' => '1'];
-        $rule = new EqualToField();
+
+        $rule = $this->newRule();
 
         $this->assertFalse($rule->__invoke($subject, 'foo', 'no_such_field'));
     }

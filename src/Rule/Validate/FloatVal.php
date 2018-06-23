@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class FloatVal
+class FloatVal implements ValidateRuleInterface
 {
     /**
      * Validates that the value represents a float.

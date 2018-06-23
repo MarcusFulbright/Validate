@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class FloatVal
+class FloatVal implements SanitizeRuleInterface
 {
     /**
      * Forces the value to a float.

@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Sanitize;
 
-class Isbn
+class Isbn implements SanitizeRuleInterface
 {
     /**
      * Forces the value to an ISBN.

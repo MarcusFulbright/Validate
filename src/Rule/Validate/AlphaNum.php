@@ -2,7 +2,7 @@
 
 namespace Mbright\Validation\Rule\Validate;
 
-class AlphaNum
+class AlphaNum implements ValidateRuleInterface
 {
     /**
      * Returns bool indicating if the value consists of only alpha numeric characters.
