@@ -3,6 +3,7 @@
 namespace Mbright\Validation\Tests\Failure;
 
 use Mbright\Validation\Failure\RuleValidationFailure;
+use Mbright\Validation\Failure\ValidationFailure;
 use PHPUnit\Framework\TestCase;
 
 class ValidationFailureTest extends TestCase
@@ -21,7 +22,7 @@ class ValidationFailureTest extends TestCase
 
     public function setUp()
     {
-        $this->failure = new RuleValidationFailure($this->fakeField, $this->fakeMessage, $this->fakeArgs);
+        $this->failure = new ValidationFailure($this->fakeField, $this->fakeMessage, null, $this->fakeArgs);
     }
 
 
@@ -51,6 +52,7 @@ class ValidationFailureTest extends TestCase
         $expected = json_encode([
             'field' => $this->fakeField,
             'message' => $this->fakeMessage,
+            'ruleClass' => null,
             'args' => $this->fakeArgs
         ]);
         $actual = json_encode($this->failure);

@@ -88,16 +88,6 @@ class AbstractSpecTest extends TestCase
         $this->assertTrue($actual);
     }
     
-    public function testSetRule()
-    {
-        $spec = new DummySpec('fakeField');
-
-        $actual = $spec->setRule(ExampleCustomValidateRule::class);
-
-        $this->assertSame($spec, $actual);
-        $this->assertEquals(ExampleCustomValidateRule::class, $spec->getRuleClass());
-    }
-
     public function testSubjectFieldIsBlankRespectsWhiteList()
     {
         $whiteList = [

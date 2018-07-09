@@ -2,6 +2,8 @@
 
 namespace Mbright\Validation\Spec;
 
+use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
+
 class ValidateSpec extends AbstractSpec
 {
     /**
@@ -45,15 +47,14 @@ class ValidateSpec extends AbstractSpec
     /**
      * Sets a validation rule and its arguments.
      *
-     * @param string $ruleClass
-     * @param array ...$args
+     * @param ValidateRuleInterface $rule
      *
      * @return self
      */
-    public function is(string $ruleClass, ...$args): self
+    public function is(ValidateRuleInterface $rule): self
     {
-        $this->setRule($ruleClass);
-        $this->args = $args;
+        $this->rule = $rule;
+        $this->ruleClass = get_class($rule);
 
         return $this;
     }
@@ -61,15 +62,14 @@ class ValidateSpec extends AbstractSpec
     /**
      * Sets a negated validation rule and its arguments.
      *
-     * @param string $ruleClass
-     * @param array ...$args
+     * @param ValidateRuleInterface $ruleClass
      *
      * @return AbstractSpec
      */
-    public function isNot(string $ruleClass, ...$args): self
+    public function isNot(ValidateRuleInterface $rule): self
     {
         $this->negated = true;
-        $this->is($ruleClass, ...$args);
+        $this->is($rule);
 
         return $this;
     }

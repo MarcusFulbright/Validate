@@ -9,13 +9,18 @@ class FailureCollection extends \ArrayObject
      *
      * @param string $field The field that failed
      * @param string $message The failure message
+     * @param string $ruleClass Class for the rule that failed
      * @param array $args The arguments passed to the rule specification
      *
      * @return ValidationFailure
      */
-    protected function newFailure(string $field, string $message, array $args = []): ValidationFailure
-    {
-        return new ValidationFailure($field, $message, $args);
+    protected function newFailure(
+        string $field,
+        string $message,
+        ?string $ruleClass = null,
+        array $args = []
+    ): ValidationFailure {
+        return new ValidationFailure($field, $message, $ruleClass, $args);
     }
 
     /**
@@ -39,8 +44,8 @@ class FailureCollection extends \ArrayObject
      */
     public function set(string $field, string $message, array $args = []): ValidationFailure
     {
-        $failure = $this->newFailure($field, $message, $args);
-        $this[$field] = array($failure);
+        $failure = $this->newFailure($field, $message, null, $args);
+        $this[$field] = [$failure];
 
         return $failure;
     }
@@ -50,13 +55,14 @@ class FailureCollection extends \ArrayObject
      *
      * @param string $field The field that failed
      * @param string $message The failure message
+     * @param string $ruleClass Class for the rule that failed
      * @param array $args The arguments passed to the rule specification
      *
      * @return ValidationFailure
      */
-    public function add(string $field, string $message, array $args = []): ValidationFailure
+    public function add(string $field, string $message, string $ruleClass, array $args = []): ValidationFailure
     {
-        $failure = $this->newFailure($field, $message, $args);
+        $failure = $this->newFailure($field, $message, $ruleClass, $args);
         $this[$field][] = $failure;
 
         return $failure;

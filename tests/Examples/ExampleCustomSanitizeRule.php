@@ -2,7 +2,9 @@
 
 namespace Mbright\Validation\Tests\Examples;
 
-class ExampleCustomSanitizeRule
+use Mbright\Validation\Rule\Sanitize\SanitizeRuleInterface;
+
+class ExampleCustomSanitizeRule implements SanitizeRuleInterface
 {
     public function __invoke($subject, string $field): bool
     {

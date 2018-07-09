@@ -11,12 +11,9 @@
 Defining your own custom Sanitize and Validate rules is very easy. The bare bones for each rule look the same:
 
 ```php
-class MyCustomValidateRule
+public function __invoke($subject, string $field): bool
 {
-    public function __invoke($subject, string $field): bool
-    {
-        // do something
-    }
+    // do something
 }
 ```
 
@@ -26,30 +23,39 @@ class MyCustomValidateRule
 
 > This library will convert arrays to stdClass so $subject will *always* be an object
 
-If your rule requires any additional arguments, they can be added to the method signature after the `$field` argument.
+If your rule requires any additional arguments, they should get injected into the rule's `__construct()`.
+
+Additionally, custom rules will need to implement either the `ValidateRuleInterface` or `SanitizeRuleInterface` depending on the rule type.
 
 ## Custom Validate Rules
-Validate rules **MUST NOT** manipulate any data on on the `$subject` and **MUST** return a boolean.
+Validate rules **MUST NOT** manipulate any data on on the `$subject` and **MUST** return a boolean. Additionally, they **must** implement `ValidateRuleInterface` 
 
 ```php
-use Mbright\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
 
-class MyCustomValidateRule implements RuleInterface
+class MyCustomValidateRule implements ValidateRuleInterface
 {
+    protected $value;
+    
+    public function __construct($value = 'foo')
+    {
+        $this->value = $value;
+    }
+    
     public function __invoke($subject, string $field): bool
     {
-        return $subject->$field === 'foo';
+        return $subject->$field === $this->value;
     }
 }
 ```
 
 ## Custom Sanitize Rule
-Sanitize Rules **MAY** manipulate data on the subject as needed and **MUST** return a boolean.
+Sanitize Rules **MAY** manipulate data on the subject as needed and **MUST** return a boolean. Additionally, Sanitize rules **must** implement `SanitizeRuleInterface`
 
 ```php
-use Mbright\Validation\Rule\RuleInterface;
+use Mbright\Validation\Rule\Sanitize\SanitizeRuleInterface;
 
-class MyCustomSanitizeRule implements RuleInterface
+class MyCustomSanitizeRule implements SanitizeRuleInterface
 {
     public function __invoke($subject, string $field): bool
     {
@@ -57,7 +63,7 @@ class MyCustomSanitizeRule implements RuleInterface
         
         //manipulate $value
         
-        $subject->$field = $value;
+        $subject->$field = $;
         
         return true;        
     }
@@ -72,6 +78,6 @@ Once your rule is defined, you can pass it to a Validator like any other rule:
 $factory = new ValidatorFactory();
 $validator = $factory->newValidator();
 
-$validator->sanitize('field')->to(MyCustomSanitizeRule::class);
-$validator->validate('field')->is(MyCustomValidateRule::class);
+$validator->sanitize('field')->to(new new MyCustomSanitizeRule());
+$validator->validate('field')->is(new MyCustomValidateRule());
 ```

@@ -38,7 +38,7 @@ Sanitize rules can be added to the Validator like so:
 ```php
 use Mbright\Validation\Rule\Sanitize;
 
-$validator->sanitize('fieldName')->to(Sanitize\Rule::class);
+$validator->sanitize('fieldName')->to(new Sanitize\Rule());
 ```
 
 ### Adding Validate Rules
@@ -49,10 +49,10 @@ Validate rules can be used to confirm that field meets the rule's expectations, 
 use Mbright\Validation\Rule\Validate;
 
 //validate that a field is a boolean
-$validator->validate('fieldName')->is(Validate\Rule::class)
+$validator->validate('fieldName')->is(new Validate\Rule());
 
 //validate that a field is *not* a boolean
-$validator->validate('fieldName')->isNot(Validate\Rule::class)
+$validator->validate('fieldName')->isNot(new Validate\Rule());
 ```
 
 ### Failure Modes
@@ -74,9 +74,9 @@ Rule level messages correspond to each rule that failed to run successfully. The
 
 Example: 
 ```php
-$validator->sanitize('someField')->to('bool')->setMessage('this field must be a type that can get converted to a boolean');
+$validator->sanitize('someField')->to(new Validate\Boolean())->setMessage('this field must be a type that can get converted to a boolean');
 
-$validator->validate('someField')->is('bool')->setMessage('this field did not successfully validate as a strict boolean value');
+$validator->validate('someField')->is(new Validate\Boolean())->setMessage('this field did not successfully validate as a strict boolean value');
 ```
 
 > Note: if a field has multiple rules, there can be one field level message for every rule

@@ -2,7 +2,8 @@
 
 namespace Mbright\Validation\Tests\Failure;
 
-use Mbright\Validation\Failure\RuleValidationFailure;
+use Mbright\Validation\Failure\ValidationFailure;
+use Mbright\Validation\Tests\Examples\ExampleCustomValidateRule;
 use PHPUnit\Framework\TestCase;
 use Mbright\Validation\Failure\FailureCollection;
 
@@ -34,17 +35,17 @@ class FailureCollectionTest extends TestCase
         $expected = $this->collection->forField($fakeField);
 
         $this->assertCount(1, $expected);
-        $this->assertInstanceOf(RuleValidationFailure::class, $expected[0]);
+        $this->assertInstanceOf(ValidationFailure::class, $expected[0]);
     }
 
     public function testAdd()
     {
         $fakeField = 'fakeField';
         $fakeMessage = 'fakeMessage';
-        $actual = $this->collection->add($fakeField, $fakeMessage);
+        $actual = $this->collection->add($fakeField, $fakeMessage, ExampleCustomValidateRule::class);
 
         $this->assertCount(1, $this->collection);
-        $this->assertInstanceOf(RuleValidationFailure::class, $actual);
+        $this->assertInstanceOf(ValidationFailure::class, $actual);
     }
 
     public function testGetMessagesAsString()
@@ -53,8 +54,8 @@ class FailureCollectionTest extends TestCase
         $fakeMessage1 = 'fakeMessage1';
         $fakeField2 = 'fakeField2';
         $fakeMessage2 = 'fakeMessage2';
-        $this->collection->add($fakeField1, $fakeMessage1);
-        $this->collection->add($fakeField2, $fakeMessage2);
+        $this->collection->add($fakeField1, $fakeMessage1, ExampleCustomValidateRule::class);
+        $this->collection->add($fakeField2, $fakeMessage2, ExampleCustomValidateRule::class);
 
         $expected = "$fakeField1: $fakeMessage1\n$fakeField2: $fakeMessage2\n";
         $actual = $this->collection->getMessagesAsString();
@@ -67,8 +68,8 @@ class FailureCollectionTest extends TestCase
         $fakeMessage1 = 'fakeMessage1';
         $fakeField2 = 'fakeField2';
         $fakeMessage2 = 'fakeMessage2';
-        $this->collection->add($fakeField1, $fakeMessage1);
-        $this->collection->add($fakeField2, $fakeMessage2);
+        $this->collection->add($fakeField1, $fakeMessage1, ExampleCustomValidateRule::class);
+        $this->collection->add($fakeField2, $fakeMessage2, ExampleCustomValidateRule::class);
 
         $expected = "$fakeMessage1\n";
         $actual = $this->collection->getMessagesForFieldAsString($fakeField1);
@@ -82,8 +83,8 @@ class FailureCollectionTest extends TestCase
         $fakeMessage1 = 'fakeMessage1';
         $fakeField2 = 'fakeField2';
         $fakeMessage2 = 'fakeMessage2';
-        $this->collection->add($fakeField1, $fakeMessage1);
-        $this->collection->add($fakeField2, $fakeMessage2);
+        $this->collection->add($fakeField1, $fakeMessage1, ExampleCustomValidateRule::class);
+        $this->collection->add($fakeField2, $fakeMessage2, ExampleCustomValidateRule::class);
 
         $expected = [
             $fakeField1 => [$fakeMessage1],

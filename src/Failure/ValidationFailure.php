@@ -10,7 +10,7 @@ class ValidationFailure implements \JsonSerializable
     /** @var string */
     protected $message;
 
-    /** @var string[] */
+    /** @var string */
     protected $ruleClass;
 
     /** @var array */
@@ -24,7 +24,7 @@ class ValidationFailure implements \JsonSerializable
      * @param string $ruleClass
      * @param array $args
      */
-    public function __construct(string $field, string $message, array $ruleClass = [], array $args = [])
+    public function __construct(string $field, string $message, ?string $ruleClass = null, array $args = [])
     {
         $this->field = $field;
         $this->message = $message;

@@ -3,6 +3,7 @@
 namespace Mbright\Validation\Spec;
 
 use Mbright\Validation\Exception\ValidationFailureException;
+use Mbright\Validation\Rule\Sanitize\SanitizeRuleInterface;
 
 class SanitizeSpec extends AbstractSpec
 {
@@ -45,13 +46,14 @@ class SanitizeSpec extends AbstractSpec
     /**
      * Set the Sanitize rule to be used.
      *
-     * @param string $ruleClass
+     * @param SanitizeRuleInterface $rule
      *
      * @return SanitizeSpec
      */
-    public function to(string $ruleClass): self
+    public function to(SanitizeRuleInterface $rule): self
     {
-        $this->setRule($ruleClass);
+        $this->rule = $rule;
+        $this->ruleClass = get_class($rule);
 
         return $this;
     }

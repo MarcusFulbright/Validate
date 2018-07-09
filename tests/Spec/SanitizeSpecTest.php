@@ -18,7 +18,7 @@ class SanitizeSpecTest extends TestCase
 
     public function testTo()
     {
-        $actual = $this->spec->to(ExampleCustomSanitizeRule::class);
+        $actual = $this->spec->to(new ExampleCustomSanitizeRule());
 
         $this->assertSame($this->spec, $actual);
     }

@@ -17,7 +17,7 @@ The following classes can get used to validate a field on an object:
 Validates the value as only containing alphabetic characters
 
 ```php
-$validator->validate('field')->is(Validate\Alpha::class);
+$validator->validate('field')->is(new Validate\Alpha());
 ```
 
 ## AlphaDash
@@ -25,7 +25,7 @@ $validator->validate('field')->is(Validate\Alpha::class);
 Validates that the value only contains alpha-numeric characters, underscores, and dashes
 
 ```php
-$validator->validate('field')->is(Validate\AlphaDash::class);
+$validator->validate('field')->is(new Validate\AlphaDash());
 ```
 
 ## AlphaNum
@@ -33,7 +33,7 @@ $validator->validate('field')->is(Validate\AlphaDash::class);
 Validates the value as containing alpha-numeric values only
 
 ```php
-$validator->validate('field')->is(Validate\AlphaNum::class);
+$validator->validate('field')->is(new Validate\AlphaNum());
 ```
 
 ## Between($min, $max)
@@ -41,7 +41,7 @@ $validator->validate('field')->is(Validate\AlphaNum::class);
 Validates that the value is within or equal to a minimum and maximum value
 
 ```php
-$validator->validate('field')->is(Validate\Between::class, 1, 100);
+$validator->validate('field')->is(new Validate\Between(1, 100));
 ```
 
 ## Boolean
@@ -49,7 +49,7 @@ $validator->validate('field')->is(Validate\Between::class, 1, 100);
 Validates the value as being a boolean, or a pseudo-boolean Pseudo-true values include the strings '1', 'y', 'yes', and 'true'; pseudo-false values include the strings '0', 'n', 'no', and 'false'
 
 ```php
-$validator->validate('field')->is(Validate\Boolean::class');
+$validator->validate('field')->is(new Validate\Boolean());
 ```
 
 ## Callback
@@ -64,7 +64,7 @@ $callback = function ($subject, $field) {
     
     return false;
 };
-$validator->validate('field')->is(Validate\Callback::class, $callback);
+$validator->validate('field')->is(new Validate\Callback($callback));
 ```
 
 > Note: this library will convert arrays to objects, so always use object notation ($subject->$field) and _not_ array notation ($subject[$field]);
@@ -76,7 +76,7 @@ $validator->validate('field')->is(Validate\Callback::class, $callback);
 Validates the value as being a credit card number
 
 ```php
-$validator->validate('field')->is(Validate\CreditCard::class);
+$validator->validate('field')->is(new Validate\CreditCard());
 ```
 
 ## DateTime
@@ -84,7 +84,7 @@ $validator->validate('field')->is(Validate\CreditCard::class);
 Validates the value as being a valid representation of a date and/or time
 
 ```php
-$validator->validate('field')->is('dateTime');
+$validator->validate('field')->is(new Validate\DateTime());
 ```
 
 ## Email
@@ -92,7 +92,7 @@ $validator->validate('field')->is('dateTime');
 Validates the value as being a valid email according to the native `filter_var` [email filter](http://phpnet/manual/en/filterfiltersvalidatephp)
 
 ```php
-$validator->validate('field')->is(Validate\Email::class);
+$validator->validate('field')->is(new Validate\Email());
 ```
 
 ## EqualToField($otherField)
@@ -100,7 +100,7 @@ $validator->validate('field')->is(Validate\Email::class);
 Validates that the value is loosely equal (==) to the value of another field on the object
 
 ```php
-$validator->validate('field')->is(Validate\EqualToField::class, 'otherField');
+$validator->validate('field')->is(new Validate\EqualToField('otherField'));
 ```
 
 ## EqualToValue($value)
@@ -108,7 +108,7 @@ $validator->validate('field')->is(Validate\EqualToField::class, 'otherField');
 Validates that the value is loosely equal (==) to the given value
 
 ```php
-$validator->validate('field')->is(Validate\EqualToValue::class, 'foo');
+$validator->validate('field')->is(new Validate\EqualToValue('foo'));
 ```
 
 ## FloatVal
@@ -124,7 +124,7 @@ $validator->validate('field')->is(Validate\FloatVal::class);
 Validates that the value is a valid hex that is not longer than the maximum length 
 
 ```php
-$validator->validate('hex')->is(Validate\Hex::class);
+$validator->validate('hex')->is(new Validate\Hex());
 ```
 
 ## InKeys($array)
@@ -132,7 +132,7 @@ $validator->validate('hex')->is(Validate\Hex::class);
 Validates that the value loosely equals (==) to a key in the given array
 
 ```php
-$validator->validate('field')->is(Validate\InKeys::class, $array);
+$validator->validate('field')->is(new Validate\InKeys($array));
 ```
 
 ## Integer
@@ -140,7 +140,7 @@ $validator->validate('field')->is(Validate\InKeys::class, $array);
 Validates that the value represents an integer
 
 ```php
-$validator->validate('field')->is(Validate\Integer::class)
+$validator->validate('field')->is(new Validate\Integer());
 ```
 
 ## InValues($array)
@@ -148,7 +148,7 @@ $validator->validate('field')->is(Validate\Integer::class)
 Validates that the value is strictly equal (===) to a value in the given array
 
 ```php
-$validator->validate('field')->is(Validate\InValues::class, $array);
+$validator->validate('field')->is(new Validate\InValues($array));
 ```
 
 ## IpAddress
@@ -156,17 +156,17 @@ $validator->validate('field')->is(Validate\InValues::class, $array);
 Validates the value as an IPv4 or IPv6 address, allowing reserved and private addresses
 
 ```php
-$validator->validate('field')->is(Validate\IpAddress::class);
+$validator->validate('field')->is(new Validate\IpAddress());
 ```
 
 To modify restrictions on the filter, pass the appropriate `FILTER_FLAG_*` constants (seen [here](http://phpnet/manual/en/filterfiltersflagsphp)) as a second parameter
 
 ```php
 // only allow IPv4 addresses in the non-private range
-$validator->validate('field')->is('ip', FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE);
+$validator->validate('field')->is(new Validate\IpAddress(FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE));
 
 // only allow IPv6 addresses in non-reserved range
-$validator->validate('field')->is('ip', FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE);
+$validator->validate('field')->is(new Validate\IpAddress(FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE));
 ```
 
 ## Isbn
@@ -174,7 +174,7 @@ $validator->validate('field')->is('ip', FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RA
 Validates the value is a correct ISBN (International Standard Book Number)
 
 ```php
-$validator->validate('field')->is(Validate\Isbn::class);
+$validator->validate('field')->is(new Validate\Isbn());
 ```
 
 ## Locale
@@ -182,7 +182,7 @@ $validator->validate('field')->is(Validate\Isbn::class);
 Validates the given value against a list of locale strings (internal to the rule class)
 
 ```php
-$validator->validate('field')->is(Validate\Locale::class');
+$validator->validate('field')->is(new Validate\Locale());
 ```
 
 ## Lowercase
@@ -190,7 +190,7 @@ $validator->validate('field')->is(Validate\Locale::class');
 Validates the value as all lowercase
 
 ```php
-$validator->validate('field')->is(Validate\Lowercase::class);
+$validator->validate('field')->is(new Validate\Lowercase());
 ```
 
 ## LowercaseFirst
@@ -198,7 +198,7 @@ $validator->validate('field')->is(Validate\Lowercase::class);
 Validates the value begins with a lowercase character
 
 ```php
-$validator->validate('field')->is(Validate\LowercaseFirst::class);
+$validator->validate('field')->is(new Validate\LowercaseFirst());
 ```
 
 ## Max($max)
@@ -206,7 +206,7 @@ $validator->validate('field')->is(Validate\LowercaseFirst::class);
 Validates the value as being less than or equal to a maximum
 
 ```php
-$validator->validate('field')->is(Validate\Max::class, $max);
+$validator->validate('field')->is(new Validate\Max(class, $max));
 ```
 
 ## Min($min)
@@ -214,7 +214,7 @@ $validator->validate('field')->is(Validate\Max::class, $max);
 Validates the value as being greater than or equal to a minimum
 
 ```php
-$validator->validate('field')->is(Validate\Min::class, $min);
+$validator->validate('field')->is(new Validate\Min(class, $min));
 ```
 
 ## Regex($expr)
@@ -222,7 +222,7 @@ $validator->validate('field')->is(Validate\Min::class, $min);
 Validates the value using `preg_match()`
 
 ```php
-$validator->validate('field')->is(Validate\Regex::class, $expr);
+$validator->validate('field')->is(new Validate\Regex($expr));
 ```
 
 ## StrictEqualToField($otherField)
@@ -230,7 +230,7 @@ $validator->validate('field')->is(Validate\Regex::class, $expr);
 Validates the value as strictly equal (`===`) to the value of another field in the subject
 
 ```php
-$validator->validate('field')->is(Validate\StrictEqualToField::class, 'otherFieldName');
+$validator->validate('field')->is(new Validate\StrictEqualToField('otherFieldName'));
 ```
 
 ## StrictEqualToValue($value)
@@ -238,7 +238,7 @@ $validator->validate('field')->is(Validate\StrictEqualToField::class, 'otherFiel
 Validates the value as strictly equal (`===`) to a specified value
 
 ```php
-$validator->validate('field')->is(Validate\StrictEqualToValue, $value);
+$validator->validate('field')->is(new Validate\StrictEqualToValue($value));
 ```
 
 ## String
@@ -246,7 +246,7 @@ $validator->validate('field')->is(Validate\StrictEqualToValue, $value);
 Validates the value can be represented by a string
 
 ```php
-$validator->validate('field')->is(Validate\String::class);
+$validator->validate('field')->is(new Validate\String());
 ```
 
 ## Strlen($len)
@@ -254,7 +254,7 @@ $validator->validate('field')->is(Validate\String::class);
 Validates the value has a specified length
 
 ```php
-$validator->validate('field')->is(Validate\Strlen::class, $len);
+$validator->validate('field')->is(new Validate\Strlen($len));
 ```
 
 ## StrlenBetween($min, $max)
@@ -262,7 +262,7 @@ $validator->validate('field')->is(Validate\Strlen::class, $len);
 Validates the value as being within or equal to a minimum and maximum length
 
 ```php
-$validator->validate('field')->is(Validate\StrlenBetween::class, $min, $max);
+$validator->validate('field')->is(new Validate\StrlenBetween($min, $max);
 ```
 
 ## StrlenMax($max)
@@ -270,7 +270,7 @@ $validator->validate('field')->is(Validate\StrlenBetween::class, $min, $max);
 Validates the value length as being no longer than a maximum
 
 ```php
-$validator->validate('field')->is(Validate\StrlenMax::class, $max);
+$validator->validate('field')->is(new Validate\StrlenMax($max));
 ```
 
 ## StrlenMin($min)
@@ -278,7 +278,7 @@ $validator->validate('field')->is(Validate\StrlenMax::class, $max);
 Validates the value length as being no shorter than a minimum
 
 ```php
-$validator->validate('field')->is(Validate\StrlenMin::class, $min);
+$validator->validate('field')->is(new Validate\StrlenMin($min));
 ```
 
 ## TitleCase
@@ -286,7 +286,7 @@ $validator->validate('field')->is(Validate\StrlenMin::class, $min);
 Validates the value as title case
 
 ```php
-$validator->validate('field')->is(Validate\TitleCase::class);
+$validator->validate('field')->is(new Validate\TitleCase());
 ```
 
 ## Trim($chars = ' \t\n\r\0\x0B')
@@ -294,7 +294,7 @@ $validator->validate('field')->is(Validate\TitleCase::class);
 Validates the value is `trim()`med Optionally specify characters to trim
 
 ```php
-$validator->validate('field')->is(Validate\Trim::class, $chars);
+$validator->validate('field')->is(new Validate\Trim($chars));
 ```
 
 ## Upload
@@ -302,7 +302,7 @@ $validator->validate('field')->is(Validate\Trim::class, $chars);
 Validates the value represents a PHP upload information array, and that the file is an uploaded file
 
 ```php
-$validator->validate('field')->is(Validate\Upload::class);
+$validator->validate('field')->is(new Validate\Upload());
 ```
 
 ## UpperCase
@@ -310,7 +310,7 @@ $validator->validate('field')->is(Validate\Upload::class);
 Validates the value as all uppercase
 
 ```php
-$validator->validate('field')->is(Validate\UpperCase::class);
+$validator->validate('field')->is(new Validate\UpperCase());
 ```
 
 ## UpperCaseFirst
@@ -318,7 +318,7 @@ $validator->validate('field')->is(Validate\UpperCase::class);
 Validates the value begins with an uppercase character
 
 ```php
-$validator->validate('field')->is(Validate\UpperCaseFirst::class);
+$validator->validate('field')->is(new Validate\UpperCaseFirst());
 ```
 
 ## Url
@@ -326,7 +326,7 @@ $validator->validate('field')->is(Validate\UpperCaseFirst::class);
 Validates the value is a well-formed URL
 
 ```php
-$validator->validate('field')->is(Validate\Url::class);
+$validator->validate('field')->is(new Validate\Url());
 ```
 
 ## Uuid
@@ -334,7 +334,7 @@ $validator->validate('field')->is(Validate\Url::class);
 Validates that the value is a canonical human-readable UUID
 
 ```php
-$validator->validate('field')->is(Validate\Uuid::class);
+$validator->validate('field')->is(new Validate\Uuid());
 ```
 
 ## UuidHexOnly
@@ -342,7 +342,7 @@ $validator->validate('field')->is(Validate\Uuid::class);
 Validates that the value is a hex-only UUID
 
 ```php
-$validator->validate('field')->is(UuidHexOnly::class);
+$validator->validate('field')->is(new UuidHexOnly());
 ```
 
 ## Word
@@ -350,5 +350,5 @@ $validator->validate('field')->is(UuidHexOnly::class);
 Validates the value as being composed only of word characters
 
 ```php
-$validator->validate('field')->is(Validate\Word::class);
+$validator->validate('field')->is(new Validate\Word());
 ```

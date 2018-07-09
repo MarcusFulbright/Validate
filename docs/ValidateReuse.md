@@ -17,8 +17,8 @@ class CustomValidator extends Validator
 {
     protected function init()
     {
-        $this->sanitize('field')->to(Sanitize\RuleClass::class);
-        $this->validate('field')->is(Validate\RuleClass::class);
+        $this->sanitize('field')->to(new Sanitize\RuleClass());
+        $this->validate('field')->is(new Validate\RuleClass());
         $this->useFieldMessage('field', 'message');
     }
 }

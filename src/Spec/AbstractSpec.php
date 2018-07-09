@@ -3,6 +3,8 @@
 namespace Mbright\Validation\Spec;
 
 use Mbright\Validation\Exception\RuleClassNotDefinedException;
+use Mbright\Validation\Rule\Sanitize\SanitizeRuleInterface;
+use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
 
 abstract class AbstractSpec
 {
@@ -154,27 +156,6 @@ abstract class AbstractSpec
     public function getRuleClass(): string
     {
         return $this->ruleClass;
-    }
-
-    /**
-     * Sets the rule and ruleClass for the spec.
-     *
-     * @param string $ruleClass
-     *
-     * @throws RuleClassNotDefinedException
-     *
-     * @return AbstractSpec
-     */
-    public function setRule(string $ruleClass): self
-    {
-        if (!class_exists($ruleClass)) {
-            throw new RuleClassNotDefinedException("Could not find mapping for [$ruleClass]");
-        }
-
-        $this->rule = new $ruleClass();
-        $this->ruleClass = $ruleClass;
-
-        return $this;
     }
 
     /**

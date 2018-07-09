@@ -263,7 +263,7 @@ class Validator
         if (isset($this->filedMessages[$spec->getField()])) {
             $this->failures->set($field, $this->filedMessages[$field]);
         } else {
-            $this->failures->add($field, $spec->getMessage(), $spec->getArgs());
+            $this->failures->add($field, $spec->getMessage(), $spec->getRuleClass(), $spec->getArgs());
         }
     }
 }

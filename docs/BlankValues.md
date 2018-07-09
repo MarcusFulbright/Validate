@@ -14,7 +14,7 @@ This library does not rely on a simple `isset()` or `empty()` check to determine
 * it is an empty string
 * a string composed only of white space
 
-This means that by default things like the following values are *not* considered blank by default:
+This means that the following values are *not* considered blank by default:
 * (int) 0
 * (float) 0.00
 * (bool) false
@@ -30,7 +30,7 @@ Example:
 use Mbright\Validation\Sanitize;
 
 //Sanitize a field to a boolean, or set it to false
-$validator->sanitize('someField')->to(Sanitize/Rule::class)->usingBlank(false)
+$validator->sanitize('someField')->to(new Sanitize/Boolean())->usingBlank(false)
 ```
 
 ## Validate Rules & Blanks
@@ -42,7 +42,7 @@ Example
 ```php
 use Mbright\Validation\Rule\Validate;
 
-$validator->validate('fieldName')->is(Validate\Rule::class)->allowBlanks();
+$validator->validate('fieldName')->is(new Validate\Boolean()->allowBlanks();
 ```
 
 > Note: If the field is a valid blank value, then the rule will never get invoked

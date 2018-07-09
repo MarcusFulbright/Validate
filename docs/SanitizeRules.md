@@ -17,7 +17,7 @@ The following classes can get used to sanitize a field on an object:
 Sanitizes to leave only alphanumeric characters
 
 ```php
-$validator->sanitize('field')->to(Sanitize\AlphaNum::class);
+$validator->sanitize('field')->to(new Sanitize\AlphaNum());
 ```
 
 ## Alpha
@@ -25,7 +25,7 @@ $validator->sanitize('field')->to(Sanitize\AlphaNum::class);
 Sanitizes to leave only alphabetic characters
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Alpha::class);
+$validator->sanitize('field')->to(new Sanitize\Alpha());
 ```
 
 ## Between($min, $max)
@@ -33,7 +33,7 @@ $validator->sanitize('field')->to(Sanitize\Alpha::class);
 Sanitizes so that values lower than the range are forced up to the minimum, and values higher than the range are forced down to the maximum
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Between, $min, $max);
+$validator->sanitize('field')->to(new Sanitize\Between, $min, $max);
 ```
 
 ## Boolean($trueValue = true, $falseValue = false)
@@ -42,14 +42,14 @@ Sanitizes to a strict PHP boolean value Pseudo-true values include the strings '
 
 ```php
 // sanitize to `true` and `false`
-$validator->sanitize('field')->to(Sanitize\Boolean::class);
+$validator->sanitize('field')->to(new Sanitize\Boolean());
 ```
 
 You can sanitize to alternative true and false values in place of PHP `true` and `false`
 
 ```php
 // sanitize to alternative true and false values
-$validator->sanitize('field')->to('bool', $trueValue, $falseValue);
+$validator->sanitize('field')->to(new Sanitize\Boolean($trueValue, $falseValue));
 ```
 
 ## Callback
@@ -57,11 +57,13 @@ $validator->sanitize('field')->to('bool', $trueValue, $falseValue);
 Sanitizes the value using a callable/callback The callback should take two arguments, `$subject` and `$field`, to indicate the subject and the field within that subject It should return `true` to pass, or `false` to fail
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Callback::class, function ($subject, $field) {
-    // always force the field to 'foo'
-    $subject->$field = 'foo';
-    return true;
-});
+$validator->sanitize('field')->to(new Sanitize\Callback(
+    function ($subject, $field) {
+        // always force the field to 'foo'
+        $subject->$field = 'foo';
+        return true;
+    })
+);
 ```
 
 > note: Always use object notation (`$subject->$field`) and not array notation (`$subject[$field]`) in the callable, as the _Validator_ converts arrays to objects on the fly
@@ -71,7 +73,7 @@ $validator->sanitize('field')->to(Sanitize\Callback::class, function ($subject, 
 Sanitizes the value to a specified date/time format, default `'Y-m-d H:i:s'`
 
 ```php
-$validator->sanitize('field')->to(Sanitize\DateTime::class, $format);
+$validator->sanitize('field')->to(new Sanitize\DateTime($format));
 ```
 
 ## Field($otherField)
@@ -79,7 +81,7 @@ $validator->sanitize('field')->to(Sanitize\DateTime::class, $format);
 Sanitizes to the value of another field in the subject
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Field::class, $otherField);
+$validator->sanitize('field')->to(new Sanitize\Field($otherField));
 ```
 
 ## FloatVal
@@ -87,7 +89,7 @@ $validator->sanitize('field')->to(Sanitize\Field::class, $otherField);
 Sanitizes the value to transform it into a float; for weird strings, this may not be what you expect
 
 ```php
-$validator->sanitize('field')->to(Sanitize\FloatVal::class);
+$validator->sanitize('field')->to(new Sanitize\FloatVal());
 ```
 
 ## Integer
@@ -95,7 +97,7 @@ $validator->sanitize('field')->to(Sanitize\FloatVal::class);
 Sanitizes the value to transform it into an integer; for weird strings, this may not be what you expect
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Integer::class);
+$validator->sanitize('field')->to(new Sanitize\Integer());
 ```
 
 ## Isbn
@@ -103,7 +105,7 @@ $validator->sanitize('field')->to(Sanitize\Integer::class);
 Sanitizes the value to an ISBN (International Standard Book Number)
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Isbn::class);
+$validator->sanitize('field')->to(new Sanitize\Isbn());
 ```
 
 ## LowerCase
@@ -111,7 +113,7 @@ $validator->sanitize('field')->to(Sanitize\Isbn::class);
 Sanitizes the value to all lowercase characters
 
 ```
-$validator->sanitize('field')->to(Sanitize\LowerCase::class);
+$validator->sanitize('field')->to(new Sanitize\LowerCase();
 ```
 
 ## LowerCaseFirst
@@ -119,7 +121,7 @@ $validator->sanitize('field')->to(Sanitize\LowerCase::class);
 Sanitizes the value to begin with a lowercase character
 
 ```
-$validator->sanitize('field')->to(Sanitize\LowerCaseFirst::class);
+$validator->sanitize('field')->to(new Sanitize\LowerCaseFirst();
 ```
 
 ## Max($max)
@@ -127,7 +129,7 @@ $validator->sanitize('field')->to(Sanitize\LowerCaseFirst::class);
 Sanitizes so that values higher than the maximum are forced down to the maximum
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Max::class, $max);
+$validator->sanitize('field')->to(new Sanitize\Max($max));
 ```
 
 ## Min($min)
@@ -135,7 +137,7 @@ $validator->sanitize('field')->to(Sanitize\Max::class, $max);
 Sanitizes so that values lower than the minimum are forced up to the minimum
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Min::class, $min);
+$validator->sanitize('field')->to(new Sanitize\Min($min));
 ```
 
 ## Now($format = 'Y-m-d H:i:s')
@@ -143,7 +145,7 @@ $validator->sanitize('field')->to(Sanitize\Min::class, $min);
 Sanitizes the value to force it to the current datetime, default format 'Y-m-d H:i:s'
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Now::class, $format);
+$validator->sanitize('field')->to(new Sanitize\Now($format));
 ```
 
 ## Remove
@@ -151,7 +153,7 @@ $validator->sanitize('field')->to(Sanitize\Now::class, $format);
 Removes the field from the subject with `unset()`
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Remove::class);
+$validator->sanitize('field')->to(new Sanitize\Remove();
 ```
 
 ## Regex($expr, $replace)
@@ -159,7 +161,7 @@ $validator->sanitize('field')->to(Sanitize\Remove::class);
 Sanitizes the value using `preg_replace()`
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Regex::class, $expr, $replace);
+$validator->sanitize('field')->to(new Sanitize\Regex($expr, $replace));
 ```
 
 ## StringVal($find = null, $replace = null)
@@ -167,7 +169,7 @@ $validator->sanitize('field')->to(Sanitize\Regex::class, $expr, $replace);
 Sanitizes the value by casting to a string and optionally using `str_replace()` to find and replace within the string
 
 ```php
-$validator->sanitize('field')->to(Sanitize\StringVal::class, $find, $replace);
+$validator->sanitize('field')->to(new Sanitize\StringVal($find, $replace));
 ```
 
 ## Strlen($len, $padString = '  ', $padType = STR_PAD_RIGHT)
@@ -175,7 +177,7 @@ $validator->sanitize('field')->to(Sanitize\StringVal::class, $find, $replace);
 Sanitizes the value to cut off longer values at the right, and `str_pad()` shorter ones
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Strlen::class, $len, $pad_string, $pad_type);
+$validator->sanitize('field')->to(new Sanitize\Strlen($len, $pad_string, $pad_type));
 ```
 
 ## StrlenBetween($min, $max, $padString = '  ', $padType = STR_PAD_RIGHT)
@@ -184,7 +186,7 @@ Sanitizes the value to truncate values longer than the maximum, and `str_pad()`
 shorter ones
 
 ```php
-$validator->sanitize('field')->to(Sanitize\StrlenBetween::class, $min, $max, $padString, $padType);
+$validator->sanitize('field')->to(new Sanitize\StrlenBetween(), $min, $max, $padString, $padType));
 ```
 
 ## StrlenMax($max)
@@ -192,7 +194,7 @@ $validator->sanitize('field')->to(Sanitize\StrlenBetween::class, $min, $max, $pa
 Sanitizes the value to truncate values longer than the maximum
 
 ```php
-$validator->sanitize('field')->to(Sanitize\StrlenMax::class, $max);
+$validator->sanitize('field')->to(new Sanitize\StrlenMax($max));
 ```
 
 ## StrlenMin($min, $padString = '  ', $padType = STR_PAD_RIGHT)
@@ -200,7 +202,7 @@ $validator->sanitize('field')->to(Sanitize\StrlenMax::class, $max);
 Sanitizes the value to `str_pad()` values shorter than the minimum
 
 ```php
-$validator->sanitize('field')->to(Sanitize\StrlenMin::class, $min, $padString, $padType);
+$validator->sanitize('field')->to(new Sanitize\StrlenMin($min, $padString, $padType));
 ```
 
 ## TitleCase
@@ -208,7 +210,7 @@ $validator->sanitize('field')->to(Sanitize\StrlenMin::class, $min, $padString, $
 Sanitizes the value to titlecase (eg "Title Case")
 
 ```php
-$validator->sanitize('field')->to(Sanitize\TitleCase::class);
+$validator->sanitize('field')->to(new Sanitize\TitleCase());
 ```
 
 ## Trim($chars = " \t\n\r\0\x0B")
@@ -216,7 +218,7 @@ $validator->sanitize('field')->to(Sanitize\TitleCase::class);
 Sanitizes the value to `trim()` it Optionally specify characters to trim
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Trim::class, $chars);
+$validator->sanitize('field')->to(new Sanitize\Trim:($chars));
 ```
 
 ## UpperCase
@@ -224,7 +226,7 @@ $validator->sanitize('field')->to(Sanitize\Trim::class, $chars);
 Sanitizes the value to all uppercase characters
 
 ```php
-$validator->sanitize('field')->to(Sanitize\UpperCase::class);
+$validator->sanitize('field')->to(new Sanitize\UpperCase());
 ```
 
 ## UpperCaseFirst
@@ -232,7 +234,7 @@ $validator->sanitize('field')->to(Sanitize\UpperCase::class);
 Sanitizes the value to begin with an uppercase character
 
 ```php
-$validator->sanitize('field')->to(Sanitize\UpperCaseFirst::class);
+$validator->sanitize('field')->to(new Sanitize\UpperCaseFirst());
 ```
 
 ## Uuid
@@ -240,7 +242,7 @@ $validator->sanitize('field')->to(Sanitize\UpperCaseFirst::class);
 Forces the value to a canonical UUID
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Uuid::class);
+$validator->sanitize('field')->to(new Sanitize\Uuid());
 ```
 
 ## UuidHexOnly
@@ -248,7 +250,7 @@ $validator->sanitize('field')->to(Sanitize\Uuid::class);
 Forces the value to a hex-only UUID
 
 ```php
-$validator->sanitize('field')->to(Sanitize\UuidHexOnly::class);
+$validator->sanitize('field')->to(new Sanitize\UuidHexOnly());
 ```
 
 ## Value
@@ -256,7 +258,7 @@ $validator->sanitize('field')->to(Sanitize\UuidHexOnly::class);
 Sanitizes to the specified value
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Value::class, $otherValue);
+$validator->sanitize('field')->to(new Sanitize\Value($otherValue));
 ```
 
 ## Word
@@ -264,5 +266,5 @@ $validator->sanitize('field')->to(Sanitize\Value::class, $otherValue);
 Sanitizes the value to remove non-word characters
 
 ```php
-$validator->sanitize('field')->to(Sanitize\Word::class);
+$validator->sanitize('field')->to(new Sanitize\Word());
 ```

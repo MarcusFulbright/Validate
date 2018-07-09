@@ -19,14 +19,14 @@ class ValidateSpecTest extends TestCase
 
     public function testIs()
     {
-        $actual = $this->spec->is(ExampleCustomValidateRule::class, []);
+        $actual = $this->spec->is(new ExampleCustomValidateRule());
 
         $this->assertSame($this->spec, $actual);
     }
 
     public function testIsNot()
     {
-        $actual = $this->spec->isNot(ExampleCustomValidateRule::class, []);
+        $actual = $this->spec->isNot(new ExampleCustomValidateRule());
 
         $this->assertSame($this->spec, $actual);
     }
@@ -63,7 +63,7 @@ class ValidateSpecTest extends TestCase
             'testField' => 'foo'
         ];
 
-        $this->spec->is(ExampleCustomValidateRule::class, []);
+        $this->spec->is(new ExampleCustomValidateRule());
 
         $actual = ($this->spec)($subject);
 
@@ -76,7 +76,7 @@ class ValidateSpecTest extends TestCase
             'testField' => 'foo'
         ];
 
-        $this->spec->isNot(ExampleCustomValidateRule::class, []);
+        $this->spec->isNot(new ExampleCustomValidateRule());
 
         $actual = ($this->spec)($subject);
 

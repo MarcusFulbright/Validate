@@ -2,7 +2,9 @@
 
 namespace Mbright\Validation\Tests\Examples;
 
-class ExampleCustomValidateRule
+use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
+
+class ExampleCustomValidateRule implements ValidateRuleInterface
 {
     public function __invoke($subject, string $field): bool
     {
