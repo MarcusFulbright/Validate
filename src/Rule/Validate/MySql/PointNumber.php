@@ -55,8 +55,8 @@ class PointNumber implements ValidateRuleInterface
 
         // separate the digits based on if they come before or after the decimal
         $segments = explode('.', (string) $value);
-        $numBeforeDecimal = count($segments[0]);
-        $numAfterDecimal = count($segments[1] ?? []);
+        $numBeforeDecimal = strlen($segments[0]);
+        $numAfterDecimal = strlen($segments[1] ?? '');
 
         return $this->checkPrecision($numBeforeDecimal, $numAfterDecimal) && $this->checkScale($numAfterDecimal);
     }
