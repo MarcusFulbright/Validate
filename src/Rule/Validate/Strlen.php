@@ -32,6 +32,6 @@ class Strlen extends AbstractStringCase implements ValidateRuleInterface
             return false;
         }
 
-        return $this->strlen($value) == $this->len;
+        return $this->strlen($value) === $this->len;
     }
 }
