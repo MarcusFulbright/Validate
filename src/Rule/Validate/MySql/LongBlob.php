@@ -11,6 +11,9 @@ use Mbright\Validation\Rule\Validate\Strlen;
  */
 class LongBlob extends Strlen
 {
+    /**
+     * @param int $len Acceptable string length.
+     */
     public function __construct(int $len)
     {
         if ($len < 0 || $len > (pow(2, 32))) {

@@ -6,7 +6,7 @@ use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
 
 /**
  * Validates that data can be inserted into one of the following column types:
- * - INT
+ * - Int
  */
 class StandardInt extends AbstractMySqlIntegerCase implements ValidateRuleInterface
 {

@@ -11,6 +11,9 @@ use Mbright\Validation\Rule\Validate\Strlen;
  */
 class VarChar extends Strlen
 {
+    /**
+     * @param int $len Acceptable string length.
+     */
     public function __construct(int $len)
     {
         if ($len > 65535 || $len < 0) {

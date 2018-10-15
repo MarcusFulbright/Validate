@@ -7,13 +7,16 @@ use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
 
 /**
  * Validates that data can be inserted into one of the following column types:
- * - BIT
+ * - Bit
  */
 class BitValue extends AbstractIntegerCase implements ValidateRuleInterface
 {
     /** @var int */
     protected $size;
 
+    /**
+     * @param int $size number of bits to allow
+     */
     public function __construct(int $size)
     {
         if ($size < 1 || $size > 64) {

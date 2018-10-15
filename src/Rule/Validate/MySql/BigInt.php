@@ -4,7 +4,7 @@ namespace Mbright\Validation\Rule\Validate\MySql;
 
 /**
  * Validates that data can be inserted into one of the following column types:
- * - BIGINT
+ * - BigInt
  */
 class BigInt extends AbstractMySqlIntegerCase
 {
