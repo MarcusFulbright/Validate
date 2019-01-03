@@ -5,6 +5,7 @@
 * [Validator Reuse](/docs/ValidateReuse.md)
 * [Available Sanitize Rules](/docs/SanitizeRules.md)
 * [Available Validate Rules](/docs/ValidateRules.md)
+  + [MySql Rules](/docs/MySql.md)
 
 # On Blank Values:
 

@@ -8,12 +8,12 @@ use Mbright\Validation\Rule\Validate\ValidateRuleInterface;
  * Validates that data can be inserted into one of the following column types:
  * - Time
  */
-class Time implements ValidateRuleInterface
+class DateTime implements ValidateRuleInterface
 {
-    use TimeTypeTrait;
+    use DateTypeTrait, TimeTypeTrait;
 
     /**
-     * Indicates if the given field's value is a MySql safe Time.
+     * * Indicates if the given field's value is a MySql safe DateTime.
      *
      * @param object $subject
      * @param string $field
@@ -23,7 +23,48 @@ class Time implements ValidateRuleInterface
     public function __invoke($subject, string $field): bool
     {
         $value = $subject->$field;
-        $timeParts = $this->extractTimeParts($value);
+
+        if (!is_string($value)) {
+            return false;
+        }
+
+        $dateTimeDelimiter = substr($value, 10, 1);
+
+        if (! in_array($dateTimeDelimiter,  [' ', 'T'])) {
+            return false;
+        }
+
+        $separated = explode($dateTimeDelimiter, $value);
+
+        return $this->validateDate($separated[0]) && $this->validateTime($separated[1]);
+    }
+
+    /**
+     * Validates that the string can represent a date.
+     *
+     * Valid formats include: YY-MM-DD and YYYY-MM-DD.
+     *
+     * @param string $dateString
+     *
+     * @return bool
+     */
+    protected function validateDate(string $dateString): bool
+    {
+        $dateParts = $this->extractDateParts($dateString, '[^[:punct:]]', true);
+
+        return !is_null($dateParts) && checkdate($dateParts->month, $dateParts->day, $dateParts->year);
+    }
+
+    /**
+     * Validates that the string can represent a time.
+     *
+     * @param string $timeString
+     *
+     * @return bool
+     */
+    protected function validateTime(string $timeString): bool
+    {
+        $timeParts = $this->extractTimeParts($timeString);
 
         return ! is_null($timeParts)
             && $this->validateHours($timeParts->hours)
@@ -76,6 +117,6 @@ class Time implements ValidateRuleInterface
     {
         $hours = (int) $hours;
 
-        return $hours >= -838 && $hours <= 838;
+        return $hours >= 0 && $hours <= 23;
     }
 }
