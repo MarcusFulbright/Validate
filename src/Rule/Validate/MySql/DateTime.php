@@ -30,7 +30,7 @@ class DateTime implements ValidateRuleInterface
 
         $dateTimeDelimiter = substr($value, 10, 1);
 
-        if (! in_array($dateTimeDelimiter,  [' ', 'T'])) {
+        if (! in_array($dateTimeDelimiter, [' ', 'T'])) {
             return false;
         }
 

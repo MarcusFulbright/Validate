@@ -24,7 +24,8 @@ trait DateTypeTrait
      *
      * @return null|\stdClass
      */
-    protected function extractDateParts(string $dateString, string $delimiterPattern, bool $normalizeYear): ?\stdClass {
+    protected function extractDateParts(string $dateString, string $delimiterPattern, bool $normalizeYear): ?\stdClass
+    {
         $extractedParts = (object) [
             'year' => null,
             'month' => null,
